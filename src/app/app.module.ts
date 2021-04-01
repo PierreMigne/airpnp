@@ -1,18 +1,57 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { HomeComponent } from './views/menu/home/home.component';
+import { HeaderComponent } from './views/menu/header/header.component';
+import { SidenavListComponent } from './views/menu/sidenav-list/sidenav-list.component';
+import { AuthComponent } from './views/auth/auth.component';
+import { ProfilComponent } from './views/profil/profil.component';
+import { PropertiesComponent } from './views/property/properties/properties.component';
+import { PropertyComponent } from './views/property/property/property.component';
+import { NewPropertyComponent } from './views/property/new-property/new-property.component';
+import { EditPropertyComponent } from './views/property/edit-property/edit-property.component';
+import { UserService } from './services/user/user.service';
+import { PropertyService } from './services/property/property.service';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    HeaderComponent,
+    SidenavListComponent,
+    AuthComponent,
+    ProfilComponent,
+    PropertiesComponent,
+    PropertyComponent,
+    NewPropertyComponent,
+    EditPropertyComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatCardModule
   ],
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'fr-FR'}, UserService, PropertyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

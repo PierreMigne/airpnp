@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <div class="toggleMenu">
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div>
+    <a routerLink="/home">Accueil</a>
+  </div>
+  <div class="flexNav">
+    <ul class="navigation-items">
+      <li>
+        <a routerLink="/properties">Biens Immobiliers</a>
+      </li>
+      <li *ngIf="!isAuth">
+        <a routerLink="/auth">Connexion</a>
+      </li>
+      <li *ngIf="isAuth">
+        <a routerLink="/home">Déconnexion</a>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>

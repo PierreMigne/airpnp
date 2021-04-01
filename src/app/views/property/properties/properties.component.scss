@@ -1,0 +1,51 @@
+.propertiesCardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.propertyCard {
+  max-width: 400px;
+  margin: 15px;
+  overflow: hidden;
+}
+.propertyCardImgContainer {
+  width: 100%;
+  position: relative;
+}
+.propertyCard img{
+  margin-bottom: 0;
+  z-index: 3;
+}
+.propertySold {
+  position: absolute;
+  top: 10px;
+  right: -50px;
+  transform: rotate(45deg);
+  background-color: red;
+  color: white;
+  font-size: 18px;
+  width: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  box-shadow: 0px 1px 5px black;
+}
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.iconContainer div {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.iconContainer div mat-icon {
+  padding: 5px;
+}
+
+.iconContainer div span {
+  margin-top: 5px;
+}

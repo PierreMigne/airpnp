@@ -1,0 +1,43 @@
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+}
+
+a:hover, a:active{
+  color: lightgray;
+}
+
+.navigation-items{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.flexNav {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navigation-items {
+  display: flex;
+}
+
+.navigation-items li {
+  padding: 0 15px;
+}
+
+.toggleMenu {
+  display: none;
+}
+
+
+@media screen and (max-width: '600px') {
+  .flexNav {
+    display: none;
+  }
+  .toggleMenu {
+    display: flex;
+  }
+}
