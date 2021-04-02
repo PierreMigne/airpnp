@@ -1,11 +1,32 @@
-<mat-nav-list>
+<mat-nav-list *ngIf="!isAuth">
   <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
-    <mat-icon>home</mat-icon> <span class="nav-caption">Accueil</span>
+    <mat-icon>home</mat-icon>
+    <span class="nav-caption">Accueil</span>
   </a>
-  <a mat-list-item routerLink="/owner" (click)="onSidenavClose()">
-    <mat-icon>assignment_ind</mat-icon> <span class="nav-caption">Owner Actions</span>
+  <a mat-list-item routerLink="/auth" (click)="onSidenavClose()">Connexion</a>
+  <a mat-list-item routerLink="/auth" (click)="onSidenavClose()">Inscription</a>
+
+</mat-nav-list>
+
+<mat-nav-list *ngIf="isAuth">
+  <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
+    <mat-icon>home</mat-icon>
+    <span class="nav-caption">Accueil</span>
   </a>
-  <a mat-list-item routerLink="#" (click)="onSidenavClose()">
-    <mat-icon>account_balance</mat-icon><span class="nav-caption">Account Actions</span>
+  <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
+    <mat-icon>account_circle</mat-icon>
+    <span class="nav-caption">Mon compte</span>
+  </a>
+  <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
+    <mat-icon>house</mat-icon>
+    <span class="nav-caption">Mes hébergements</span>
+  </a>
+  <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
+    <mat-icon>favorite_border</mat-icon>
+    <span class="nav-caption">Mes favoris</span>
+  </a>
+  <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
+    <mat-icon>logout</mat-icon>
+    <span class="nav-caption">Déconnexion</span>
   </a>
 </mat-nav-list>

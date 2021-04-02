@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { HomeComponent } from './views/menu/home/home.component';
+import { MatMenuModule } from '@angular/material/menu';
 import { HeaderComponent } from './views/menu/header/header.component';
 import { SidenavListComponent } from './views/menu/sidenav-list/sidenav-list.component';
 import { AuthComponent } from './views/auth/auth.component';
@@ -24,6 +25,7 @@ import { UserService } from './services/user/user.service';
 import { PropertyService } from './services/property/property.service';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
+import { FooterComponent } from './views/footer/footer.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -38,6 +40,7 @@ registerLocaleData(localeFr);
     PropertyComponent,
     NewPropertyComponent,
     EditPropertyComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,8 @@ registerLocaleData(localeFr);
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    MatMenuModule
   ],
   providers: [{provide: LOCALE_ID, useValue: 'fr-FR'}, UserService, PropertyService],
   bootstrap: [AppComponent]

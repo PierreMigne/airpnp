@@ -4,36 +4,44 @@ export class Property {
   private _id: number;
   private _title: string;
   private _category: string;
+  private _location: string;
   private _surface: number;
   private _rooms: number;
+  private _beds: number;
   private _description: string;
+  private _options: Array<string>;
   private _price: number;
   private _createdAt: Date;
-  private _sold: boolean;
+  private _isVisible: boolean;
   private _photos: string;
 
   constructor(
     title: string,
     category: string,
+    location: string,
     surface: number,
     rooms: number,
+    beds: number,
     description: string,
+    options: Array<string>,
     price: number,
-    sold: boolean,
-    photos: string
+    photos: string,
   ) {
     this._title = title;
     this._category = category;
+    this._location = location;
     this._surface = surface;
     this._rooms = rooms;
+    this._beds = beds;
     this._description = description;
+    this._options = options;
     this._price = price;
-    this._sold = sold;
     this._photos = photos;
 
     this._id = Property.nbId;
     Property.nbId++;
     this._createdAt = new Date();
+    this._isVisible = false
   }
 
   /**
@@ -61,6 +69,14 @@ export class Property {
   }
 
   /**
+   * Getter location
+   * @return {string}
+   */
+  public get location(): string {
+    return this._location;
+  }
+
+  /**
    * Getter surface
    * @return {number}
    */
@@ -77,11 +93,27 @@ export class Property {
   }
 
   /**
+   * Getter beds
+   * @return {number}
+   */
+  public get beds(): number {
+    return this._beds;
+  }
+
+  /**
    * Getter description
    * @return {string}
    */
   public get description(): string {
     return this._description;
+  }
+
+  /**
+   * Getter options
+   * @return {Array<string>}
+   */
+  public get options(): Array<string> {
+    return this._options;
   }
 
   /**
@@ -101,11 +133,11 @@ export class Property {
   }
 
   /**
-   * Getter sold
+   * Getter isVisible
    * @return {boolean}
    */
-  public get sold(): boolean {
-    return this._sold;
+  public get isVisible(): boolean {
+    return this._isVisible;
   }
 
   /**
@@ -141,6 +173,14 @@ export class Property {
   }
 
   /**
+   * Setter location
+   * @param {string} value
+   */
+  public set location(value: string) {
+    this._location = value;
+  }
+
+  /**
    * Setter surface
    * @param {number} value
    */
@@ -157,11 +197,27 @@ export class Property {
   }
 
   /**
+   * Setter beds
+   * @param {number} value
+   */
+  public set beds(value: number) {
+    this._beds = value;
+  }
+
+  /**
    * Setter description
    * @param {string} value
    */
   public set description(value: string) {
     this._description = value;
+  }
+
+  /**
+   * Setter options
+   * @param {Array<string>} value
+   */
+  public set options(value: Array<string>) {
+    this._options = value;
   }
 
   /**
@@ -181,11 +237,11 @@ export class Property {
   }
 
   /**
-   * Setter sold
+   * Setter isVisible
    * @param {boolean} value
    */
-  public set sold(value: boolean) {
-    this._sold = value;
+  public set isVisible(value: boolean) {
+    this._isVisible = value;
   }
 
   /**

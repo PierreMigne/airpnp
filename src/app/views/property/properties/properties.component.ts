@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Property } from 'src/app/models/property.model';
 import { PropertyService } from '../../../services/property/property.service';
 
@@ -11,7 +12,7 @@ export class PropertiesComponent implements OnInit {
 
   properties: Array<Property>;
 
-  constructor(private propertyService: PropertyService) {
+  constructor(private propertyService: PropertyService, private router: Router) {
     this.properties = [];
   }
 
@@ -19,5 +20,8 @@ export class PropertiesComponent implements OnInit {
     this.properties = this.propertyService.properties;
   }
 
+  onShowProperty(propertyId: number) {
+    this.router.navigate(['properties', propertyId]);
+  }
 
 }

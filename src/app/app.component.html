@@ -6,9 +6,10 @@
   <mat-sidenav-content>
     <!-- Navbar Content -->
     <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
-    <main>
-      <!-- Content -->
-      <router-outlet></router-outlet>
-    </main>
+      <main>
+        <!-- Content -->
+        <router-outlet ></router-outlet>
+      </main>
+      <app-footer></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

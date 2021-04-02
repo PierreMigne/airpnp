@@ -1,48 +1,38 @@
-<div class="propertiesCardsContainer"  >
-  <!-- <h1>{{property.title}}</h1>
-  <p>{{property.category}}</p>
-  <p>{{property.surface}} m²</p>
-  <p *ngIf="property.rooms > 1">{{property.rooms}} chambres</p>
-  <p *ngIf="property.rooms <= 1">{{property.rooms}} chambre</p>
-  <p>{{property.description}}</p>
-
-
-  <p *ngIf="property.sold === false">À vendre</p>
-  <p *ngIf="property.sold === true">Vendu</p>
-
-
-  <p>Paru le {{property.createdAt | date: 'longDate'}}</p> -->
-
-
-
-
+<div class="propertiesCardsContainer">
   <mat-card class="propertyCard" *ngFor="let property of properties">
     <mat-card-header>
       <mat-card-title>{{property.title}}</mat-card-title>
       <mat-card-subtitle>{{property.category}}</mat-card-subtitle>
+      <p class="propertyPrice">{{property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</p>
     </mat-card-header>
     <div class="propertyCardImgContainer">
       <img mat-card-image [src]="property.photos" [alt]="property.title">
-      <div class="propertySold">Vendu !</div>
     </div>
     <mat-card-content>
       <div class="iconContainer">
         <div>
-          <mat-icon aria-hidden="false" aria-label="Example home icon">bed</mat-icon>
+          <mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon>
+          <span>{{property.surface}} m²</span>
+        </div>
+        <div>
+          <mat-icon aria-hidden="false" aria-label="room icon">chair</mat-icon>
           <span *ngIf="property.rooms > 1">{{property.rooms}} chambres</span>
           <span *ngIf="property.rooms <= 1">{{property.rooms}} chambre</span>
         </div>
         <div>
-          <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-          <span>{{property.surface}} m²</span>
+          <mat-icon aria-hidden="false" aria-label="bed icon">bed</mat-icon>
+          <span *ngIf="property.beds > 1">{{property.beds}} lits</span>
+          <span *ngIf="property.beds <= 1">{{property.beds}} lit</span>
         </div>
       </div>
-      <p>{{property.description}}</p>
-      <p>{{property.price | currency:"EUR"}}</p>
+      <div class="propertyLocation">Lieu : {{property.location}}</div>
+      <ul class="propertyOptions">
+        <li *ngFor="let option of property.options">{{ option | uppercase }}</li>
+      </ul>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>VOIR CE BIEN</button>
+      <button mat-button><mat-icon>favorite_border</mat-icon></button>
+      <button mat-button (click)="onShowProperty(property.id)">VOIR CE BIEN</button>
     </mat-card-actions>
   </mat-card>
 

@@ -13,11 +13,13 @@ export class PropertyService {
     const property = new Property(
       'Belle villa méditerranéenne',
       'Maison',
+      'Toulouse',
       180,
       5,
+      3,
       'Petite maison de campagne.',
-      180000,
-      false,
+      ['wifi', 'parkging', 'piscine','wifi', 'parkging', 'piscine','wifi', 'parkging', 'piscine','wifi'],
+      180,
       'assets/img/house.jpg'
     );
     this.properties.push(property);

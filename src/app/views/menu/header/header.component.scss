@@ -1,17 +1,17 @@
-a {
+.navigation-items{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navigation-items li a {
   text-decoration: none;
   color: white;
   font-size: 16px;
 }
 
-a:hover, a:active{
+.navigation-items li a:hover, a:active{
   color: lightgray;
-}
-
-.navigation-items{
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
 }
 
 .flexNav {
@@ -30,6 +30,11 @@ a:hover, a:active{
 
 .toggleMenu {
   display: none;
+}
+
+.mat-menu-item a {
+  text-decoration: none;
+  color: inherit;
 }
 
 
