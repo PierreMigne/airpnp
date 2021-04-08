@@ -26,6 +26,8 @@ import { PropertyService } from './services/property/property.service';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { FooterComponent } from './views/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -53,7 +55,17 @@ registerLocaleData(localeFr);
     MatIconModule,
     MatListModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function  tokenGetter() {
+          return localStorage.getItem('accessToken');
+        },
+        allowedDomains: ['localhost:3000'],
+        disallowedRoutes: ['http://localhost:3000/auth/signin']
+      }
+    })
   ],
   providers: [{provide: LOCALE_ID, useValue: 'fr-FR'}, UserService, PropertyService],
   bootstrap: [AppComponent]

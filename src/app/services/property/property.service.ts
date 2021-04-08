@@ -1,31 +1,37 @@
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, Subject, throwError } from 'rxjs';
 import { Property } from 'src/app/models/property.model';
+import { catchError, map } from 'rxjs/operators';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PropertyService {
 
-  properties: Array<Property>;
+  properties: Array<Property> = [];
+  propertiesSubject = new Subject<any[]>();
+  private propertiesUrl = 'http://localhost:3000/properties/all'; // DELETE ALL TO HAVE PROPERTIES BY USER
 
-  constructor() {
-    this.properties = [];
-    const property = new Property(
-      'Belle villa méditerranéenne',
-      'Maison',
-      'Toulouse',
-      180,
-      5,
-      3,
-      'Petite maison de campagne.',
-      ['wifi', 'parkging', 'piscine','wifi', 'parkging', 'piscine','wifi', 'parkging', 'piscine','wifi'],
-      180,
-      'assets/img/house.jpg'
-    );
-    this.properties.push(property);
-    this.properties.push(property);
-    this.properties.push(property);
-    this.properties.push(property);
-    this.properties.push(property);
+  constructor(private httpClient: HttpClient) {}
+
+  getPropertiesFromServer() {
+    this.httpClient
+      .get<any[]>(this.propertiesUrl)
+      .subscribe(
+        (response) => {
+          this.properties = response;
+        },
+        (error) => {
+          console.log('Erreur ! : ' + JSON.stringify(error.error));
+        }
+      );
   }
+
+  emitPropertiesSubject() {
+    this.propertiesSubject.next(this.properties);
+  }
+
 }
