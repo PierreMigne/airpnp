@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -8,14 +9,26 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class AuthComponent implements OnInit {
 
-  email = 'pierre@hotmail.fr';
-  password = 'Admin123';
+  title: string;
+  type: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private location: Location) { }
 
   ngOnInit(): void {
-    this.authService.signIn(this.email, this.password);
+    this.getPath();
+    // this.authService.signIn(this.email, this.password);
     // this.authService.signUp(this.email, this.password);
+  }
+
+  getPath() {
+    const path = this.location.prepareExternalUrl(this.location.path()).slice(1);
+    if (path === 'signup') {
+      this.title = 'INSCRIPTION';
+      this.type = 'signup';
+    } else if (path === 'signin') {
+      this.title = 'CONNEXION';
+      this.type = 'signin';
+    }
   }
 
   onLogout() {

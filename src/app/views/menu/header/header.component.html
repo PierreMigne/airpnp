@@ -13,10 +13,10 @@
         <a routerLink="/properties">Hébergements</a>
       </li>
       <li *ngIf="!isAuth">
-        <a routerLink="/auth">Connexion</a>
+        <a routerLink="/signin">Connexion</a>
       </li>
       <li *ngIf="!isAuth">
-        <a routerLink="/auth">Inscription</a>
+        <a routerLink="/signup">Inscription</a>
       </li>
       <li>
         <button mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>

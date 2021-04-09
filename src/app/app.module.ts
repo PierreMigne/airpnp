@@ -9,9 +9,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { HomeComponent } from './views/menu/home/home.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { HeaderComponent } from './views/menu/header/header.component';
 import { SidenavListComponent } from './views/menu/sidenav-list/sidenav-list.component';
@@ -28,6 +30,9 @@ import { registerLocaleData } from '@angular/common';
 import { FooterComponent } from './views/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
+import { SigninFormComponent } from './components/signin-form/signin-form.component';
+import { SignupFormComponent } from './components/signup-form/signup-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -43,6 +48,8 @@ registerLocaleData(localeFr);
     NewPropertyComponent,
     EditPropertyComponent,
     FooterComponent,
+    SigninFormComponent,
+    SignupFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,11 +62,15 @@ registerLocaleData(localeFr);
     MatIconModule,
     MatListModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatMenuModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: function  tokenGetter() {
+        tokenGetter: function  tokenGetter(): any {
           return localStorage.getItem('accessToken');
         },
         allowedDomains: ['localhost:3000'],
