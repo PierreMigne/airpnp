@@ -1,23 +1,24 @@
-<mat-nav-list *ngIf="!isAuth">
+<!-- Sidenav utilisateur non connecté -->
+<mat-nav-list *ngIf="!onGetIsAuth()">
   <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
     <mat-icon>home</mat-icon>
     <span class="nav-caption">Accueil</span>
   </a>
-  <a mat-list-item routerLink="/auth" (click)="onSidenavClose()">Connexion</a>
-  <a mat-list-item routerLink="/auth" (click)="onSidenavClose()">Inscription</a>
-
+  <a mat-list-item routerLink="/signin" (click)="onSidenavClose()">Connexion</a>
+  <a mat-list-item routerLink="/signup" (click)="onSidenavClose()">Inscription</a>
 </mat-nav-list>
 
-<mat-nav-list *ngIf="isAuth">
+<!-- Sidenav utilisateur connecté -->
+<mat-nav-list *ngIf="onGetIsAuth()">
   <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
     <mat-icon>home</mat-icon>
     <span class="nav-caption">Accueil</span>
   </a>
-  <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
+  <a mat-list-item routerLink="/profile" (click)="onSidenavClose()">
     <mat-icon>account_circle</mat-icon>
     <span class="nav-caption">Mon compte</span>
   </a>
-  <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
+  <a mat-list-item routerLink="/my-properties" (click)="onSidenavClose()">
     <mat-icon>house</mat-icon>
     <span class="nav-caption">Mes hébergements</span>
   </a>
@@ -25,7 +26,7 @@
     <mat-icon>favorite_border</mat-icon>
     <span class="nav-caption">Mes favoris</span>
   </a>
-  <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
+  <a mat-list-item routerLink="/home" (click)="onSidenavClose()" (click)="onLogout()">
     <mat-icon>logout</mat-icon>
     <span class="nav-caption">Déconnexion</span>
   </a>

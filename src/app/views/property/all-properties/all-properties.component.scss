@@ -1,0 +1,57 @@
+.propertiesCardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.propertyCard {
+  max-width: 400px;
+  margin: 15px;
+}
+.propertyCardImgContainer {
+  width: 100%;
+}
+.propertyCard img{
+  margin-bottom: 0;
+}
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.iconContainer div {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+.iconContainer div mat-icon {
+  padding: 5px;
+}
+.iconContainer div span {
+  margin-top: 5px;
+}
+.mat-card-content {
+  margin-bottom: 0;
+}
+.propertyPrice {
+  text-align: right;
+  font-size: 20px;
+}
+.propertyOptions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding-inline-start: 0px;
+}
+.propertyOptions li:not(:last-child):after{
+  content: '-';
+  padding: 0 5px;
+}
+.propertyLocation {
+  text-align: center;
+}
+.mat-card-actions {
+  display: flex;
+  justify-content: space-around;
+}

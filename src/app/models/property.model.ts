@@ -1,5 +1,5 @@
 export class Property {
-  static nbId = 1;
+  // static nbId = 1;
 
   private _id: number;
   private _title: string;
@@ -38,10 +38,10 @@ export class Property {
     this._price = price;
     this._photos = photos;
 
-    this._id = Property.nbId;
-    Property.nbId++;
+    // this._id = Property.nbId;
+    // Property.nbId++;
     this._createdAt = new Date();
-    this._isVisible = false
+    this._isVisible = false;
   }
 
   /**

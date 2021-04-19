@@ -5,6 +5,20 @@ mat-sidenav {
   width: 250px;
 }
 
+app-footer, app-header {
+  height: 70px;
+}
+
 main {
-  padding: 10px;
+  padding-top: 10px;
+  min-height: calc(100% - 150px); // 70px header + 70px footer + 10px padding-top
+}
+
+
+
+.authBackground {
+  background-image: url('/assets/img/authBackground.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

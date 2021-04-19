@@ -1,0 +1,89 @@
+section {
+  margin-bottom: 30px;
+}
+h2 {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  font-size: 30px;
+  margin-top: 15px;
+  span {
+    padding: 0 20px;
+    font-size: 20px;
+  }
+}
+mat-chip-list {
+  display: flex;
+  justify-content: space-evenly!important;
+  margin-bottom: 10px;
+}
+mat-chip {
+  padding: 0 20px;
+  margin: 0 20px!important;
+}
+img {
+  width: 100%;
+  object-fit: cover;
+  max-height: 70vh;
+}
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 18px;
+}
+.iconContainer div {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.iconContainer div mat-icon {
+  padding: 10px;
+  font-size: 25px;
+}
+.iconContainer div span {
+  margin-top: 5px;
+}
+.propertyOptions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding-inline-start: 0px;
+}
+.propertyOptions li:not(:last-child):after{
+  content: '-';
+  padding: 0 5px;
+}
+.propertyDescpritionLocation {
+  text-align: center;
+}
+.btnContainer {
+  display: flex;
+  justify-content: space-around;
+}
+.mat-raised-button {
+  margin-top: 15px;
+  font-size: 25px;
+}
+
+@media screen and (max-width: 800px) {
+  h2 {
+    font-size: 20px;
+    span {
+      font-size: 16px;
+    }
+  }
+}
+@media screen and (max-width: 400px) {
+  .iconContainer {
+    font-size: 14px;
+    padding: 5px;
+  }
+  .iconContainer div mat-icon {
+    padding: 10px;
+    font-size: 25px;
+    padding: 5px;
+  }
+}

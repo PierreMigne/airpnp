@@ -1,7 +1,7 @@
+import { Property } from './../../models/property.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Property } from 'src/app/models/property.model';
+import { ReplaySubject, Subscription } from 'rxjs';
 
 
 @Injectable({
@@ -9,18 +9,22 @@ import { Property } from 'src/app/models/property.model';
 })
 export class PropertyService {
 
-  properties: Array<Property> = [];
-  propertiesSubject = new Subject<Property[]>();
-  private propertiesUrl = 'http://localhost:3000/properties/all'; // DELETE "ALL" TO HAVE PROPERTIES BY USER
+  properties: ReplaySubject<Array<Property>>;
+  property: ReplaySubject<Property>;
+  // private allPropertiesUrl = 'http://localhost:3000/properties/all';
+  // private propertiesUrl = 'http://localhost:3000/properties';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.properties = new ReplaySubject<Array<Property>>();
+    this.property = new ReplaySubject<Property>();
+  }
 
-  getPropertiesFromServer() {
-    this.httpClient
-      .get<Property[]>(this.propertiesUrl)
+  getPropertiesFromServer(url): Subscription {
+    return this.httpClient
+      .get<Property[]>(url)
       .subscribe(
-        (response) => {
-          this.properties = response;
+        (properties: Array<Property>) => {
+          this.properties.next(properties);
         },
         (error) => {
           console.log('Erreur ! : ' + JSON.stringify(error.error));
@@ -28,8 +32,16 @@ export class PropertyService {
       );
   }
 
-  emitPropertiesSubject() {
-    this.propertiesSubject.next(this.properties);
+  getPropertyFromServer(url): Subscription {
+    return this.httpClient
+      .get<Property>(url)
+      .subscribe(
+        (property: Property) => {
+          this.property.next(property);
+        },
+        (error) => {
+          console.log('Erreur ! : ' + JSON.stringify(error.error));
+        }
+      );
   }
-
 }

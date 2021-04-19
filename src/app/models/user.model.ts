@@ -1,17 +1,20 @@
 export class User {
   private _firstname: string;
   private _lastname: string;
+  private _birthDate: string;
   private _email: string;
   private _password: string;
 
   constructor(
     firstname: string,
     lastname: string,
+    birthDate: string,
     email: string,
     password: string
   ) {
     this._firstname = firstname;
     this._lastname = lastname;
+    this._birthDate = birthDate;
     this._email = email;
     this._password = password;
   }
@@ -30,6 +33,14 @@ export class User {
    */
   public get lastname(): string {
     return this._lastname;
+  }
+
+  /**
+   * Getter birthDate
+   * @return {string}
+   */
+  public get birthDate(): string {
+    return this._birthDate;
   }
 
   /**
@@ -62,6 +73,14 @@ export class User {
    */
   public set lastname(value: string) {
     this._lastname = value;
+  }
+
+  /**
+   * Setter birthDate
+   * @param {string} value
+   */
+  public set birthDate(value: string) {
+    this._birthDate = value;
   }
 
   /**

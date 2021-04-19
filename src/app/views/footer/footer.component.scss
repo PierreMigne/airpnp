@@ -1,5 +1,6 @@
 footer {
-  height: 70px;
+  // height: 70px;
+  height: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,6 +8,6 @@ footer {
   background-color: #212121;
   color: white;
   font-size: 18px;
-  position: sticky;
-  top: 100%;
+  // position: sticky;
+  // top: 100%;
 }

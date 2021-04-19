@@ -1,0 +1,27 @@
+form {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.authForm {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+mat-form-field {
+  padding: 5px;
+  width: 236px;
+}
+.authBtn {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 540px) {
+  .authForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}

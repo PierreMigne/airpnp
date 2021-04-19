@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Property } from 'src/app/models/property.model';
-import { PropertyService } from '../../../services/property/property.service';
+import { PropertyService } from 'src/app/services/property/property.service';
 
 @Component({
-  selector: 'app-properties',
-  templateUrl: './properties.component.html',
-  styleUrls: ['./properties.component.scss']
+  selector: 'app-all-properties',
+  templateUrl: './all-properties.component.html',
+  styleUrls: ['./all-properties.component.scss']
 })
-export class PropertiesComponent implements OnInit, OnDestroy {
+export class AllPropertiesComponent implements OnInit, OnDestroy {
 
   properties: Array<Property>;
   propertiesSubscription: Subscription;
@@ -22,7 +22,7 @@ export class PropertiesComponent implements OnInit, OnDestroy {
         this.properties = properties;
       }
     );
-    this.propertyService.getPropertiesFromServer('http://localhost:3000/properties');
+    this.propertyService.getPropertiesFromServer('http://localhost:3000/properties/all');
   }
 
   onShowProperty(propertyId: number): void {

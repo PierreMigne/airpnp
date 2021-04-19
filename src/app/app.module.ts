@@ -11,6 +11,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatChipsModule } from '@angular/material/chips';
 import { HomeComponent } from './views/menu/home/home.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -33,6 +36,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { SigninFormComponent } from './components/signin-form/signin-form.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AllPropertiesComponent } from './views/property/all-properties/all-properties.component';
+import { SinglePropertyComponent } from './views/property/single-property/single-property.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -50,6 +55,8 @@ registerLocaleData(localeFr);
     FooterComponent,
     SigninFormComponent,
     SignupFormComponent,
+    AllPropertiesComponent,
+    SinglePropertyComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,11 +65,14 @@ registerLocaleData(localeFr);
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
+    MatChipsModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
     MatCardModule,
     MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatInputModule,
     MatMenuModule,
     HttpClientModule,

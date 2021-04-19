@@ -1,5 +1,5 @@
-<div class="card card-register">
-  <h2 class="title">{{title}}</h2>
+<div>
+  <h2>{{title}}</h2>
   <app-signin-form *ngIf="type === 'signin'" [title]='title'></app-signin-form>
   <app-signup-form *ngIf="type === 'signup'" [title]='title'></app-signup-form>
 </div>

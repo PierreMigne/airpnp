@@ -1,0 +1,35 @@
+<section>
+  <h2>{{property.title | uppercase}} <span class="propertyPrice">{{property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</span></h2>
+
+  <mat-chip-list aria-label="Property Category and Location">
+    <mat-chip>{{property.category}}</mat-chip>
+    <mat-chip>{{property.location}}</mat-chip>
+  </mat-chip-list>
+  <img src="{{property.photos}}" alt="{{property.title}}">
+  <div class="iconContainer">
+    <div>
+      <mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon>
+      <span>{{property.surface}} m²</span>
+    </div>
+    <div>
+      <mat-icon aria-hidden="false" aria-label="room icon">chair</mat-icon>
+      <span *ngIf="property.rooms > 1">{{property.rooms}} chambres</span>
+      <span *ngIf="property.rooms <= 1">{{property.rooms}} chambre</span>
+    </div>
+    <div>
+      <mat-icon aria-hidden="false" aria-label="bed icon">bed</mat-icon>
+      <span *ngIf="property.beds > 1">{{property.beds}} lits</span>
+      <span *ngIf="property.beds <= 1">{{property.beds}} lit</span>
+    </div>
+  </div>
+  <ul class="propertyOptions">
+    <li *ngFor="let option of property.options">{{ option | uppercase }}</li>
+  </ul>
+  <div class="propertyDescpritionLocation">
+    <p>{{property.description}}</p>
+    <p>Lieu : {{property.location}}</p>
+  </div>
+  <div class="btnContainer">
+    <button mat-raised-button color="primary" (click)="onReservation()">Réserver</button>
+  </div>
+</section>

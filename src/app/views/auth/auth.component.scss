@@ -1,0 +1,17 @@
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 3px;
+  padding: 50px 20px;
+  margin: auto;
+  margin-top: 50px;
+  max-width: 800px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+h2 {
+  padding: 20px 0 40px 0;
+  font-size: 30px;
+}

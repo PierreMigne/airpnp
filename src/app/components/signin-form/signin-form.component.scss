@@ -1,0 +1,19 @@
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.authForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+mat-form-field {
+  padding: 5px;
+  width: 236px;
+}
+.authBtn {
+  margin-top: 20px;
+}

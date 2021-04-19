@@ -12,20 +12,23 @@
       <li>
         <a routerLink="/properties">Hébergements</a>
       </li>
-      <li *ngIf="!isAuth">
+      <li>
+        <a>{{onGetIsAuth()}}</a>
+      </li>
+      <li *ngIf="!onGetIsAuth()">
         <a routerLink="/signin">Connexion</a>
       </li>
-      <li *ngIf="!isAuth">
+      <li *ngIf="!onGetIsAuth()">
         <a routerLink="/signup">Inscription</a>
       </li>
       <li>
         <button mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
         <mat-menu #menu="matMenu" class="mat-menu">
-          <a routerLink="/home" mat-menu-item>
+          <a routerLink="/profile" mat-menu-item>
             <mat-icon>account_circle</mat-icon>
             Mon compte
           </a>
-          <a routerLink="/home" mat-menu-item>
+          <a routerLink="/my-properties" mat-menu-item>
             <mat-icon>house</mat-icon>
             Mes hébergements
           </a>
@@ -33,7 +36,7 @@
             <mat-icon>favorite_border</mat-icon>
             Mes favoris
           </a>
-          <a routerLink="/home" mat-menu-item>
+          <a routerLink="/home" mat-menu-item (click)="onLogout()">
             <mat-icon>logout</mat-icon>
             Déconnexion
           </a>

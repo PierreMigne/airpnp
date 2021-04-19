@@ -10,24 +10,6 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router: Router) {
   }
 
-  // signIn(email: string, password: string) {
-  //   return this.httpClient
-  //     .post<{accessToken: string}>('http://localhost:3000/auth/signin', {email, password})
-  //     .subscribe(
-  //       (res) => {
-  //         if (res.accessToken) {
-  //           localStorage.setItem('accessToken', res.accessToken);
-  //          // this.router.navigateByUrl('/home');
-  //         } else {
-  //           this.router.navigate(['/signup']);
-  //         }
-  //       },
-  //       (error) => {
-  //         console.log('Erreur ! : ' + JSON.stringify(error));
-  //       }
-  //     );
-  // }
-
   async signIn(email: string, password: string): Promise<any> {
     return await this.httpClient
       .post<{accessToken: string}>('http://localhost:3000/auth/signin', {email, password})
@@ -48,21 +30,27 @@ export class AuthService {
     ;
   }
 
-  signUp(email: string, password: string) {
-    return this.httpClient
-      .post<{accessToken: string}>('http://localhost:3000/auth/signup', {email, password})
-      .subscribe(
-        (res) => {
-          this.signIn(email, password);
-        },
-        (error) => {
-          console.log('Erreur ! : ' + JSON.stringify(error.error.message));
-        }
-      );
+  async signUp(email: string, password: string, firstname: string, lastname: string, birthDate: Date): Promise<any> {
+    return await this.httpClient
+      .post<{accessToken: string}>('http://localhost:3000/auth/signup', {email, password, firstname, lastname, birthDate})
+      .toPromise()
+      .then(() => {
+        this.signIn(email, password);
+        Promise.resolve();
+      })
+      .catch((err) => {
+        Promise.reject(err.error.message);
+        return(err.error.message);
+      })
+    ;
   }
 
-  loggedIn(): boolean {
-    return localStorage.getItem('accessToken') !==  null;
+  getIsAuth(): boolean {
+    if (localStorage.getItem('accessToken') !==  null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   logout() {
