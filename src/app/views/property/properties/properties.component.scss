@@ -43,15 +43,27 @@
   flex-wrap: wrap;
   list-style-type: none;
   padding-inline-start: 0px;
+  margin-top: 5px;
 }
 .propertyOptions li:not(:last-child):after{
   content: '-';
   padding: 0 5px;
 }
-.propertyLocation {
-  text-align: center;
-}
 .mat-card-actions {
   display: flex;
   justify-content: space-around;
+}
+
+@media screen and (max-width: 400px) {
+  .iconContainer div {
+    padding: 2px;
+    font-size: 13px;
+  }
+  .iconContainer div mat-icon {
+    padding-left: 5px;
+    font-size: 20px;
+  }
+  .iconContainer div span {
+    margin-top: 0px;
+  }
 }

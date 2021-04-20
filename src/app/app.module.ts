@@ -13,7 +13,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatChipsModule } from '@angular/material/chips';
 import { HomeComponent } from './views/menu/home/home.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -21,7 +20,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HeaderComponent } from './views/menu/header/header.component';
 import { SidenavListComponent } from './views/menu/sidenav-list/sidenav-list.component';
 import { AuthComponent } from './views/auth/auth.component';
-import { ProfilComponent } from './views/profil/profil.component';
+import { ProfilComponent } from './views/profile/profil/profil.component';
 import { PropertiesComponent } from './views/property/properties/properties.component';
 import { PropertyComponent } from './views/property/property/property.component';
 import { NewPropertyComponent } from './views/property/new-property/new-property.component';
@@ -38,6 +37,7 @@ import { SignupFormComponent } from './components/signup-form/signup-form.compon
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AllPropertiesComponent } from './views/property/all-properties/all-properties.component';
 import { SinglePropertyComponent } from './views/property/single-property/single-property.component';
+import { EditProfilComponent } from './views/profile/edit-profil/edit-profil.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -57,6 +57,7 @@ registerLocaleData(localeFr);
     SignupFormComponent,
     AllPropertiesComponent,
     SinglePropertyComponent,
+    EditProfilComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +66,6 @@ registerLocaleData(localeFr);
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
-    MatChipsModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,

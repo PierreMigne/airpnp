@@ -1,5 +1,6 @@
 section {
-  margin-bottom: 30px;
+  // margin-bottom: 30px;
+  margin: 10px auto 30px auto;
 }
 h2 {
   display: flex;
@@ -78,7 +79,7 @@ img {
 }
 @media screen and (max-width: 400px) {
   .iconContainer {
-    font-size: 14px;
+    font-size: 13px;
     padding: 5px;
   }
   .iconContainer div mat-icon {

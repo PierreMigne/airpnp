@@ -1,0 +1,24 @@
+<section class="container">
+  <button mat-raised-button class="editBtn" color="primary" (click)="onEditProfile()">Modifier</button>
+  <h2>Profil</h2>
+  <hr>
+  <div *ngIf="loading === true">
+    En chargement blabla
+  </div>
+  <div *ngIf="loading === false">
+    <p>
+      Nom: {{user.lastname}}
+    </p>
+    <p>
+      Prénom: {{user.firstname}}
+    </p>
+    <p>
+      Date de naissance: {{user.birthDate | date}}
+    </p>
+    <p>
+      Email: {{user.email}}
+    </p>
+  </div>
+  <hr>
+
+</section>

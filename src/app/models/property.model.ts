@@ -6,7 +6,7 @@ export class Property {
   private _category: string;
   private _location: string;
   private _surface: number;
-  private _rooms: number;
+  private _peoples: number;
   private _beds: number;
   private _description: string;
   private _options: Array<string>;
@@ -20,7 +20,7 @@ export class Property {
     category: string,
     location: string,
     surface: number,
-    rooms: number,
+    peoples: number,
     beds: number,
     description: string,
     options: Array<string>,
@@ -31,7 +31,7 @@ export class Property {
     this._category = category;
     this._location = location;
     this._surface = surface;
-    this._rooms = rooms;
+    this._peoples = peoples;
     this._beds = beds;
     this._description = description;
     this._options = options;
@@ -85,11 +85,11 @@ export class Property {
   }
 
   /**
-   * Getter rooms
+   * Getter peoples
    * @return {number}
    */
-  public get rooms(): number {
-    return this._rooms;
+  public get peoples(): number {
+    return this._peoples;
   }
 
   /**
@@ -189,11 +189,11 @@ export class Property {
   }
 
   /**
-   * Setter rooms
+   * Setter peoples
    * @param {number} value
    */
-  public set rooms(value: number) {
-    this._rooms = value;
+  public set peoples(value: number) {
+    this._peoples = value;
   }
 
   /**

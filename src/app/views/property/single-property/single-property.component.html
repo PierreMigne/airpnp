@@ -1,10 +1,6 @@
-<section>
+<section class="container">
   <h2>{{property.title | uppercase}} <span class="propertyPrice">{{property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</span></h2>
-
-  <mat-chip-list aria-label="Property Category and Location">
-    <mat-chip>{{property.category}}</mat-chip>
-    <mat-chip>{{property.location}}</mat-chip>
-  </mat-chip-list>
+  <span>{{property.category}} · {{property.location}}</span>
   <img src="{{property.photos}}" alt="{{property.title}}">
   <div class="iconContainer">
     <div>
@@ -12,9 +8,9 @@
       <span>{{property.surface}} m²</span>
     </div>
     <div>
-      <mat-icon aria-hidden="false" aria-label="room icon">chair</mat-icon>
-      <span *ngIf="property.rooms > 1">{{property.rooms}} chambres</span>
-      <span *ngIf="property.rooms <= 1">{{property.rooms}} chambre</span>
+      <mat-icon aria-hidden="false" aria-label="people icon">people</mat-icon>
+      <span *ngIf="property.peoples > 1">{{property.peoples}} personnes</span>
+      <span *ngIf="property.peoples <= 1">{{property.peoples}} personne</span>
     </div>
     <div>
       <mat-icon aria-hidden="false" aria-label="bed icon">bed</mat-icon>

@@ -2,7 +2,7 @@
   <mat-card class="propertyCard" *ngFor="let property of properties">
     <mat-card-header>
       <mat-card-title>{{property.title}}</mat-card-title>
-      <mat-card-subtitle>{{property.category}}</mat-card-subtitle>
+      <mat-card-subtitle>{{property.category}} · {{property.location}}</mat-card-subtitle>
       <p class="propertyPrice">{{property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</p>
     </mat-card-header>
     <div class="propertyCardImgContainer">
@@ -15,9 +15,9 @@
           <span>{{property.surface}} m²</span>
         </div>
         <div>
-          <mat-icon aria-hidden="false" aria-label="room icon">chair</mat-icon>
-          <span *ngIf="property.rooms > 1">{{property.rooms}} chambres</span>
-          <span *ngIf="property.rooms <= 1">{{property.rooms}} chambre</span>
+          <mat-icon aria-hidden="false" aria-label="people icon">people</mat-icon>
+          <span *ngIf="property.peoples > 1">{{property.peoples}} personnes</span>
+          <span *ngIf="property.peoples <= 1">{{property.peoples}} personne</span>
         </div>
         <div>
           <mat-icon aria-hidden="false" aria-label="bed icon">bed</mat-icon>
@@ -25,7 +25,6 @@
           <span *ngIf="property.beds <= 1">{{property.beds}} lit</span>
         </div>
       </div>
-      <div class="propertyLocation">Lieu : {{property.location}}</div>
       <ul class="propertyOptions">
         <li *ngFor="let option of property.options">{{ option | uppercase }}</li>
       </ul>
