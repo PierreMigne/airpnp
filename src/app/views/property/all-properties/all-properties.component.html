@@ -1,4 +1,5 @@
-<div class="propertiesCardsContainer">
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div class="propertiesCardsContainer" *ngIf="!loading">
   <mat-card class="propertyCard" *ngFor="let property of properties">
     <mat-card-header>
       <mat-card-title>{{property.title}}</mat-card-title>

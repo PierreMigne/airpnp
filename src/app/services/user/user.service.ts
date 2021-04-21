@@ -9,14 +9,12 @@ import { Observable, Subject } from 'rxjs';
 export class UserService {
 
   user: Subject<User>;
-  loading: boolean;
 
   constructor(private httpClient: HttpClient) {
     this.user = new Subject<User>();
   }
 
   getUserFromServer(): Observable<User> {
-    this.loading = true;
     return this.httpClient.get<User>('http://localhost:3000/auth/profile');
   }
 }

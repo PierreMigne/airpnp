@@ -1,7 +1,7 @@
-import { Property } from './../../models/property.model';
+import { Property } from 'src/app/models/property.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReplaySubject, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -9,39 +9,19 @@ import { ReplaySubject, Subscription } from 'rxjs';
 })
 export class PropertyService {
 
-  properties: ReplaySubject<Array<Property>>;
-  property: ReplaySubject<Property>;
-  // private allPropertiesUrl = 'http://localhost:3000/properties/all';
-  // private propertiesUrl = 'http://localhost:3000/properties';
+  properties: Subject<Array<Property>>;
+  property: Subject<Property>;
 
   constructor(private httpClient: HttpClient) {
-    this.properties = new ReplaySubject<Array<Property>>();
-    this.property = new ReplaySubject<Property>();
+    this.properties = new Subject<Property[]>();
+    this.property = new Subject<Property>();
   }
 
-  getPropertiesFromServer(url): Subscription {
-    return this.httpClient
-      .get<Property[]>(url)
-      .subscribe(
-        (properties: Array<Property>) => {
-          this.properties.next(properties);
-        },
-        (error) => {
-          console.log('Erreur ! : ' + JSON.stringify(error.error));
-        }
-      );
+  getPropertiesFromServer(url): Observable<Property[]> {
+    return this.httpClient.get<Property[]>(url);
   }
 
-  getPropertyFromServer(url): Subscription {
-    return this.httpClient
-      .get<Property>(url)
-      .subscribe(
-        (property: Property) => {
-          this.property.next(property);
-        },
-        (error) => {
-          console.log('Erreur ! : ' + JSON.stringify(error.error));
-        }
-      );
+  getPropertyFromServer(url): Observable<Property> {
+    return this.httpClient.get<Property>(url);
   }
 }

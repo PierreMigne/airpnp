@@ -16,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './views/menu/home/home.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { HeaderComponent } from './views/menu/header/header.component';
 import { SidenavListComponent } from './views/menu/sidenav-list/sidenav-list.component';
@@ -71,6 +72,7 @@ registerLocaleData(localeFr);
     MatListModule,
     MatCardModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,

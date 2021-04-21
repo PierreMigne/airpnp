@@ -2,10 +2,8 @@
   <button mat-raised-button class="editBtn" color="primary" (click)="onEditProfile()">Modifier</button>
   <h2>Profil</h2>
   <hr>
-  <div *ngIf="loading === true">
-    En chargement blabla
-  </div>
-  <div *ngIf="loading === false">
+  <mat-spinner *ngIf="loading"></mat-spinner>
+  <div *ngIf="!loading">
     <p>
       Nom: {{user.lastname}}
     </p>
@@ -18,7 +16,7 @@
     <p>
       Email: {{user.email}}
     </p>
+    <hr>
   </div>
-  <hr>
 
 </section>

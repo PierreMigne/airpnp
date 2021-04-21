@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PropertyService } from '../../../services/property/property.service';
 import { Property } from '../../../models/property.model';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-single-property',
@@ -12,24 +11,29 @@ import { Subscription } from 'rxjs';
 export class SinglePropertyComponent implements OnInit {
 
   property: Property;
-  propertySubscription: Subscription;
+  loading: boolean;
 
   constructor(private propertyService: PropertyService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.propertySubscription = this.propertyService.property.subscribe(
+    this.loading = true;
+    const id = this.route.snapshot.params.id;
+    this.propertyService.getPropertyFromServer('http://localhost:3000/properties/all/' + id).subscribe(
       (property: Property) => {
+        this.propertyService.property.next(property);
         this.property = property;
+        this.loading = false;
+      },
+      (error) => {
+        console.log('Erreur ! : ' + JSON.stringify(error.error));
+        this.loading = false;
       }
     );
-    const id = this.route.snapshot.params.id;
-    this.propertyService.getPropertyFromServer('http://localhost:3000/properties/all/' + id);
   }
 
   onReservation() {
     console.log('redirection vers la réservation');
 
   }
-
 
 }

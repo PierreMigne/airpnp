@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 import { Property } from 'src/app/models/property.model';
 import { PropertyService } from '../../../services/property/property.service';
 
@@ -9,28 +8,30 @@ import { PropertyService } from '../../../services/property/property.service';
   templateUrl: './properties.component.html',
   styleUrls: ['./properties.component.scss']
 })
-export class PropertiesComponent implements OnInit, OnDestroy {
+export class PropertiesComponent implements OnInit {
 
   properties: Array<Property>;
-  propertiesSubscription: Subscription;
+  loading: boolean;
 
   constructor(private propertyService: PropertyService, private router: Router) {}
 
   ngOnInit(): void {
-    this.propertiesSubscription = this.propertyService.properties.subscribe(
-      (properties: Property[]) => {
+    this.loading = true;
+    this.propertyService.getPropertiesFromServer('http://localhost:3000/properties').subscribe(
+      (properties: Array<Property>) => {
+        this.propertyService.properties.next(properties);
         this.properties = properties;
+        this.loading = false;
+      },
+      (error) => {
+        console.log('Erreur ! : ' + JSON.stringify(error.error));
+        this.loading = false;
       }
     );
-    this.propertyService.getPropertiesFromServer('http://localhost:3000/properties');
   }
 
   onShowProperty(propertyId: number): void {
     this.router.navigate(['properties', propertyId]);
-  }
-
-  ngOnDestroy(): void {
-    this.propertiesSubscription.unsubscribe();
   }
 
 }

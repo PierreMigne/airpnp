@@ -1,4 +1,5 @@
-<section class="container">
+<mat-spinner *ngIf="loading"></mat-spinner>
+<section class="container" *ngIf="!loading">
   <h2>{{property.title | uppercase}} <span class="propertyPrice">{{property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</span></h2>
   <span>{{property.category}} · {{property.location}}</span>
   <img src="{{property.photos}}" alt="{{property.title}}">
