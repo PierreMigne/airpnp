@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'properties/:id', component: SinglePropertyComponent},
   { path: 'my-properties', canActivate: [AuthGuardService], component: PropertiesComponent},
   { path: 'my-properties/add', canActivate: [AuthGuardService], component: NewPropertyComponent},
-  { path: 'my-properties/:id', canActivate: [AuthGuardService], component: PropertyComponent},
+  // { path: 'my-properties/:id', canActivate: [AuthGuardService], component: PropertyComponent},
   { path: 'my-properties/:id/edit', canActivate: [AuthGuardService], component: EditPropertyComponent},
   { path: 'profile', canActivate: [AuthGuardService], component: ProfilComponent},
   { path: 'profile/edit', canActivate: [AuthGuardService], component: EditPropertyComponent},
