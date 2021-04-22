@@ -39,6 +39,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AllPropertiesComponent } from './views/property/all-properties/all-properties.component';
 import { SinglePropertyComponent } from './views/property/single-property/single-property.component';
 import { EditProfilComponent } from './views/profile/edit-profil/edit-profil.component';
+import { EditPasswordComponent } from './views/profile/edit-password/edit-password.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -59,6 +60,7 @@ registerLocaleData(localeFr);
     AllPropertiesComponent,
     SinglePropertyComponent,
     EditProfilComponent,
+    EditPasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,8 @@ import { AuthGuardService } from './services/guards/auth/auth-guard.service';
 import { ProfilComponent } from './views/profile/profil/profil.component';
 import { AllPropertiesComponent } from './views/property/all-properties/all-properties.component';
 import { SinglePropertyComponent } from './views/property/single-property/single-property.component';
+import { EditProfilComponent } from './views/profile/edit-profil/edit-profil.component';
+import { EditPasswordComponent } from './views/profile/edit-password/edit-password.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -22,7 +24,8 @@ const routes: Routes = [
   // { path: 'my-properties/:id', canActivate: [AuthGuardService], component: PropertyComponent},
   { path: 'my-properties/:id/edit', canActivate: [AuthGuardService], component: EditPropertyComponent},
   { path: 'profile', canActivate: [AuthGuardService], component: ProfilComponent},
-  { path: 'profile/edit', canActivate: [AuthGuardService], component: EditPropertyComponent},
+  { path: 'profile/edit', canActivate: [AuthGuardService], component: EditProfilComponent},
+  { path: 'profile/edit/password', canActivate: [AuthGuardService], component: EditPasswordComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

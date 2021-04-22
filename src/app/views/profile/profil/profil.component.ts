@@ -33,9 +33,11 @@ export class ProfilComponent implements OnInit, OnDestroy {
     );
   }
 
-
   onEditProfile(): void {
     this.router.navigate(['profile', 'edit']);
+  }
+  onEditPassword(): void {
+    this.router.navigate(['profile', 'edit', 'password']);
   }
 
   ngOnDestroy(): void {

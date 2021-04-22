@@ -17,4 +17,12 @@ export class UserService {
   getUserFromServer(): Observable<User> {
     return this.httpClient.get<User>('http://localhost:3000/auth/profile');
   }
+
+  editUser(firstname: string, lastname: string, birthDate: Date): Observable<User> {
+    return this.httpClient.put<User>('http://localhost:3000/auth/profile/edit', {firstname, lastname, birthDate});
+  }
+
+  editPassword(oldPassword: string, password: string): Observable<User> {
+    return this.httpClient.put<User>('http://localhost:3000/auth/profile/edit/password', {oldPassword, password});
+  }
 }

@@ -1,1 +1,30 @@
-<p>edit-profil works!</p>
+<section class="container">
+  <!-- le ngIf est utile pour ne pas avoir de message d'erreur pendant quelques microsecondes avant de recevoir le user -->
+  <h2 *ngIf="user">Modifier le profil de {{user.email}}</h2>
+  <hr>
+  <mat-spinner *ngIf="loading"></mat-spinner>
+  <form [formGroup]="editUserForm" (ngSubmit)="onSubmitEditUserForm()" *ngIf="!loading">
+    <mat-error *ngIf="errorMsg">{{errorMsg}}</mat-error>
+    <div class="editUserForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Entrez votre prénom</mat-label>
+        <input matInput placeholder="Prénom" required formControlName="firstname">
+        <mat-error *ngIf="editUserForm.controls.firstname.invalid">{{getErrorMessage('firstname')}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Entrez votre nom</mat-label>
+        <input matInput placeholder="Nom" required formControlName="lastname">
+        <mat-error *ngIf="editUserForm.controls.lastname.invalid">{{getErrorMessage('lastname')}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="birthDate">
+        <mat-label>Entrez votre date de naissance</mat-label>
+        <input matInput required formControlName="birthDate" type="date">
+        <mat-error *ngIf="editUserForm.controls.birthDate.invalid">{{getErrorMessage('birthDate')}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="btnContainer">
+      <button mat-raised-button type="button" (click)="onBack()">Retour</button>
+      <button mat-raised-button type="submit" color="primary"  [disabled]="editUserForm.invalid">Modifier</button>
+    </div>
+  </form>
+</section>
