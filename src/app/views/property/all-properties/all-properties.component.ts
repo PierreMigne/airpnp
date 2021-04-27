@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Property } from 'src/app/models/property.model';
 import { PropertyService } from 'src/app/services/property/property.service';
 
@@ -14,12 +15,34 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
   properties: Array<Property>;
   propertiesSubscription: Subscription;
   loading: boolean;
+  search: string;
+  category: any;
+  peoples: number;
+  url: string;
 
   constructor(private propertyService: PropertyService, private router: Router) {}
 
   ngOnInit(): void {
     this.loading = true;
-    this.propertiesSubscription = this.propertyService.getPropertiesFromServer('http://localhost:3000/properties/all').subscribe(
+    this.search = history.state.search; // Methods to have the search data from HomeComponent
+    this.category = history.state.category; // Methods to have the category from HomeComponent
+    this.peoples = history.state.peoples; // Methods to have the peoples from HomeComponent
+
+    const categoryList = this.category ? this.category.map((category: string, index: number) => {
+      return 'category[' + index + ']=' + category; // category[0]=MAISON&category[1]=VILLA...
+    }).join('&') : null;
+
+    if (this.category && this.search) {
+      this.url = `http://localhost:3000/properties/all?${categoryList}&search=${this.search}`;
+    } else if (this.category && !this.search) {
+      this.url = `http://localhost:3000/properties/all?${categoryList}`;
+    } else if (this.search && !this.category) {
+      this.url = `http://localhost:3000/properties/all?search=${this.search}`;
+    } else {
+      this.url = `http://localhost:3000/properties/all`;
+    }
+
+    this.propertiesSubscription = this.propertyService.getPropertiesFromServer(this.url).subscribe(
       (properties: Array<Property>) => {
         this.propertyService.properties.next(properties);
         this.properties = properties;

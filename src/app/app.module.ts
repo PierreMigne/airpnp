@@ -17,6 +17,8 @@ import { HomeComponent } from './views/menu/home/home.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
 import { HeaderComponent } from './views/menu/header/header.component';
 import { SidenavListComponent } from './views/menu/sidenav-list/sidenav-list.component';
@@ -73,6 +75,8 @@ registerLocaleData(localeFr);
     MatIconModule,
     MatListModule,
     MatCardModule,
+    MatSelectModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,

@@ -1,0 +1,16 @@
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.propertiesSearchForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+mat-form-field {
+  padding: 5px;
+  width: 236px;
+}
