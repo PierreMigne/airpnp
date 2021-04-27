@@ -32,14 +32,18 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
       return 'category[' + index + ']=' + category; // category[0]=MAISON&category[1]=VILLA...
     }).join('&') : null;
 
-    if (this.category && this.search) {
-      this.url = `http://localhost:3000/properties/all?${categoryList}&search=${this.search}`;
-    } else if (this.category && !this.search) {
-      this.url = `http://localhost:3000/properties/all?${categoryList}`;
-    } else if (this.search && !this.category) {
-      this.url = `http://localhost:3000/properties/all?search=${this.search}`;
-    } else {
-      this.url = `http://localhost:3000/properties/all`;
+    this.url = 'http://localhost:3000/properties/all';
+    if (this.category || this.search || this.peoples) {
+      this.url += '?';
+    }
+    if (this.category) {
+      this.url += categoryList;
+    }
+    if (this.search) {
+      this.url += `&search=${this.search}`;
+    }
+    if (this.peoples) {
+      this.url += `&peoples=${this.peoples}`;
     }
 
     this.propertiesSubscription = this.propertyService.getPropertiesFromServer(this.url).subscribe(
