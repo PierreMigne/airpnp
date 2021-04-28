@@ -15,38 +15,46 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
   properties: Array<Property>;
   propertiesSubscription: Subscription;
   loading: boolean;
-  search: string;
+  location: string;
   category: any;
   peoples: number;
-  url: string;
+  options: any;
 
   constructor(private propertyService: PropertyService, private router: Router) {}
 
   ngOnInit(): void {
     this.loading = true;
-    this.search = history.state.search; // Methods to have the search data from HomeComponent
+    this.location = history.state.location; // Methods to have the location data from HomeComponent
     this.category = history.state.category; // Methods to have the category from HomeComponent
     this.peoples = history.state.peoples; // Methods to have the peoples from HomeComponent
+    this.options = history.state.options; // Methods to have the options from HomeComponent
 
     const categoryList = this.category ? this.category.map((category: string, index: number) => {
       return 'category[' + index + ']=' + category; // category[0]=MAISON&category[1]=VILLA...
     }).join('&') : null;
 
-    this.url = 'http://localhost:3000/properties/all';
-    if (this.category || this.search || this.peoples) {
-      this.url += '?';
+    const optionsList = this.options ? this.options.map((options: any, index: number) => {
+      return 'options[' + index + ']=' + options; // options[0]=wifi&options[1]=pisicne...
+    }).join('&') : null;
+
+    let url = 'http://localhost:3000/properties/all';
+    if (this.category || this.location || this.peoples  || this.options) {
+      url += '?';
     }
     if (this.category) {
-      this.url += categoryList;
+      url += categoryList;
     }
-    if (this.search) {
-      this.url += `&search=${this.search}`;
+    if (this.location) {
+      url += `&location=${this.location}`;
     }
     if (this.peoples) {
-      this.url += `&peoples=${this.peoples}`;
+      url += `&peoples=${this.peoples}`;
+    }
+    if (this.options) {
+      url += `&${optionsList}`;
     }
 
-    this.propertiesSubscription = this.propertyService.getPropertiesFromServer(this.url).subscribe(
+    this.propertiesSubscription = this.propertyService.getPropertiesFromServer(url).subscribe(
       (properties: Array<Property>) => {
         this.propertyService.properties.next(properties);
         this.properties = properties;

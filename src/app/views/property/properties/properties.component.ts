@@ -33,7 +33,8 @@ export class PropertiesComponent implements OnInit, OnDestroy {
   }
 
   onShowProperty(propertyId: number): void {
-    this.router.navigate(['properties', propertyId]);
+    const ownOrNotProperties = true;
+    this.router.navigate(['properties', propertyId], { state: { ownOrNotProperties } });
   }
 
   ngOnDestroy(): void {

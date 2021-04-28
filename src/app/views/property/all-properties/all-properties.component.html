@@ -2,9 +2,9 @@
   <h2>Hébergements</h2>
   <hr>
   <mat-chip-list >
-    <div *ngIf="search">
-      <span>Critères : </span>
-      <mat-chip >{{search}}</mat-chip>
+    <div *ngIf="location">
+      <span>Localisation : </span>
+      <mat-chip >{{location}}</mat-chip>
     </div>
 
     <div *ngIf="category">
@@ -15,8 +15,14 @@
 
     <div *ngIf="peoples">
       <span *ngIf="peoples > 1">Personnes: </span>
-      <span *ngIf="peoples <= 1">Peronne: </span>
+      <span *ngIf="peoples <= 1">Personne: </span>
       <mat-chip>{{peoples}}</mat-chip>
+    </div>
+
+    <div *ngIf="options">
+      <span *ngIf="options.length > 1">Options: </span>
+      <span *ngIf="options.length <= 1">Option: </span>
+      <mat-chip *ngFor="let option of options">{{option}}</mat-chip>
     </div>
   </mat-chip-list>
 </div>

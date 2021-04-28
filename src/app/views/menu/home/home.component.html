@@ -6,9 +6,14 @@
     <mat-error *ngIf="errorMsg">{{errorMsg}}</mat-error>
     <div class="propertiesSearchForm">
       <mat-form-field appearance="fill">
-        <mat-label>Critère(s)</mat-label>
-        <input matInput formControlName="search" placeholder="Ville, Titre, Options, etc">
-        <mat-error *ngIf="propertiesSearchForm.controls.search.invalid">{{getErrorMessage('search')}}</mat-error>
+        <mat-label>Localisation</mat-label>
+        <input matInput formControlName="location" placeholder="Ville">
+        <mat-error *ngIf="propertiesSearchForm.controls.location.invalid">{{getErrorMessage('location')}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Option(s)</mat-label>
+        <input matInput formControlName="options" placeholder="Wifi, pisicne, etc">
+        <mat-error *ngIf="propertiesSearchForm.controls.options.invalid">{{getErrorMessage('options')}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Catégories</mat-label>

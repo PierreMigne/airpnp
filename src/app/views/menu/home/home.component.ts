@@ -1,9 +1,7 @@
-import { Property } from 'src/app/models/property.model';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PropertyService } from '../../../services/property/property.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +14,7 @@ export class HomeComponent implements OnInit {
   categoryList: string[] = ['MAISON', 'VILLA', 'APPARTEMENT'];
   propertiesSearchForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private propertyService: PropertyService) {}
+  constructor(private formBuilder: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -24,23 +22,27 @@ export class HomeComponent implements OnInit {
 
   initForm(): void {
     this.propertiesSearchForm = this.formBuilder.group({
-      search: [''],
+      location: [''],
       category: [''],
       peoples: [''],
+      options: [''],
     });
   }
 
   onSubmitPropertiesSearchForm(): void {
     this.errorMsg = null;
-    const search = this.propertiesSearchForm.get('search').value;
+    const location = this.propertiesSearchForm.get('location').value;
     const category = this.propertiesSearchForm.get('category').value;
     const peoples = this.propertiesSearchForm.get('peoples').value;
-    // console.log(this.category);
+    const options = this.propertiesSearchForm.get('options').value ?
+                    this.propertiesSearchForm.get('options').value.replace(' ', '').replace(',', ' ').split(' ')
+                    : null;
 
-    this.router.navigateByUrl('/properties', { state: { search, category , peoples } });
-
+    this.router.navigateByUrl('/properties', { state: { location, category , peoples, options } });
   }
 
+
+  // TODO : CHANGER LES PARAMETRES DES MESSAGES D'ERREURS
   getErrorMessage(type: string): string {
     switch (type) {
       case 'firstname':
