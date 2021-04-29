@@ -33,7 +33,7 @@ import { PropertyService } from './services/property/property.service';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { FooterComponent } from './views/footer/footer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SigninFormComponent } from './components/signin-form/signin-form.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
@@ -42,6 +42,7 @@ import { AllPropertiesComponent } from './views/property/all-properties/all-prop
 import { SinglePropertyComponent } from './views/property/single-property/single-property.component';
 import { EditProfilComponent } from './views/profile/edit-profil/edit-profil.component';
 import { EditPasswordComponent } from './views/profile/edit-password/edit-password.component';
+import { CustomHttpInterceptorService } from './services/httpInterceptor/custom-http-interceptor.service';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -96,7 +97,12 @@ registerLocaleData(localeFr);
       }
     })
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'fr-FR'}, UserService, PropertyService],
+  providers: [
+    {provide: LOCALE_ID, useValue: 'fr-FR'},
+    UserService,
+    PropertyService,
+    {provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
