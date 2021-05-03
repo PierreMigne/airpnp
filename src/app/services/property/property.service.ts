@@ -17,11 +17,27 @@ export class PropertyService {
     this.property = new Subject<Property>();
   }
 
-  getPropertiesFromServer(url): Observable<Property[]> {
+  getPropertiesFromServer(url: string): Observable<Property[]> {
     return this.httpClient.get<Property[]>(url);
   }
 
-  getPropertyFromServer(url): Observable<Property> {
+  getPropertyFromServer(url: string): Observable<Property> {
     return this.httpClient.get<Property>(url);
+  }
+
+  editProperty(
+    url: string,
+    title: string,
+    category: string,
+    location: string,
+    surface: number,
+    peoples: number,
+    beds: number,
+    description: string,
+    options: string[],
+    price: number,
+    photos: string
+    ): Observable<Property> {
+    return this.httpClient.put<Property>(url, {title, category, location, surface, peoples, beds, description, options, price, photos});
   }
 }

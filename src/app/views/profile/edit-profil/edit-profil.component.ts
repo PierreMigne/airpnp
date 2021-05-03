@@ -22,12 +22,9 @@ export class EditProfilComponent implements OnInit, OnDestroy {
   editUserForm: FormGroup;
   errorMsg: string;
 
-  password: string;
   firstname: string;
   lastname: string;
   birthDate: Date;
-
-  hide = true;
 
   @Input() title: string;
   constructor(
