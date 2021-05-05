@@ -1,9 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { ConfirmedValidator } from 'src/app/components/signup-form/confirmed.validator';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { Subscription } from 'rxjs';
 import { User } from '../../../models/user.model';
 import { UserService } from '../../../services/user/user.service';
 
@@ -109,10 +107,6 @@ export class EditProfilComponent implements OnInit, OnDestroy {
         return 'Une erreur est survenue.'
       ;
     }
-  }
-
-  onBack() {
-    this.router.navigate(['profile']);
   }
 
   ngOnDestroy(): void {

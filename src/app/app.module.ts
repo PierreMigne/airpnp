@@ -25,7 +25,6 @@ import { SidenavListComponent } from './views/menu/sidenav-list/sidenav-list.com
 import { AuthComponent } from './views/auth/auth.component';
 import { ProfilComponent } from './views/profile/profil/profil.component';
 import { PropertiesComponent } from './views/property/properties/properties.component';
-import { PropertyComponent } from './views/property/property/property.component';
 import { NewPropertyComponent } from './views/property/new-property/new-property.component';
 import { EditPropertyComponent } from './views/property/edit-property/edit-property.component';
 import { UserService } from './services/user/user.service';
@@ -54,7 +53,6 @@ registerLocaleData(localeFr);
     AuthComponent,
     ProfilComponent,
     PropertiesComponent,
-    PropertyComponent,
     NewPropertyComponent,
     EditPropertyComponent,
     FooterComponent,

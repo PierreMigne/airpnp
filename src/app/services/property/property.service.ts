@@ -40,4 +40,8 @@ export class PropertyService {
     ): Observable<Property> {
     return this.httpClient.put<Property>(url, {title, category, location, surface, peoples, beds, description, options, price, photos});
   }
+
+  deleteProperty( url: string): Observable<Property[]> {
+    return this.httpClient.delete<Property[]>(url);
+  }
 }

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './views/menu/home/home.component';
 import { AuthComponent } from './views/auth/auth.component';
 import { PropertiesComponent } from './views/property/properties/properties.component';
-import { PropertyComponent } from './views/property/property/property.component';
 import { NewPropertyComponent } from './views/property/new-property/new-property.component';
 import { EditPropertyComponent } from './views/property/edit-property/edit-property.component';
 import { AuthGuardService } from './services/guards/auth/auth-guard.service';

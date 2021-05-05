@@ -120,10 +120,6 @@ export class EditPasswordComponent implements OnInit, OnDestroy {
     }
   }
 
-  onBack() {
-    this.router.navigate(['profile']);
-  }
-
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();
     if (this.editUserSubscription) {

@@ -1,10 +1,9 @@
 import { Property } from './../../../models/property.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PropertyService } from '../../../services/property/property.service';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit-property',
@@ -125,7 +124,7 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
       (property: Property) => {
         this.propertyService.property.next(property);
         this.editProperty = property;
-        this.onBack();
+        this.router.navigate(['my-properties']);
       },
       (error) => {
         this.errorMsg = error;
@@ -189,10 +188,6 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
         return 'Une erreur est survenue.'
       ;
     }
-  }
-
-  onBack(): void {
-    this.router.navigate(['my-properties']);
   }
 
   ngOnDestroy(): void {

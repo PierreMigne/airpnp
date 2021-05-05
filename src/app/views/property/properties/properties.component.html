@@ -1,5 +1,13 @@
+<div class="container">
+  <a mat-raised-button color="primary" [routerLink]="['/my-properties/add']"><mat-icon aria-hidden="false" aria-label="add icon">add</mat-icon><span>Ajouter</span></a>
+  <h2>Mes hébergements</h2>
+  <hr>
+</div>
 <mat-spinner *ngIf="loading"></mat-spinner>
 <div class="propertiesCardsContainer" *ngIf="!loading">
+  <div *ngIf="!properties.length">
+    <p>Vous n'avez pas encore d'hébergements. Voulez-vous en <a [routerLink]="['/my-properties/add']">ajouter un</a> ?</p>
+  </div>
   <mat-card class="propertyCard" *ngFor="let property of properties">
     <mat-card-header>
       <mat-card-title>{{property.title}}</mat-card-title>
@@ -33,7 +41,7 @@
     <mat-card-actions>
       <button mat-button (click)="onShowProperty(property.id)">VOIR</button>
       <button mat-button [routerLink]="['/properties/' + property.id + '/edit']" >MODIFIER</button>
-      <button mat-button (click)="onShowProperty(property.id)">SUPPRIMER</button>
+      <button mat-button (click)="onDeleteProperty(property.id)">SUPPRIMER</button>
     </mat-card-actions>
   </mat-card>
 
