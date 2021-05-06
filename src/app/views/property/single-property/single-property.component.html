@@ -29,6 +29,6 @@
   <div class="btnContainer" >
     <button mat-raised-button (click)="onBack()">Retour</button>
     <button mat-raised-button color="primary" (click)="onReservation()" *ngIf="!ownOrNotProperties">Réserver</button>
-    <button mat-raised-button color="primary" (click)="onModification()" *ngIf="ownOrNotProperties">Modifier</button>
+    <a mat-raised-button color="primary" [routerLink]="['/properties/' + property.id + '/edit']" *ngIf="ownOrNotProperties">Modifier</a>
   </div>
 </section>

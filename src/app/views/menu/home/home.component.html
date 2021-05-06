@@ -1,5 +1,4 @@
 <section class="container">
-  <!-- le ngIf est utile pour ne pas avoir de message d'erreur pendant quelques microsecondes avant de recevoir le user -->
   <h2>Chercher des hébergements</h2>
   <hr>
   <form [formGroup]="propertiesSearchForm" (ngSubmit)="onSubmitPropertiesSearchForm()">
@@ -8,23 +7,19 @@
       <mat-form-field appearance="fill">
         <mat-label>Localisation</mat-label>
         <input matInput formControlName="location" placeholder="Ville">
-        <mat-error *ngIf="propertiesSearchForm.controls.location.invalid">{{getErrorMessage('location')}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Option(s)</mat-label>
         <input matInput formControlName="options" placeholder="Wifi, pisicne, etc">
-        <mat-error *ngIf="propertiesSearchForm.controls.options.invalid">{{getErrorMessage('options')}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Catégories</mat-label>
         <mat-select multiple formControlName="category">
-          <mat-option *ngFor="let category of categoryList" [value]="category">{{category}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Nombre de personnes</mat-label>
         <input matInput formControlName="peoples" placeholder="ex: 3">
-        <mat-error *ngIf="propertiesSearchForm.controls.peoples.invalid">{{getErrorMessage('peoples')}}</mat-error>
       </mat-form-field>
     </div>
     <div class="btnContainer">

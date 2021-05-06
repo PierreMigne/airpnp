@@ -40,7 +40,7 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-button (click)="onShowProperty(property.id)">VOIR</button>
-      <button mat-button [routerLink]="['/properties/' + property.id + '/edit']" >MODIFIER</button>
+      <a mat-button [routerLink]="['/properties/' + property.id + '/edit']" >MODIFIER</a>
       <button mat-button (click)="onDeleteProperty(property.id)">SUPPRIMER</button>
     </mat-card-actions>
   </mat-card>

@@ -1,1 +1,70 @@
-<p>new-property works!</p>
+<section class="container">
+  <h2>Ajouter un hébergement</h2>
+  <hr>
+  <form [formGroup]="createPropertyForm" (ngSubmit)="onSubmitCreatePropertyForm()">
+    <mat-error *ngIf="errorMsg">{{errorMsg}}</mat-error>
+    <div class="createPropertyForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Entrez le titre</mat-label>
+        <input matInput placeholder="Titre" required formControlName="title">
+        <mat-error *ngIf="createPropertyForm.controls.title.invalid">{{getErrorMessage('title')}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Choisissez la catégorie</mat-label>
+        <mat-select formControlName="category" >
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{category}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="createPropertyForm.controls.category.invalid">{{getErrorMessage('category')}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Entrez le lieu</mat-label>
+        <input matInput placeholder="Lieu" required formControlName="location">
+        <mat-error *ngIf="createPropertyForm.controls.location.invalid">{{getErrorMessage('location')}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Entrez la surface (en m²)</mat-label>
+        <input matInput placeholder="Surface" required formControlName="surface" type="number">
+        <mat-error *ngIf="createPropertyForm.controls.surface.invalid">{{getErrorMessage('surface')}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Entrez le nombre de personnes</mat-label>
+        <input matInput placeholder="Nombre de personnes" required formControlName="peoples" type="number">
+        <mat-error *ngIf="createPropertyForm.controls.peoples.invalid">{{getErrorMessage('peoples')}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Entrez le nombre de lits</mat-label>
+        <input matInput placeholder="Nombre de lits" required formControlName="beds" type="number">
+        <mat-error *ngIf="createPropertyForm.controls.beds.invalid">{{getErrorMessage('beds')}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Entrez les options</mat-label>
+        <input matInput placeholder="Options" formControlName="options">
+        <mat-error *ngIf="createPropertyForm.controls.options.invalid">{{getErrorMessage('options')}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Entrez le prix</mat-label>
+        <input matInput placeholder="Prix" required formControlName="price" type="number">
+        <mat-error *ngIf="createPropertyForm.controls.price.invalid">{{getErrorMessage('price')}}</mat-error>
+      </mat-form-field>
+      <!-- <mat-form-field appearance="fill">
+        <mat-label>Choisissez une photo</mat-label>
+        <input placeholder="Photo" type="file" required formControlName="photos">
+        <mat-error *ngIf="createPropertyForm.controls.photos.invalid">{{getErrorMessage('photos')}}</mat-error>
+      </mat-form-field> -->
+
+      <!-- <input placeholder="Photo" type="file" required formControlName="photos" (change)="onFileSelected($event)"> -->
+      <br>
+      <mat-form-field appearance="fill" class="description">
+        <mat-label>Entrez la description</mat-label>
+        <textarea matInput placeholder="Description" required formControlName="description" mat-autosize></textarea>
+        <mat-error *ngIf="createPropertyForm.controls.description.invalid">{{getErrorMessage('description')}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="btnContainer">
+      <a mat-raised-button [routerLink]="['/my-properties']">Retour</a>
+      <button mat-raised-button type="submit" color="primary" [disabled]="createPropertyForm.invalid">Ajouter</button>
+    </div>
+  </form>
+</section>

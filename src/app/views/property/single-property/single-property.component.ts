@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PropertyService } from '../../../services/property/property.service';
 import { Property } from '../../../models/property.model';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../../services/auth/auth.service';
 import { Location } from '@angular/common';
 
 @Component({
@@ -46,10 +45,6 @@ export class SinglePropertyComponent implements OnInit {
 
   onReservation() {
     console.log('redirection vers la réservation');
-  }
-
-  onModification() {
-    console.log('redirection vers la modification');
   }
 
   onBack(): void {

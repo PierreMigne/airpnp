@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PropertyService } from '../../../services/property/property.service';
 
 @Component({
   selector: 'app-home',
@@ -39,34 +38,5 @@ export class HomeComponent implements OnInit {
                     : null;
 
     this.router.navigateByUrl('/properties', { state: { location, category , peoples, options } });
-  }
-
-
-  // TODO : CHANGER LES PARAMETRES DES MESSAGES D'ERREURS
-  getErrorMessage(type: string): string {
-    switch (type) {
-      case 'firstname':
-        if (this.propertiesSearchForm.controls.firstname.hasError('required')) {
-          return 'Le prénom est requis.';
-        }
-        break
-      ;
-      case 'lastname':
-        if (this.propertiesSearchForm.controls.lastname.hasError('required')) {
-          return 'Le nom est requis.';
-        }
-        break
-      ;
-      case 'birthDate':
-        if (this.propertiesSearchForm.controls.birthDate.hasError('required')) {
-          return 'La date de naissance est requise.';
-        }
-        break
-      ;
-
-      default:
-        return 'Une erreur est survenue.'
-      ;
-    }
   }
 }
