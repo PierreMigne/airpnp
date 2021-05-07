@@ -17,6 +17,7 @@ import { HomeComponent } from './views/menu/home/home.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
@@ -42,6 +43,7 @@ import { SinglePropertyComponent } from './views/property/single-property/single
 import { EditProfilComponent } from './views/profile/edit-profil/edit-profil.component';
 import { EditPasswordComponent } from './views/profile/edit-password/edit-password.component';
 import { CustomHttpInterceptorService } from './services/httpInterceptor/custom-http-interceptor.service';
+import { UploadComponent } from './views/upload/upload.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -62,6 +64,7 @@ registerLocaleData(localeFr);
     SinglePropertyComponent,
     EditProfilComponent,
     EditPasswordComponent,
+    UploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +81,7 @@ registerLocaleData(localeFr);
     MatChipsModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,

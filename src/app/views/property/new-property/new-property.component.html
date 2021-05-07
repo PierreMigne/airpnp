@@ -6,7 +6,7 @@
     <div class="createPropertyForm">
       <mat-form-field appearance="fill">
         <mat-label>Entrez le titre</mat-label>
-        <input matInput placeholder="Titre" required formControlName="title">
+        <input matInput placeholder="Titre" required formControlName="title" name="title">
         <mat-error *ngIf="createPropertyForm.controls.title.invalid">{{getErrorMessage('title')}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
@@ -20,45 +20,37 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Entrez le lieu</mat-label>
-        <input matInput placeholder="Lieu" required formControlName="location">
+        <input matInput placeholder="Lieu" required formControlName="location" name="location">
         <mat-error *ngIf="createPropertyForm.controls.location.invalid">{{getErrorMessage('location')}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Entrez la surface (en m²)</mat-label>
-        <input matInput placeholder="Surface" required formControlName="surface" type="number">
+        <input matInput placeholder="Surface" required formControlName="surface" type="number" name="surface">
         <mat-error *ngIf="createPropertyForm.controls.surface.invalid">{{getErrorMessage('surface')}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Entrez le nombre de personnes</mat-label>
-        <input matInput placeholder="Nombre de personnes" required formControlName="peoples" type="number">
+        <input matInput placeholder="Nombre de personnes" required formControlName="peoples" type="number" name="peoples">
         <mat-error *ngIf="createPropertyForm.controls.peoples.invalid">{{getErrorMessage('peoples')}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Entrez le nombre de lits</mat-label>
-        <input matInput placeholder="Nombre de lits" required formControlName="beds" type="number">
+        <input matInput placeholder="Nombre de lits" required formControlName="beds" type="number" name="beds">
         <mat-error *ngIf="createPropertyForm.controls.beds.invalid">{{getErrorMessage('beds')}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Entrez les options</mat-label>
-        <input matInput placeholder="Options" formControlName="options">
+        <input matInput placeholder="Options" formControlName="options" name="options">
         <mat-error *ngIf="createPropertyForm.controls.options.invalid">{{getErrorMessage('options')}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Entrez le prix</mat-label>
-        <input matInput placeholder="Prix" required formControlName="price" type="number">
+        <input matInput placeholder="Prix" required formControlName="price" type="number" name="price">
         <mat-error *ngIf="createPropertyForm.controls.price.invalid">{{getErrorMessage('price')}}</mat-error>
       </mat-form-field>
-      <!-- <mat-form-field appearance="fill">
-        <mat-label>Choisissez une photo</mat-label>
-        <input placeholder="Photo" type="file" required formControlName="photos">
-        <mat-error *ngIf="createPropertyForm.controls.photos.invalid">{{getErrorMessage('photos')}}</mat-error>
-      </mat-form-field> -->
-
-      <!-- <input placeholder="Photo" type="file" required formControlName="photos" (change)="onFileSelected($event)"> -->
-      <br>
       <mat-form-field appearance="fill" class="description">
         <mat-label>Entrez la description</mat-label>
-        <textarea matInput placeholder="Description" required formControlName="description" mat-autosize></textarea>
+        <textarea matInput placeholder="Description" required formControlName="description" mat-autosize name="description"></textarea>
         <mat-error *ngIf="createPropertyForm.controls.description.invalid">{{getErrorMessage('description')}}</mat-error>
       </mat-form-field>
     </div>

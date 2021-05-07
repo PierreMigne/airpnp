@@ -1,9 +1,12 @@
 import { Property } from 'src/app/models/property.model';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { PropertyService } from 'src/app/services/property/property.service';
+import { UploadService } from '../../../services/upload/upload.service';
+import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-property',
@@ -13,7 +16,6 @@ import { PropertyService } from 'src/app/services/property/property.service';
 export class NewPropertyComponent implements OnInit, OnDestroy {
 
   loading: boolean;
-  url: string;
 
   createProperty: Property;
   createPropertySubscription: Subscription;
@@ -31,7 +33,6 @@ export class NewPropertyComponent implements OnInit, OnDestroy {
   description: string;
   options: string[];
   price: number;
-  photos: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,8 +42,6 @@ export class NewPropertyComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.categories = ['VILLA', 'MAISON', 'APPARTEMENT'];
-    this.url = 'http://localhost:3000/properties/';
-
     this.initForm();
   }
 
@@ -57,41 +56,17 @@ export class NewPropertyComponent implements OnInit, OnDestroy {
       description: ['', [Validators.required]],
       options: [''],
       price: ['', [Validators.required]],
-      photos: ['', [Validators.required]],
     });
   }
 
   onSubmitCreatePropertyForm(): void {
     this.errorMsg = null;
-    this.title = this.createPropertyForm.get('title').value;
-    this.category = this.createPropertyForm.get('category').value;
-    this.location = this.createPropertyForm.get('location').value;
-    this.surface = this.createPropertyForm.get('surface').value;
-    this.peoples = this.createPropertyForm.get('peoples').value;
-    this.beds = this.createPropertyForm.get('beds').value;
-    this.description = this.createPropertyForm.get('description').value;
-    this.options = this.createPropertyForm.get('options').value;
-    this.price = this.createPropertyForm.get('price').value;
-    this.photos = this.createPropertyForm.get('photos').value;
-
     this.createPropertySubscription = this.propertyService
-      .createProperty(
-        this.url,
-        this.title,
-        this.category,
-        this.location,
-        this.surface,
-        this.peoples,
-        this.beds,
-        this.description,
-        this.options,
-        this.price,
-        this.photos
-      ).subscribe(
+      .createProperty((this.createPropertyForm.value as Property)).subscribe(
       (property: Property) => {
         this.propertyService.property.next(property);
         this.createProperty = property;
-        this.router.navigate(['my-properties']);
+        this.router.navigate(['my-properties', property.id, 'upload']);
       },
       (error) => {
         this.errorMsg = error;

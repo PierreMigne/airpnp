@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Property } from 'src/app/models/property.model';
 import { PropertyService } from '../../../services/property/property.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-properties',
@@ -15,12 +16,13 @@ export class PropertiesComponent implements OnInit, OnDestroy {
   propertiesSubscription: Subscription;
 
   loading: boolean;
+  urlServer = environment.urlServer;
 
   constructor(private propertyService: PropertyService, private router: Router) {}
 
   ngOnInit(): void {
     this.loading = true;
-    this.propertiesSubscription = this.propertyService.getPropertiesFromServer('http://localhost:3000/properties').subscribe(
+    this.propertiesSubscription = this.propertyService.getPropertiesFromServer().subscribe(
       (properties: Array<Property>) => {
         this.propertyService.properties.next(properties);
         this.properties = properties;
@@ -33,14 +35,9 @@ export class PropertiesComponent implements OnInit, OnDestroy {
     );
   }
 
-  onShowProperty(propertyId: number): void {
-    const ownOrNotProperties = true;
-    this.router.navigate(['properties', propertyId], { state: { ownOrNotProperties } });
-  }
-
   onDeleteProperty(propertyId: number): void {
     this.loading = true;
-    this.propertiesSubscription = this.propertyService.deleteProperty('http://localhost:3000/properties/' + propertyId).subscribe(
+    this.propertiesSubscription = this.propertyService.deleteProperty(propertyId).subscribe(
       (properties: Array<Property>) => {
         this.propertyService.properties.next(properties);
         this.properties = properties;

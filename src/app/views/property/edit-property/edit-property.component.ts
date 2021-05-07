@@ -24,6 +24,7 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
   editPropertyForm: FormGroup;
   errorMsg: string;
 
+  id: number;
   categories: string[];
   title: string;
   category: string;
@@ -34,7 +35,6 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
   description: string;
   options: string[];
   price: number;
-  photos: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,10 +46,9 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.categories = ['VILLA', 'MAISON', 'APPARTEMENT'];
     this.loading = true;
-    const id = this.activatedRoute.snapshot.params.id;
-    this.url = 'http://localhost:3000/properties/' + id;
+    this.id = this.activatedRoute.snapshot.params.id;
 
-    this.propertySubscription = this.propertyService.getPropertyFromServer(this.url).subscribe(
+    this.propertySubscription = this.propertyService.getPropertyFromServer(this.id).subscribe(
       (property: Property) => {
         this.propertyService.property.next(property);
         this.property = property;
@@ -66,7 +65,6 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
           description: this.property.description,
           options: this.property.options,
           price: this.property.price,
-          photos: this.property.photos,
         });
       },
       (error) => {
@@ -90,37 +88,13 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
       description: ['', [Validators.required]],
       options: [''],
       price: ['', [Validators.required]],
-      photos: ['', [Validators.required]],
     });
   }
 
   onSubmitEditPropertyForm(): void {
     this.errorMsg = null;
-    this.title = this.editPropertyForm.get('title').value;
-    this.category = this.editPropertyForm.get('category').value;
-    this.location = this.editPropertyForm.get('location').value;
-    this.surface = this.editPropertyForm.get('surface').value;
-    this.peoples = this.editPropertyForm.get('peoples').value;
-    this.beds = this.editPropertyForm.get('beds').value;
-    this.description = this.editPropertyForm.get('description').value;
-    this.options = this.editPropertyForm.get('options').value;
-    this.price = this.editPropertyForm.get('price').value;
-    this.photos = this.editPropertyForm.get('photos').value;
-
     this.editPropertySubscription = this.propertyService
-      .editProperty(
-        this.url,
-        this.title,
-        this.category,
-        this.location,
-        this.surface,
-        this.peoples,
-        this.beds,
-        this.description,
-        this.options,
-        this.price,
-        this.photos
-      ).subscribe(
+      .editProperty(this.id, (this.editPropertyForm.value as Property)).subscribe(
       (property: Property) => {
         this.propertyService.property.next(property);
         this.editProperty = property;

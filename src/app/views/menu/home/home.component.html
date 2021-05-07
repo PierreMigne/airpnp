@@ -6,20 +6,23 @@
     <div class="propertiesSearchForm">
       <mat-form-field appearance="fill">
         <mat-label>Localisation</mat-label>
-        <input matInput formControlName="location" placeholder="Ville">
+        <input matInput formControlName="location" placeholder="Ville" name="location">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Option(s)</mat-label>
-        <input matInput formControlName="options" placeholder="Wifi, pisicne, etc">
+        <input matInput formControlName="options" placeholder="Wifi, pisicne, etc" name="options">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Catégories</mat-label>
         <mat-select multiple formControlName="category">
+          <mat-option *ngFor="let category of categoryList" [value]="category">
+            {{category}}
+          </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Nombre de personnes</mat-label>
-        <input matInput formControlName="peoples" placeholder="ex: 3">
+        <input matInput formControlName="peoples" placeholder="ex: 3" name="peoples">
       </mat-form-field>
     </div>
     <div class="btnContainer">

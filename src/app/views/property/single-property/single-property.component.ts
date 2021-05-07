@@ -1,36 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PropertyService } from '../../../services/property/property.service';
 import { Property } from '../../../models/property.model';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-single-property',
   templateUrl: './single-property.component.html',
   styleUrls: ['./single-property.component.scss']
 })
-export class SinglePropertyComponent implements OnInit {
+export class SinglePropertyComponent implements OnInit, OnDestroy {
 
   property: Property;
   propertySubscription: Subscription;
   loading: boolean;
   ownOrNotProperties: boolean;
-  url: string;
+  urlServer = environment.urlServer;
 
-  constructor(private propertyService: PropertyService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private propertyService: PropertyService,
+              private route: ActivatedRoute,
+              private location: Location,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.loading = true;
-    this.ownOrNotProperties = history.state.ownOrNotProperties; // Methods to have the ownOrNotProperties from PropertiesComponent
     const id = this.route.snapshot.params.id;
-    if (this.ownOrNotProperties) {
-      this.url = 'http://localhost:3000/properties/' + id;
-    } else {
-      this.url = 'http://localhost:3000/properties/all/' + id;
+
+    if (this.router.url.split('/').includes('my-properties')) {
+      this.ownOrNotProperties = true;
     }
 
-    this.propertySubscription = this.propertyService.getPropertyFromServer(this.url).subscribe(
+    this.propertySubscription = this.propertyService.getPropertyFromServer(id).subscribe(
       (property: Property) => {
         this.propertyService.property.next(property);
         this.property = property;
@@ -43,9 +46,9 @@ export class SinglePropertyComponent implements OnInit {
     );
   }
 
-  onReservation() {
-    console.log('redirection vers la réservation');
-  }
+  // onReservation() {
+  //   console.log('redirection vers la réservation');
+  // }
 
   onBack(): void {
     this.location.back();

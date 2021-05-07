@@ -1,8 +1,8 @@
 <mat-spinner *ngIf="loading"></mat-spinner>
 <section class="container" *ngIf="!loading">
   <h2>{{property.title | uppercase}} <span class="propertyPrice">{{property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</span></h2>
-  <span>{{property.category}} · {{property.location}}</span>
-  <img src="{{property.photos}}" alt="{{property.title}}">
+  <span class="subTitle">{{property.category}} · {{property.location}}</span>
+  <img *ngFor="let image of property.images" [src]="urlServer + image.file">
   <div class="iconContainer">
     <div>
       <mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon>
@@ -29,6 +29,6 @@
   <div class="btnContainer" >
     <button mat-raised-button (click)="onBack()">Retour</button>
     <button mat-raised-button color="primary" (click)="onReservation()" *ngIf="!ownOrNotProperties">Réserver</button>
-    <a mat-raised-button color="primary" [routerLink]="['/properties/' + property.id + '/edit']" *ngIf="ownOrNotProperties">Modifier</a>
+    <a mat-raised-button color="primary" [routerLink]="['/my-properties/' + property.id + '/edit']" *ngIf="ownOrNotProperties">Modifier</a>
   </div>
 </section>

@@ -9,38 +9,40 @@
     <p>Vous n'avez pas encore d'hébergements. Voulez-vous en <a [routerLink]="['/my-properties/add']">ajouter un</a> ?</p>
   </div>
   <mat-card class="propertyCard" *ngFor="let property of properties">
-    <mat-card-header>
-      <mat-card-title>{{property.title}}</mat-card-title>
-      <mat-card-subtitle>{{property.category}} · {{property.location}}</mat-card-subtitle>
-      <p class="propertyPrice">{{property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</p>
-    </mat-card-header>
-    <div class="propertyCardImgContainer">
-      <img mat-card-image [src]="property.photos" [alt]="property.title">
-    </div>
-    <mat-card-content>
-      <div class="iconContainer">
-        <div>
-          <mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon>
-          <span>{{property.surface}} m²</span>
-        </div>
-        <div>
-          <mat-icon aria-hidden="false" aria-label="people icon">people</mat-icon>
-          <span *ngIf="property.peoples > 1">{{property.peoples}} personnes</span>
-          <span *ngIf="property.peoples <= 1">{{property.peoples}} personne</span>
-        </div>
-        <div>
-          <mat-icon aria-hidden="false" aria-label="bed icon">bed</mat-icon>
-          <span *ngIf="property.beds > 1">{{property.beds}} lits</span>
-          <span *ngIf="property.beds <= 1">{{property.beds}} lit</span>
-        </div>
+    <a [routerLink]="['/my-properties/' + property.id]" class="link">
+      <mat-card-header>
+        <mat-card-title>{{property.title}}</mat-card-title>
+        <mat-card-subtitle>{{property.category}} · {{property.location}}</mat-card-subtitle>
+        <p class="propertyPrice">{{property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</p>
+      </mat-card-header>
+      <div class="propertyCardImgContainer">
+        <img mat-card-image [src]="urlServer + property.images[0].file" [alt]="property.title">
       </div>
-      <ul class="propertyOptions">
-        <li *ngFor="let option of property.options">{{ option | uppercase }}</li>
-      </ul>
-    </mat-card-content>
+      <mat-card-content>
+        <div class="iconContainer">
+          <div>
+            <mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon>
+            <span>{{property.surface}} m²</span>
+          </div>
+          <div>
+            <mat-icon aria-hidden="false" aria-label="people icon">people</mat-icon>
+            <span *ngIf="property.peoples > 1">{{property.peoples}} personnes</span>
+            <span *ngIf="property.peoples <= 1">{{property.peoples}} personne</span>
+          </div>
+          <div>
+            <mat-icon aria-hidden="false" aria-label="bed icon">bed</mat-icon>
+            <span *ngIf="property.beds > 1">{{property.beds}} lits</span>
+            <span *ngIf="property.beds <= 1">{{property.beds}} lit</span>
+          </div>
+        </div>
+        <ul class="propertyOptions">
+          <li *ngFor="let option of property.options">{{ option | uppercase }}</li>
+        </ul>
+      </mat-card-content>
+    </a>
     <mat-card-actions>
-      <button mat-button (click)="onShowProperty(property.id)">VOIR</button>
-      <a mat-button [routerLink]="['/properties/' + property.id + '/edit']" >MODIFIER</a>
+      <a mat-button [routerLink]="['/my-properties/' + property.id + '/upload']">GESTION PHOTOS</a>
+      <a mat-button [routerLink]="['/my-properties/' + property.id + '/edit']">MODIFIER</a>
       <button mat-button (click)="onDeleteProperty(property.id)">SUPPRIMER</button>
     </mat-card-actions>
   </mat-card>

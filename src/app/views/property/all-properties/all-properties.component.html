@@ -40,7 +40,7 @@
       <p class="propertyPrice">{{property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</p>
     </mat-card-header>
     <div class="propertyCardImgContainer">
-      <img mat-card-image [src]="property.photos" [alt]="property.title">
+      <img mat-card-image [src]="urlServer + property.images[0].file" [alt]="property.title">
     </div>
     <mat-card-content>
       <div class="iconContainer">

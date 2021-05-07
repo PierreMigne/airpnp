@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PropertyService } from '../../../services/property/property.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
   categoryList: string[] = ['MAISON', 'VILLA', 'APPARTEMENT'];
   propertiesSearchForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {}
+  constructor(private formBuilder: FormBuilder, private router: Router, private propertyService: PropertyService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -37,6 +38,10 @@ export class HomeComponent implements OnInit {
                     this.propertiesSearchForm.get('options').value.replace(' ', '').replace(',', ' ').split(' ')
                     : null;
 
-    this.router.navigateByUrl('/properties', { state: { location, category , peoples, options } });
+    this.propertyService.location = location;
+    this.propertyService.category = category;
+    this.propertyService.peoples = peoples;
+    this.propertyService.options = options;
+    this.router.navigateByUrl('/properties');
   }
 }

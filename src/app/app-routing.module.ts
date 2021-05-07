@@ -11,6 +11,7 @@ import { AllPropertiesComponent } from './views/property/all-properties/all-prop
 import { SinglePropertyComponent } from './views/property/single-property/single-property.component';
 import { EditProfilComponent } from './views/profile/edit-profil/edit-profil.component';
 import { EditPasswordComponent } from './views/profile/edit-password/edit-password.component';
+import { UploadComponent } from './views/upload/upload.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -20,8 +21,9 @@ const routes: Routes = [
   { path: 'properties/:id', component: SinglePropertyComponent},
   { path: 'my-properties', canActivate: [AuthGuardService], component: PropertiesComponent},
   { path: 'my-properties/add', canActivate: [AuthGuardService], component: NewPropertyComponent},
-  // { path: 'my-properties/:id', canActivate: [AuthGuardService], component: PropertyComponent},
-  { path: 'properties/:id/edit', canActivate: [AuthGuardService], component: EditPropertyComponent},
+  { path: 'my-properties/:id', canActivate: [AuthGuardService], component: SinglePropertyComponent},
+  { path: 'my-properties/:id/edit', canActivate: [AuthGuardService], component: EditPropertyComponent},
+  { path: 'my-properties/:id/upload', canActivate: [AuthGuardService], component: UploadComponent},
   { path: 'profile', canActivate: [AuthGuardService], component: ProfilComponent},
   { path: 'profile/edit', canActivate: [AuthGuardService], component: EditProfilComponent},
   { path: 'profile/edit/password', canActivate: [AuthGuardService], component: EditPasswordComponent},
