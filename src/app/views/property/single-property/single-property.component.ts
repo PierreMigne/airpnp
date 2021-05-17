@@ -18,7 +18,7 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
   propertySubscription: Subscription;
   loading: boolean;
   ownOrNotProperties: boolean;
-  urlServer = environment.urlServer;
+  urlServer = environment.urlServer + 'properties/uploads/';
 
   constructor(private propertyService: PropertyService,
               private route: ActivatedRoute,
@@ -45,10 +45,6 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
       }
     );
   }
-
-  // onReservation() {
-  //   console.log('redirection vers la réservation');
-  // }
 
   onBack(): void {
     this.location.back();

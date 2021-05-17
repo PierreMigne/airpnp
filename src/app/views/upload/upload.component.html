@@ -18,7 +18,8 @@
       </button>
     </mat-card-actions>
   </mat-card>
-  <input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" accept="image/*" style="display:none;">
+  <input type="file" #fileUpload id="fileUpload" name="fileUpload" accept="image/*" style="display:none;">
   <br><br>
-  <a mat-raised-button color="primary" [routerLink]="['/my-properties']">Retour</a>
+  <a mat-raised-button color="primary" [routerLink]="['/profile']" *ngIf="propertiesOrProfile === 'profile'">Retour</a>
+  <a mat-raised-button color="primary" [routerLink]="['/my-properties']" *ngIf="propertiesOrProfile !== 'profile'">Retour</a>
 </section>

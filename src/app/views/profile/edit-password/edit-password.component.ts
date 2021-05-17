@@ -36,7 +36,6 @@ export class EditPasswordComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.userSubscription = this.userService.getUserFromServer().subscribe(
       (user: User) => {
-        this.userService.user.next(user);
         this.user = user;
         this.loading = false;
       },
@@ -67,7 +66,6 @@ export class EditPasswordComponent implements OnInit, OnDestroy {
 
     this.editUserSubscription = this.userService.editPassword(this.oldPassword, this.password).subscribe(
       (user: User) => {
-        this.userService.user.next(user);
         this.editUser = user;
         this.router.navigate(['profile']);
       },

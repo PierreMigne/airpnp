@@ -3,6 +3,7 @@ import { UserService } from '../../../services/user/user.service';
 import { User } from '../../../models/user.model';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-profil',
@@ -14,6 +15,7 @@ export class ProfilComponent implements OnInit, OnDestroy {
   loading: boolean;
   user: User;
   userSubscription: Subscription;
+  urlServer = environment.urlServer + 'auth/profile/uploads/';
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -22,7 +24,8 @@ export class ProfilComponent implements OnInit, OnDestroy {
 
     this.userSubscription = this.userService.getUserFromServer().subscribe(
       (user: User) => {
-        this.userService.user.next(user);
+        // console.log(user.image.file);
+
         this.user = user;
         this.loading = false;
       },
@@ -31,13 +34,6 @@ export class ProfilComponent implements OnInit, OnDestroy {
         this.loading = false;
       }
     );
-  }
-
-  onEditProfile(): void {
-    this.router.navigate(['profile', 'edit']);
-  }
-  onEditPassword(): void {
-    this.router.navigate(['profile', 'edit', 'password']);
   }
 
   ngOnDestroy(): void {

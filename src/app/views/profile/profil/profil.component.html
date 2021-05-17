@@ -1,5 +1,5 @@
 <section class="container">
-  <button mat-raised-button class="editBtn" color="primary" (click)="onEditProfile()">Modifier</button>
+  <a mat-raised-button class="editBtn" color="primary" [routerLink]="['edit']">Modifier</a>
   <h2>Profil</h2>
   <hr>
   <mat-spinner *ngIf="loading"></mat-spinner>
@@ -16,11 +16,20 @@
     <p>
       Email: {{user.email}}
     </p>
-    <hr>
+
   </div>
+  <h2>Photo de profil</h2>
+  <hr>
+  <div class="imgContainer" *ngIf="user">
+    <p>Photo de profil :</p>
+    <img mat-card-image [src]="urlServer + user.id + '/' + user.image.file" [alt]="user.lastname" class="avatar" *ngIf="user.image">
+    <mat-icon style="font-size: 100px; width: 100px; height: 100px;" *ngIf="!user.image" >account_circle</mat-icon>
+    <a mat-raised-button color="primary" [routerLink]="[user.id + '/upload']" *ngIf="user.image">Modifier photo</a>
+    <a mat-raised-button color="primary" [routerLink]="[user.id + '/upload']" *ngIf="!user.image">Ajouter photo</a>
+  </div>
+  <hr>
   <div>
-    <button mat-raised-button class="editBtn" color="primary" (click)="onEditPassword()">Modifier</button>
+    <a mat-raised-button class="editBtn" color="primary" [routerLink]="['edit', 'password']">Modifier</a>
     <h2>Mot de passe</h2>
   </div>
-
 </section>

@@ -83,12 +83,13 @@ img {
 }
 @media screen and (max-width: 400px) {
   .iconContainer {
-    font-size: 13px;
+    font-size: 14px;
+    padding: 5px;
+  }
+  .iconContainer div {
     padding: 5px;
   }
   .iconContainer div mat-icon {
-    padding: 10px;
-    font-size: 25px;
     padding: 5px;
   }
 }

@@ -69,7 +69,7 @@ export class NewPropertyComponent implements OnInit, OnDestroy {
         this.router.navigate(['my-properties', property.id, 'upload']);
       },
       (error) => {
-        this.errorMsg = error;
+        this.errorMsg = error.error.message;
         console.log('Erreur ! : ' + JSON.stringify(error.error));
       }
     );

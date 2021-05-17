@@ -1,22 +1,34 @@
 export class User {
+  private _id: number
   private _firstname: string;
   private _lastname: string;
   private _birthDate: string;
   private _email: string;
   private _password: string;
+  private _image: string;
 
   constructor(
     firstname: string,
     lastname: string,
     birthDate: string,
     email: string,
-    password: string
+    password: string,
+    image: string
   ) {
     this._firstname = firstname;
     this._lastname = lastname;
     this._birthDate = birthDate;
     this._email = email;
     this._password = password;
+    this._image = image;
+  }
+
+  /**
+   * Getter id
+   * @return {number}
+   */
+  public get id(): number {
+    return this._id;
   }
 
   /**
@@ -60,6 +72,22 @@ export class User {
   }
 
   /**
+   * Getter image
+   * @return {string}
+   */
+  public get image(): string {
+    return this._image;
+  }
+
+  /**
+   * Setter id
+   * @param {number} value
+   */
+  public set id(value: number) {
+    this._id = value;
+  }
+
+  /**
    * Setter firstname
    * @param {string} value
    */
@@ -97,5 +125,13 @@ export class User {
    */
   public set password(value: string) {
     this._password = value;
+  }
+
+  /**
+   * Setter image
+   * @param {string} value
+   */
+  public set image(value: string) {
+    this._image = value;
   }
 }

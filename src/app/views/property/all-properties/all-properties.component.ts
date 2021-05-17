@@ -20,7 +20,7 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
   peoples: number;
   options: any;
 
-  urlServer = environment.urlServer;
+  urlServer = environment.urlServer + 'properties/uploads/';
 
   constructor(private propertyService: PropertyService, private router: Router) {}
 
@@ -30,12 +30,6 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
     this.category = this.propertyService.category;
     this.peoples = this.propertyService.peoples;
     this.options = this.propertyService.options;
-    // this.location = history.state.location; // Methods to have the location data from HomeComponent
-    // this.category = history.state.category; // Methods to have the category from HomeComponent
-    // this.peoples = history.state.peoples; // Methods to have the peoples from HomeComponent
-    // this.options = history.state.options; // Methods to have the options from HomeComponent
-
-
 
     this.propertiesSubscription = this.propertyService.getPropertiesFromServer().subscribe(
       (properties: Array<Property>) => {

@@ -35,7 +35,6 @@ export class EditProfilComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.userSubscription = this.userService.getUserFromServer().subscribe(
       (user: User) => {
-        this.userService.user.next(user);
         this.user = user;
         this.loading = false;
 
@@ -71,7 +70,6 @@ export class EditProfilComponent implements OnInit, OnDestroy {
 
     this.editUserSubscription = this.userService.editUser(this.firstname, this.lastname, this.birthDate).subscribe(
       (user: User) => {
-        this.userService.user.next(user);
         this.editUser = user;
         this.router.navigate(['profile']);
       },

@@ -1,6 +1,6 @@
 import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { UploadService } from '../../services/upload/upload.service';
@@ -16,18 +16,24 @@ export class UploadComponent implements OnInit {
   files  = [];
   id: number;
   photos = [];
+  propertiesOrProfile: string;
 
-  constructor(private uploadService: UploadService, private activatedRoute: ActivatedRoute) { }
+  constructor(private uploadService: UploadService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.id;
+    if (this.router.url.includes('my-properties')) {
+      this.propertiesOrProfile = 'properties';
+    } else {
+      this.propertiesOrProfile = 'profile';
+    }
   }
 
   uploadFile(file: any) {
     const formData = new FormData();
     formData.append('file', file.data);
     file.inProgress = true;
-    this.uploadService.upload(this.id, formData).pipe(
+    this.uploadService.upload(this.propertiesOrProfile, this.id, formData).pipe(
       map(event => {
         switch (event.type) {
           case HttpEventType.UploadProgress:
@@ -58,10 +64,6 @@ export class UploadComponent implements OnInit {
     this.files = [];
     const fileUpload = this.fileUpload.nativeElement;
     fileUpload.onchange = () => {
-      // for (let index = 0; index < fileUpload.files.length; index++) {
-      //   const file = fileUpload.files[index];
-      //   this.files.push({ data: file, inProgress: false, progress: 0});
-      // }
       for (const file of fileUpload.files) {
         this.files.push({ data: file, inProgress: false, progress: 0});
       }

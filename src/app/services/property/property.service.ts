@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class PropertyService {
 
   urlServer = environment.urlServer + 'properties';
+  url: string;
   properties: Subject<Array<Property>>;
   property: Subject<Property>;
 
@@ -34,7 +35,11 @@ export class PropertyService {
       return 'options[' + index + ']=' + options; // options[0]=wifi&options[1]=pisicne...
     }).join('&') : null;
 
-    let url = this.urlServer + '/all';
+    let url = this.urlServer;
+
+    if (!this.router.url.includes('my-properties')) {
+      url += '/all';
+    }
 
     if (this.category || this.location || this.peoples  || this.options) {
       url += '?';

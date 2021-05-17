@@ -16,7 +16,7 @@ export class PropertiesComponent implements OnInit, OnDestroy {
   propertiesSubscription: Subscription;
 
   loading: boolean;
-  urlServer = environment.urlServer;
+  urlServer = environment.urlServer + 'properties/uploads/';
 
   constructor(private propertyService: PropertyService, private router: Router) {}
 
@@ -24,7 +24,6 @@ export class PropertiesComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.propertiesSubscription = this.propertyService.getPropertiesFromServer().subscribe(
       (properties: Array<Property>) => {
-        this.propertyService.properties.next(properties);
         this.properties = properties;
         this.loading = false;
       },
@@ -39,7 +38,7 @@ export class PropertiesComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.propertiesSubscription = this.propertyService.deleteProperty(propertyId).subscribe(
       (properties: Array<Property>) => {
-        this.propertyService.properties.next(properties);
+        // this.propertyService.properties.next(properties);
         this.properties = properties;
         this.loading = false;
       },

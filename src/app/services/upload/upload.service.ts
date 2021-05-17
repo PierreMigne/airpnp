@@ -8,13 +8,18 @@ import { environment } from '../../../environments/environment';
 })
 export class UploadService {
 
-  // SERVER_URL = 'http://localhost:3000/properties/1/uploads';
   urlServer = environment.urlServer;
+  url: string;
 
   constructor(private httpClient: HttpClient) { }
 
-  upload(propertyId: number, formData: FormData): Observable<HttpEvent<FormData>> {
-    return this.httpClient.post<FormData>(`${this.urlServer}properties/${propertyId}/uploads`, formData, {
+  upload(propertiesOrProfile: string, id: number, formData: FormData): Observable<HttpEvent<FormData>> {
+    if (propertiesOrProfile === 'profile') {
+      this.url = `${this.urlServer}auth/${propertiesOrProfile}/${id}/uploads`;
+    } else {
+      this.url = `${this.urlServer}${propertiesOrProfile}/${id}/uploads`;
+    }
+    return this.httpClient.post<FormData>(this.url, formData, {
         reportProgress: true,
         observe: 'events'
       });

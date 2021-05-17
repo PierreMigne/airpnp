@@ -16,7 +16,8 @@
         <p class="propertyPrice">{{property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</p>
       </mat-card-header>
       <div class="propertyCardImgContainer">
-        <img mat-card-image [src]="urlServer + property.images[0].file" [alt]="property.title">
+        <img *ngIf="property.images[0]" mat-card-image [src]="urlServer + property.id + '/' + property.images[0].file" [alt]="property.title">
+        <!-- <img *ngIf="!property.images[0]" mat-card-image [src]="" [alt]="property.title"> src = placholder ?-->
       </div>
       <mat-card-content>
         <div class="iconContainer">
@@ -26,8 +27,7 @@
           </div>
           <div>
             <mat-icon aria-hidden="false" aria-label="people icon">people</mat-icon>
-            <span *ngIf="property.peoples > 1">{{property.peoples}} personnes</span>
-            <span *ngIf="property.peoples <= 1">{{property.peoples}} personne</span>
+            <span>{{property.peoples}} pers.</span>
           </div>
           <div>
             <mat-icon aria-hidden="false" aria-label="bed icon">bed</mat-icon>

@@ -1,6 +1,4 @@
 export class Property {
-  // static nbId = 1;
-
   private _id: number;
   private _title: string;
   private _category: string;
@@ -13,7 +11,7 @@ export class Property {
   private _price: number;
   private _createdAt: Date;
   private _isVisible: boolean;
-  private _photos: string;
+  // private _photos: string;
 
   constructor(
     title: string,
@@ -25,7 +23,7 @@ export class Property {
     description: string,
     options: Array<string>,
     price: number,
-    photos: string,
+    // photos: string,
   ) {
     this._title = title;
     this._category = category;
@@ -36,10 +34,7 @@ export class Property {
     this._description = description;
     this._options = options;
     this._price = price;
-    this._photos = photos;
-
-    // this._id = Property.nbId;
-    // Property.nbId++;
+    // this._photos = photos;
     this._createdAt = new Date();
     this._isVisible = false;
   }
@@ -140,13 +135,13 @@ export class Property {
     return this._isVisible;
   }
 
-  /**
-   * Getter photos
-   * @return {string}
-   */
-  public get photos(): string {
-    return this._photos;
-  }
+  // /**
+  //  * Getter photos
+  //  * @return {string}
+  //  */
+  // public get photos(): string {
+  //   return this._photos;
+  // }
 
   /**
    * Setter id
@@ -244,11 +239,11 @@ export class Property {
     this._isVisible = value;
   }
 
-  /**
-   * Setter photos
-   * @param string value
-   */
-  public set photos(value: string) {
-    this._photos = value;
-  }
+  // /**
+  //  * Setter photos
+  //  * @param string value
+  //  */
+  // public set photos(value: string) {
+  //   this._photos = value;
+  // }
 }

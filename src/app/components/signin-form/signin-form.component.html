@@ -3,7 +3,7 @@
   <div class="authForm">
     <mat-form-field appearance="fill">
       <mat-label>Entrez votre email</mat-label>
-      <input matInput placeholder="pat@example.com" required formControlName="email">
+      <input matInput placeholder="pat@example.com" required formControlName="email" name="email">
       <mat-error *ngIf="signInForm.controls.email.invalid">{{getErrorMessage('email')}}</mat-error>
     </mat-form-field>
 

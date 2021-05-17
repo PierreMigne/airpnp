@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'profile', canActivate: [AuthGuardService], component: ProfilComponent},
   { path: 'profile/edit', canActivate: [AuthGuardService], component: EditProfilComponent},
   { path: 'profile/edit/password', canActivate: [AuthGuardService], component: EditPasswordComponent},
+  { path: 'profile/:id/upload', canActivate: [AuthGuardService], component: UploadComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

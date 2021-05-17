@@ -28,6 +28,8 @@
 }
 .propertyCard img{
   margin-bottom: 0;
+  max-height: 325px;
+  object-fit: cover;
 }
 .iconContainer {
   display: flex;
@@ -75,15 +77,7 @@
   .container a span{
     display: none;
   }
-  .iconContainer div {
-    padding: 2px;
-    font-size: 13px;
-  }
-  .iconContainer div mat-icon {
-    padding-left: 5px;
-    font-size: 20px;
-  }
-  .iconContainer div span {
-    margin-top: 0px;
-  }
+  // .iconContainer div span {
+  //   margin-top: 0px;
+  // }
 }

@@ -3,25 +3,25 @@
   <div class="authForm">
     <mat-form-field appearance="fill">
       <mat-label>Entrez votre prénom</mat-label>
-      <input matInput placeholder="Prénom" required formControlName="firstname">
+      <input matInput placeholder="Prénom" required formControlName="firstname" name="firstname">
       <mat-error *ngIf="signUpForm.controls.firstname.invalid">{{getErrorMessage('firstname')}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Entrez votre nom</mat-label>
-      <input matInput placeholder="Nom" required formControlName="lastname">
+      <input matInput placeholder="Nom" required formControlName="lastname" name="lastname">
       <mat-error *ngIf="signUpForm.controls.lastname.invalid">{{getErrorMessage('lastname')}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Entrez votre email</mat-label>
-      <input matInput placeholder="pat@example.com" required formControlName="email">
+      <input matInput placeholder="pat@example.com" required formControlName="email" name="email">
       <mat-error *ngIf="signUpForm.controls.email.invalid">{{getErrorMessage('email')}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Entrez votre date de naissance</mat-label>
-      <input matInput required formControlName="birthDate" type="date">
+      <input matInput required formControlName="birthDate" type="date" name="birthDate">
       <mat-error *ngIf="signUpForm.controls.birthDate.invalid">{{getErrorMessage('birthDate')}}</mat-error>
     </mat-form-field>
 

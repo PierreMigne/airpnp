@@ -2,7 +2,7 @@
 <section class="container" *ngIf="!loading">
   <h2>{{property.title | uppercase}} <span class="propertyPrice">{{property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</span></h2>
   <span class="subTitle">{{property.category}} · {{property.location}}</span>
-  <img *ngFor="let image of property.images" [src]="urlServer + image.file">
+  <img *ngFor="let image of property.images" [src]="urlServer + property.id + '/' + image.file">
   <div class="iconContainer">
     <div>
       <mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon>
@@ -10,8 +10,7 @@
     </div>
     <div>
       <mat-icon aria-hidden="false" aria-label="people icon">people</mat-icon>
-      <span *ngIf="property.peoples > 1">{{property.peoples}} personnes</span>
-      <span *ngIf="property.peoples <= 1">{{property.peoples}} personne</span>
+      <span>{{property.peoples}} pers.</span>
     </div>
     <div>
       <mat-icon aria-hidden="false" aria-label="bed icon">bed</mat-icon>

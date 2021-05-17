@@ -8,10 +8,9 @@ import { Observable, Subject } from 'rxjs';
 })
 export class UserService {
 
-  user: Subject<User>;
+
 
   constructor(private httpClient: HttpClient) {
-    this.user = new Subject<User>();
   }
 
   getUserFromServer(): Observable<User> {

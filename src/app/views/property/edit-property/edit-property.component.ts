@@ -69,7 +69,7 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
       },
       (error) => {
         console.log('Erreur ! : ' + JSON.stringify(error.error));
-        this.errorMsg = error;
+        this.errorMsg = error.error.message;
         this.loading = false;
       }
     );
@@ -101,7 +101,7 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
         this.router.navigate(['my-properties']);
       },
       (error) => {
-        this.errorMsg = error;
+        this.errorMsg = error.error.message;
         console.log('Erreur ! : ' + JSON.stringify(error.error));
       }
     );

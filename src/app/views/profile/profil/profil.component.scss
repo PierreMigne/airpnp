@@ -4,4 +4,28 @@ section {
 .editBtn {
   float: right;
 }
+.imgContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  p {
+    margin: 0 15px 0 0;
+  }
+  a {
+    margin-left: auto;
+  }
+}
+.avatar {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  margin-left: 15px;
+}
 
+@media screen and (max-width: 430px) {
+  .imgContainer a {
+    margin: 10px auto;
+  }
+}
