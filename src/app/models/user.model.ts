@@ -6,6 +6,7 @@ export class User {
   private _email: string;
   private _password: string;
   private _image: string;
+  private _favorites: any
 
   constructor(
     firstname: string,
@@ -13,7 +14,8 @@ export class User {
     birthDate: string,
     email: string,
     password: string,
-    image: string
+    image: string,
+    favorites: any
   ) {
     this._firstname = firstname;
     this._lastname = lastname;
@@ -21,6 +23,7 @@ export class User {
     this._email = email;
     this._password = password;
     this._image = image;
+    this._favorites = favorites;
   }
 
   /**
@@ -80,6 +83,14 @@ export class User {
   }
 
   /**
+   * Getter favorites
+   * @return {any}
+   */
+  public get favorites(): any {
+    return this._favorites;
+  }
+
+  /**
    * Setter id
    * @param {number} value
    */
@@ -133,5 +144,13 @@ export class User {
    */
   public set image(value: string) {
     this._image = value;
+  }
+
+  /**
+   * Setter favorites
+   * @param {any} value
+   */
+  public set favorites(value: any) {
+    this._favorites = value;
   }
 }

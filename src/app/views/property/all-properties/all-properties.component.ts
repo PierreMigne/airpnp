@@ -1,9 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Property } from 'src/app/models/property.model';
 import { PropertyService } from 'src/app/services/property/property.service';
 import { environment } from '../../../../environments/environment';
+import { SnackbarService } from '../../../services/snackbar/snackbar.service';
+import { UserService } from '../../../services/user/user.service';
+import { User } from '../../../models/user.model';
+import { Favorite } from '../../../models/favorite.model';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-all-properties',
@@ -20,12 +24,23 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
   peoples: number;
   options: any;
 
+  isAuth: boolean;
+
+  propertyIdInFavorites = [];
+
   urlServer = environment.urlServer + 'properties/uploads/';
 
-  constructor(private propertyService: PropertyService, private router: Router) {}
+  constructor(
+    private propertyService: PropertyService,
+    private snackbarService: SnackbarService,
+    private userService: UserService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.loading = true;
+    this.isAuth = this.authService.getIsAuth();
+
     this.location = this.propertyService.location;
     this.category = this.propertyService.category;
     this.peoples = this.propertyService.peoples;
@@ -33,19 +48,68 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
 
     this.propertiesSubscription = this.propertyService.getPropertiesFromServer().subscribe(
       (properties: Array<Property>) => {
-        this.propertyService.properties.next(properties);
         this.properties = properties;
         this.loading = false;
+        if (this.isAuth) {
+          this.userService.getUserFromServer().subscribe(
+            (user: User) => {
+              this.propertyIdInFavorites = user.favorites.map(fav => fav.propertyId);
+              // user.favorites.forEach(propertyOfUser => {
+              //   this.propertyIdInFavorites.push(propertyOfUser.propertyId);
+              // });
+              this.properties.forEach(property => {
+                if (this.propertyIdInFavorites.includes(property.id)) {
+                  property.isLiked = true;
+                } else {
+                  property.isLiked = false;
+                }
+              });
+            }
+          );
+        }
+      },
+      (error) => {
+        console.log('Erreur ! : ' + JSON.stringify(error.error.message));
+        this.loading = false;
+      }
+    );
+  }
+
+  onSaveFavorite(propertyId: number): any {
+    this.loading = true;
+    this.propertyService.createFavorite(propertyId).subscribe(
+      () => {
+        this.loading = false;
+        this.snackbarService.successSnackbar('Hébergement ajouté avec succès dans vos favoris.');
+        const i = this.properties.findIndex(property => property.id === propertyId);
+        this.properties[i].isLiked = true;
+      },
+      (error) => {
+        this.loading = false;
+        if (error.error.code === '23505') {
+          this.snackbarService.alertSnackbar('Cet hébergement est déjà dans vos favoris.');
+        } else {
+          console.log('Erreur ! : ' + JSON.stringify(error.error.message));
+          this.snackbarService.alertSnackbar('Une erreur est survenue.');
+        }
+      }
+    );
+  }
+
+  onDeleteFavorite(propertyId: number): void {
+    this.loading = true;
+    this.propertyService.deleteFavoriteByPropertyIdAndUser(propertyId).subscribe(
+      () => {
+        this.loading = false;
+        this.snackbarService.successSnackbar('Hébergement supprimé avec succès de vos favoris.');
+        const i = this.properties.findIndex(property => property.id === propertyId);
+        this.properties[i].isLiked = false;
       },
       (error) => {
         console.log('Erreur ! : ' + JSON.stringify(error.error));
         this.loading = false;
       }
     );
-  }
-
-  onShowProperty(propertyId: number): void {
-    this.router.navigate(['properties', propertyId]);
   }
 
   ngOnDestroy(): void {

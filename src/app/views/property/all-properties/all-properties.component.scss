@@ -55,3 +55,9 @@ mat-card-header {
   display: flex;
   justify-content: space-around;
 }
+
+@media screen and (max-width: 400px) {
+  .iconContainer div span {
+    font-size: 13px;
+  }
+}

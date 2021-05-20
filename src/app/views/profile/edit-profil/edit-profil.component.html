@@ -4,7 +4,6 @@
   <hr>
   <mat-spinner *ngIf="loading"></mat-spinner>
   <form [formGroup]="editUserForm" (ngSubmit)="onSubmitEditUserForm()" *ngIf="!loading">
-    <mat-error *ngIf="errorMsg">{{errorMsg}}</mat-error>
     <div class="editUserForm">
       <mat-form-field appearance="fill">
         <mat-label>Entrez votre prénom</mat-label>

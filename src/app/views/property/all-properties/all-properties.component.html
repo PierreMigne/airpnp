@@ -63,8 +63,11 @@
       </ul>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button><mat-icon>favorite_border</mat-icon></button>
-      <button mat-button (click)="onShowProperty(property.id)">VOIR CE BIEN</button>
+      <!-- <button mat-button (click)="onSaveFavorite(property.id)" *ngIf="!propertyIdInFavorites.includes(property.id)"><mat-icon>favorite_border</mat-icon></button>
+      <button mat-button (click)="onDeleteFavorite(property.id)" *ngIf="propertyIdInFavorites.includes(property.id)"><mat-icon>favorite</mat-icon></button> -->
+      <button mat-button (click)="onSaveFavorite(property.id)" *ngIf="!property.isLiked" [disabled]="!isAuth"><mat-icon>favorite_border</mat-icon></button>
+      <button mat-button (click)="onDeleteFavorite(property.id)" *ngIf="property.isLiked"><mat-icon>favorite</mat-icon></button>
+      <a mat-button [routerLink]="['/properties/' + property.id]">VOIR CE BIEN</a>
     </mat-card-actions>
   </mat-card>
 

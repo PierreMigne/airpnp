@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { UploadService } from '../../services/upload/upload.service';
+import { SnackbarService } from '../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-upload',
@@ -18,7 +19,12 @@ export class UploadComponent implements OnInit {
   photos = [];
   propertiesOrProfile: string;
 
-  constructor(private uploadService: UploadService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(
+    private uploadService: UploadService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private snackbarService: SnackbarService
+  ) { }
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.id;
@@ -40,11 +46,13 @@ export class UploadComponent implements OnInit {
             file.progress = Math.round(event.loaded * 100 / event.total);
             break;
           case HttpEventType.Response:
+            this.snackbarService.successSnackbar('La photo a été uploadé avec succès.');
             return event;
         }
       }),
       catchError((error: HttpErrorResponse) => {
         file.inProgress = false;
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
         return of(`${file.data.name} upload failed.`);
       })).subscribe((event: any) => {
         if (typeof (event) === 'object') {

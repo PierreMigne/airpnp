@@ -7,6 +7,7 @@ import { PropertyService } from 'src/app/services/property/property.service';
 import { UploadService } from '../../../services/upload/upload.service';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
+import { SnackbarService } from '../../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-new-property',
@@ -21,7 +22,6 @@ export class NewPropertyComponent implements OnInit, OnDestroy {
   createPropertySubscription: Subscription;
 
   createPropertyForm: FormGroup;
-  errorMsg: string;
 
   categories: string[];
   title: string;
@@ -38,6 +38,7 @@ export class NewPropertyComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private propertyService: PropertyService,
     private router: Router,
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -60,17 +61,16 @@ export class NewPropertyComponent implements OnInit, OnDestroy {
   }
 
   onSubmitCreatePropertyForm(): void {
-    this.errorMsg = null;
     this.createPropertySubscription = this.propertyService
       .createProperty((this.createPropertyForm.value as Property)).subscribe(
       (property: Property) => {
-        this.propertyService.property.next(property);
         this.createProperty = property;
+        this.snackbarService.successSnackbar('Hébergement créé avec succès.');
         this.router.navigate(['my-properties', property.id, 'upload']);
       },
       (error) => {
-        this.errorMsg = error.error.message;
-        console.log('Erreur ! : ' + JSON.stringify(error.error));
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
+        console.log('Erreur ! : ' + JSON.stringify(error.error.message));
       }
     );
   }

@@ -29,8 +29,8 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  onLogout() {
-    this.authService.logout();
-  }
+  // onLogout() {
+  //   this.authService.logout();
+  // }
 
 }

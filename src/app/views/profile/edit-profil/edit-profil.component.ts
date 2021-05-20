@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../../../models/user.model';
 import { UserService } from '../../../services/user/user.service';
+import { SnackbarService } from '../../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-edit-profil',
@@ -28,7 +29,8 @@ export class EditProfilComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -45,8 +47,8 @@ export class EditProfilComponent implements OnInit, OnDestroy {
         });
       },
       (error) => {
-        console.log('Erreur ! : ' + JSON.stringify(error.error));
-        this.errorMsg = error;
+        console.log('Erreur ! : ' + JSON.stringify(error.error.message));
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
         this.loading = false;
       }
     );
@@ -63,7 +65,6 @@ export class EditProfilComponent implements OnInit, OnDestroy {
   }
 
   onSubmitEditUserForm(): void {
-    this.errorMsg = null;
     this.firstname = this.editUserForm.get('firstname').value;
     this.lastname = this.editUserForm.get('lastname').value;
     this.birthDate = this.editUserForm.get('birthDate').value;
@@ -71,10 +72,11 @@ export class EditProfilComponent implements OnInit, OnDestroy {
     this.editUserSubscription = this.userService.editUser(this.firstname, this.lastname, this.birthDate).subscribe(
       (user: User) => {
         this.editUser = user;
+        this.snackbarService.successSnackbar('Profil modifié avec succès.');
         this.router.navigate(['profile']);
       },
       (error) => {
-        this.errorMsg = error;
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
         console.log('Erreur ! : ' + JSON.stringify(error.error));
       }
     );

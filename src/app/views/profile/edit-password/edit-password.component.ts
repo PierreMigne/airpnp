@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ConfirmedValidator } from 'src/app/components/signup-form/confirmed.validator';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user/user.service';
+import { SnackbarService } from '../../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-edit-password',
@@ -20,7 +21,6 @@ export class EditPasswordComponent implements OnInit, OnDestroy {
   editUserSubscription: Subscription;
 
   editPasswordForm: FormGroup;
-  errorMsg: string;
   oldPassword: string;
   password: string;
   hide = true;
@@ -29,7 +29,8 @@ export class EditPasswordComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +41,7 @@ export class EditPasswordComponent implements OnInit, OnDestroy {
         this.loading = false;
       },
       (error) => {
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
         console.log('Erreur ! : ' + JSON.stringify(error.error));
         this.loading = false;
       }
@@ -60,18 +62,18 @@ export class EditPasswordComponent implements OnInit, OnDestroy {
   }
 
   onSubmitEditPasswordForm(): void {
-    this.errorMsg = null;
     this.oldPassword = this.editPasswordForm.get('oldPassword').value;
     this.password = this.editPasswordForm.get('password').value;
 
     this.editUserSubscription = this.userService.editPassword(this.oldPassword, this.password).subscribe(
       (user: User) => {
         this.editUser = user;
+        this.snackbarService.successSnackbar('Mot de passe modifié avec succès.');
         this.router.navigate(['profile']);
       },
       (error) => {
-        this.errorMsg = error.error.message;
-        console.log('Erreur ! : ' + JSON.stringify(error.error));
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
+        console.log('Erreur ! : ' + JSON.stringify(error.error.message));
       }
     );
   }

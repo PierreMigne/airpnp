@@ -56,3 +56,18 @@ mat-spinner {
     margin: 10px;
   }
 }
+
+
+.alertSnackbar {
+  background-color: #f8d7da;
+  color: #842029;
+  font-size: 15px;
+  button { color: #222 }
+}
+
+.successSnackbar {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  font-size: 15px;
+  button { color: #222 }
+}

@@ -2,7 +2,6 @@
   <h2>Ajouter un hébergement</h2>
   <hr>
   <form [formGroup]="createPropertyForm" (ngSubmit)="onSubmitCreatePropertyForm()">
-    <mat-error *ngIf="errorMsg">{{errorMsg}}</mat-error>
     <div class="createPropertyForm">
       <mat-form-field appearance="fill">
         <mat-label>Entrez le titre</mat-label>

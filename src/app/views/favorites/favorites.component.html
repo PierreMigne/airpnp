@@ -1,0 +1,47 @@
+<div class="container">
+  <h2>Mes favoris</h2>
+  <hr>
+</div>
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div class="propertiesCardsContainer" *ngIf="!loading">
+  <div *ngIf="!favorites.length">
+    <p>Vous n'avez pas encore d'hébergements dans vos favoris.</p>
+  </div>
+  <mat-card class="propertyCard" *ngFor="let favorite of favorites">
+    <a [routerLink]="['/properties/' + favorite.property.id]" class="link">
+      <mat-card-header>
+        <mat-card-title>{{favorite.property.title}}</mat-card-title>
+        <mat-card-subtitle>{{favorite.property.category}} · {{favorite.property.location}}</mat-card-subtitle>
+        <p class="propertyPrice">{{favorite.property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</p>
+      </mat-card-header>
+      <div class="propertyCardImgContainer">
+        <img *ngIf="favorite.property.images[0]" mat-card-image [src]="urlServer + favorite.property.id + '/' + favorite.property.images[0].file" [alt]="favorite.property.title">
+        <!-- <img *ngIf="!property.images[0]" mat-card-image [src]="" [alt]="property.title"> src = placholder ?-->
+      </div>
+      <mat-card-content>
+        <div class="iconContainer">
+          <div>
+            <mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon>
+            <span>{{favorite.property.surface}} m²</span>
+          </div>
+          <div>
+            <mat-icon aria-hidden="false" aria-label="people icon">people</mat-icon>
+            <span>{{favorite.property.peoples}} pers.</span>
+          </div>
+          <div>
+            <mat-icon aria-hidden="false" aria-label="bed icon">bed</mat-icon>
+            <span *ngIf="favorite.property.beds > 1">{{favorite.property.beds}} lits</span>
+            <span *ngIf="favorite.property.beds <= 1">{{favorite.property.beds}} lit</span>
+          </div>
+        </div>
+        <ul class="propertyOptions">
+          <li *ngFor="let option of favorite.property.options">{{ option | uppercase }}</li>
+        </ul>
+      </mat-card-content>
+    </a>
+    <mat-card-actions>
+      <button mat-button (click)="onDeleteFavorite(favorite.id)">SUPPRIMER</button>
+    </mat-card-actions>
+  </mat-card>
+
+</div>

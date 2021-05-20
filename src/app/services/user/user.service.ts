@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user.model';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-
-
+  urlServer = environment.urlServer + 'auth';
   constructor(private httpClient: HttpClient) {
   }
 
   getUserFromServer(): Observable<User> {
-    return this.httpClient.get<User>('http://localhost:3000/auth/profile');
+    return this.httpClient.get<User>(this.urlServer + '/profile');
   }
 
   editUser(firstname: string, lastname: string, birthDate: Date): Observable<User> {
-    return this.httpClient.put<User>('http://localhost:3000/auth/profile/edit', {firstname, lastname, birthDate});
+    return this.httpClient.put<User>(this.urlServer + '/profile/edit', {firstname, lastname, birthDate});
   }
 
   editPassword(oldPassword: string, password: string): Observable<User> {
-    return this.httpClient.put<User>('http://localhost:3000/auth/profile/edit/password', {oldPassword, password});
+    return this.httpClient.put<User>(this.urlServer + '/profile/edit/password', {oldPassword, password});
   }
 }

@@ -4,6 +4,7 @@ import { PropertyService } from '../../../services/property/property.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { SnackbarService } from '../../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-edit-property',
@@ -22,7 +23,6 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
   editPropertySubscription: Subscription;
 
   editPropertyForm: FormGroup;
-  errorMsg: string;
 
   id: number;
   categories: string[];
@@ -41,6 +41,7 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
     private propertyService: PropertyService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +51,6 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
 
     this.propertySubscription = this.propertyService.getPropertyFromServer(this.id).subscribe(
       (property: Property) => {
-        this.propertyService.property.next(property);
         this.property = property;
         this.loading = false;
         const index = this.categories.indexOf(this.property.category);
@@ -68,8 +68,8 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
         });
       },
       (error) => {
-        console.log('Erreur ! : ' + JSON.stringify(error.error));
-        this.errorMsg = error.error.message;
+        console.log('Erreur ! : ' + JSON.stringify(error.error.message));
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
         this.loading = false;
       }
     );
@@ -92,17 +92,16 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
   }
 
   onSubmitEditPropertyForm(): void {
-    this.errorMsg = null;
     this.editPropertySubscription = this.propertyService
       .editProperty(this.id, (this.editPropertyForm.value as Property)).subscribe(
       (property: Property) => {
-        this.propertyService.property.next(property);
         this.editProperty = property;
+        this.snackbarService.successSnackbar('Hébergement modifié avec succès.');
         this.router.navigate(['my-properties']);
       },
       (error) => {
-        this.errorMsg = error.error.message;
-        console.log('Erreur ! : ' + JSON.stringify(error.error));
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
+        console.log('Erreur ! : ' + JSON.stringify(error.error.message));
       }
     );
   }

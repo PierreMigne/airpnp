@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { Favorite } from 'src/app/models/favorite.model';
 
 
 @Injectable({
@@ -68,6 +69,14 @@ export class PropertyService {
     }
   }
 
+  getFavorites(): Observable<Favorite[]> {
+    return this.httpClient.get<Favorite[]>(this.urlServer + '/favorites');
+  }
+
+  // getFavoriteByPropertyIdAndUser(propertyId: number): Observable<Favorite> {
+  //   return this.httpClient.get<Favorite>(this.urlServer + '/' +  propertyId + '/favorite');
+  // }
+
   editProperty(
     id: number,
     property: Property,
@@ -78,10 +87,24 @@ export class PropertyService {
   createProperty(
     property: Property,
     ): Observable<Property> {
-    return this.httpClient.post<Property>(this.urlServer, {...property});
+      return this.httpClient.post<Property>(this.urlServer, {...property});
+  }
+
+  createFavorite(
+    id: number,
+    ): Observable<Favorite> {
+    return this.httpClient.post<Favorite>(this.urlServer + '/' + id + '/favorite', null);
   }
 
   deleteProperty(id: number): Observable<Property[]> {
     return this.httpClient.delete<Property[]>(this.urlServer + '/' + id);
+  }
+
+  deleteFavorite(favoriteId: number): Observable<Favorite[]> {
+    return this.httpClient.delete<Favorite[]>(this.urlServer + '/favorites/' + favoriteId);
+  }
+
+  deleteFavoriteByPropertyIdAndUser(propertyId: number): Observable<Favorite> {
+    return this.httpClient.delete<Favorite>(this.urlServer + '/favorite/' + propertyId);
   }
 }

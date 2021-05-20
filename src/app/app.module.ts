@@ -20,6 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { HeaderComponent } from './views/menu/header/header.component';
 import { SidenavListComponent } from './views/menu/sidenav-list/sidenav-list.component';
@@ -44,6 +45,7 @@ import { EditProfilComponent } from './views/profile/edit-profil/edit-profil.com
 import { EditPasswordComponent } from './views/profile/edit-password/edit-password.component';
 import { CustomHttpInterceptorService } from './services/httpInterceptor/custom-http-interceptor.service';
 import { UploadComponent } from './views/upload/upload.component';
+import { FavoritesComponent } from './views/favorites/favorites.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -65,6 +67,7 @@ registerLocaleData(localeFr);
     EditProfilComponent,
     EditPasswordComponent,
     UploadComponent,
+    FavoritesComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +82,7 @@ registerLocaleData(localeFr);
     MatCardModule,
     MatSelectModule,
     MatChipsModule,
+    MatSnackBarModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,

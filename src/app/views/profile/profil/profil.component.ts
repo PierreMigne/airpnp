@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
 import { User } from '../../../models/user.model';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { environment } from '../../../../environments/environment.prod';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-profil',
@@ -17,15 +16,13 @@ export class ProfilComponent implements OnInit, OnDestroy {
   userSubscription: Subscription;
   urlServer = environment.urlServer + 'auth/profile/uploads/';
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.loading = true;
 
     this.userSubscription = this.userService.getUserFromServer().subscribe(
       (user: User) => {
-        // console.log(user.image.file);
-
         this.user = user;
         this.loading = false;
       },

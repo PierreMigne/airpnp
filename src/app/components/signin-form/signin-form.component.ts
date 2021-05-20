@@ -1,13 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-signin-form',
@@ -25,14 +22,13 @@ export class SigninFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.initForm();
   }
 
-  initForm() {
+  initForm(): void {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)]],

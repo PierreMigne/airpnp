@@ -5,6 +5,7 @@ import { Property } from '../../../models/property.model';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
+import { SnackbarService } from '../../../services/snackbar/snackbar.service';
 
 
 @Component({
@@ -20,10 +21,13 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
   ownOrNotProperties: boolean;
   urlServer = environment.urlServer + 'properties/uploads/';
 
-  constructor(private propertyService: PropertyService,
-              private route: ActivatedRoute,
-              private location: Location,
-              private router: Router) { }
+  constructor(
+    private propertyService: PropertyService,
+    private route: ActivatedRoute,
+    private location: Location,
+    private router: Router,
+    private snackbarService: SnackbarService
+  ) { }
 
   ngOnInit(): void {
     this.loading = true;
@@ -35,12 +39,12 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
 
     this.propertySubscription = this.propertyService.getPropertyFromServer(id).subscribe(
       (property: Property) => {
-        this.propertyService.property.next(property);
         this.property = property;
         this.loading = false;
       },
       (error) => {
-        console.log('Erreur ! : ' + JSON.stringify(error.error));
+        console.log('Erreur ! : ' + JSON.stringify(error.error.message));
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
         this.loading = false;
       }
     );

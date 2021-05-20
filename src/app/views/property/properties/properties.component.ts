@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Property } from 'src/app/models/property.model';
 import { PropertyService } from '../../../services/property/property.service';
 import { environment } from '../../../../environments/environment';
+import { SnackbarService } from '../../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-properties',
@@ -18,7 +19,7 @@ export class PropertiesComponent implements OnInit, OnDestroy {
   loading: boolean;
   urlServer = environment.urlServer + 'properties/uploads/';
 
-  constructor(private propertyService: PropertyService, private router: Router) {}
+  constructor(private propertyService: PropertyService, private snackbarService: SnackbarService) {}
 
   ngOnInit(): void {
     this.loading = true;
@@ -28,7 +29,8 @@ export class PropertiesComponent implements OnInit, OnDestroy {
         this.loading = false;
       },
       (error) => {
-        console.log('Erreur ! : ' + JSON.stringify(error.error));
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
+        console.log('Erreur ! : ' + JSON.stringify(error.error.message));
         this.loading = false;
       }
     );
@@ -38,12 +40,13 @@ export class PropertiesComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.propertiesSubscription = this.propertyService.deleteProperty(propertyId).subscribe(
       (properties: Array<Property>) => {
-        // this.propertyService.properties.next(properties);
         this.properties = properties;
+        this.snackbarService.successSnackbar('Hébergement supprimé avec succès.');
         this.loading = false;
       },
       (error) => {
-        console.log('Erreur ! : ' + JSON.stringify(error.error));
+        console.log('Erreur ! : ' + JSON.stringify(error.error.message));
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
         this.loading = false;
       }
     );

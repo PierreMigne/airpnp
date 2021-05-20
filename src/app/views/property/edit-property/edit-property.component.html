@@ -3,7 +3,6 @@
   <hr>
   <mat-spinner *ngIf="loading"></mat-spinner>
   <form [formGroup]="editPropertyForm" (ngSubmit)="onSubmitEditPropertyForm()" *ngIf="!loading">
-    <mat-error *ngIf="errorMsg">{{errorMsg}}</mat-error>
     <div class="editPropertyForm">
       <mat-form-field appearance="fill">
         <mat-label>Entrez le titre</mat-label>
