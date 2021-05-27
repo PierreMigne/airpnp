@@ -1,0 +1,8 @@
+<ngx-daterangepicker-material *ngIf="reservation"
+  (choosedDate)="choosedDate($event)"
+  [isInvalidDate]="isInvalidDate"
+  [autoApply]= true
+  [linkedCalendars]="true"
+  [minDate]="minDay"
+  >
+</ngx-daterangepicker-material>

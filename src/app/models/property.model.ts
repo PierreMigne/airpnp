@@ -12,7 +12,6 @@ export class Property {
   private _createdAt: Date;
   private _isVisible: boolean;
   private _isLiked: boolean;
-  // private _photos: string;
 
   constructor(
     title: string,
@@ -25,7 +24,6 @@ export class Property {
     options: Array<string>,
     price: number,
     isLiked: boolean,
-    // photos: string,
   ) {
     this._title = title;
     this._category = category;
@@ -37,7 +35,6 @@ export class Property {
     this._options = options;
     this._price = price;
     this._isLiked = isLiked;
-    // this._photos = photos;
     this._createdAt = new Date();
     this._isVisible = false;
   }
@@ -146,14 +143,6 @@ export class Property {
     return this._isLiked;
   }
 
-  // /**
-  //  * Getter photos
-  //  * @return {string}
-  //  */
-  // public get photos(): string {
-  //   return this._photos;
-  // }
-
   /**
    * Setter id
    * @param {number} value
@@ -258,11 +247,4 @@ export class Property {
     this._isLiked = value;
   }
 
-  // /**
-  //  * Setter photos
-  //  * @param string value
-  //  */
-  // public set photos(value: string) {
-  //   this._photos = value;
-  // }
 }

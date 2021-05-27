@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { Favorite } from 'src/app/models/favorite.model';
+import { Booking } from '../../models/booking.model';
 
 
 @Injectable({
@@ -73,6 +74,14 @@ export class PropertyService {
     return this.httpClient.get<Favorite[]>(this.urlServer + '/favorites');
   }
 
+  getBookings(): Observable<Booking[]> {
+    return this.httpClient.get<Booking[]>(this.urlServer + '/bookings');
+  }
+
+  getBookingsById(id: number): Observable<Booking[]> {
+    return this.httpClient.get<Booking[]>(this.urlServer + '/bookings/' + id);
+  }
+
   // getFavoriteByPropertyIdAndUser(propertyId: number): Observable<Favorite> {
   //   return this.httpClient.get<Favorite>(this.urlServer + '/' +  propertyId + '/favorite');
   // }
@@ -94,6 +103,13 @@ export class PropertyService {
     id: number,
     ): Observable<Favorite> {
     return this.httpClient.post<Favorite>(this.urlServer + '/' + id + '/favorite', null);
+  }
+
+  createBooking(
+    id: number,
+    booking: Booking
+    ): Observable<Booking> {
+    return this.httpClient.post<Booking>(this.urlServer + '/' + id + '/booking', {...booking});
   }
 
   deleteProperty(id: number): Observable<Property[]> {

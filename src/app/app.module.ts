@@ -5,23 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './views/menu/home/home.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatSelectModule } from '@angular/material/select';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatMenuModule } from '@angular/material/menu';
 import { HeaderComponent } from './views/menu/header/header.component';
 import { SidenavListComponent } from './views/menu/sidenav-list/sidenav-list.component';
 import { AuthComponent } from './views/auth/auth.component';
@@ -46,6 +30,10 @@ import { EditPasswordComponent } from './views/profile/edit-password/edit-passwo
 import { CustomHttpInterceptorService } from './services/httpInterceptor/custom-http-interceptor.service';
 import { UploadComponent } from './views/upload/upload.component';
 import { FavoritesComponent } from './views/favorites/favorites.component';
+import { BookingsComponent } from './views/bookings/bookings.component';
+import { MaterialModule } from './material.module';
+import { InlineRangeCalendarComponent } from './components/inline-range-calendar/inline-range-calendar.component';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -68,31 +56,19 @@ registerLocaleData(localeFr);
     EditPasswordComponent,
     UploadComponent,
     FavoritesComponent,
+    BookingsComponent,
+    InlineRangeCalendarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatCardModule,
-    MatSelectModule,
-    MatChipsModule,
-    MatSnackBarModule,
-    MatFormFieldModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatInputModule,
-    MatMenuModule,
+    MaterialModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxDaterangepickerMd.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: function  tokenGetter(): any {
@@ -105,6 +81,8 @@ registerLocaleData(localeFr);
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'fr-FR'},
+    // {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
+    // { provide: DateAdapter, useClass: CustomDateAdapter },
     UserService,
     PropertyService,
     {provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptorService, multi: true}

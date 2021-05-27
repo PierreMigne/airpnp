@@ -13,6 +13,7 @@ import { EditProfilComponent } from './views/profile/edit-profil/edit-profil.com
 import { EditPasswordComponent } from './views/profile/edit-password/edit-password.component';
 import { UploadComponent } from './views/upload/upload.component';
 import { FavoritesComponent } from './views/favorites/favorites.component';
+import { BookingsComponent } from './views/bookings/bookings.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'my-properties/:id/edit', canActivate: [AuthGuardService], component: EditPropertyComponent},
   { path: 'my-properties/:id/upload', canActivate: [AuthGuardService], component: UploadComponent},
   { path: 'favorites', canActivate: [AuthGuardService], component: FavoritesComponent},
+  { path: 'bookings', canActivate: [AuthGuardService], component: BookingsComponent},
   { path: 'profile', canActivate: [AuthGuardService], component: ProfilComponent},
   { path: 'profile/edit', canActivate: [AuthGuardService], component: EditProfilComponent},
   { path: 'profile/edit/password', canActivate: [AuthGuardService], component: EditPasswordComponent},

@@ -64,6 +64,27 @@ img {
 .propertyDescpritionLocation {
   text-align: center;
 }
+.calendarAndResa {
+  display: flex;
+  justify-content: space-evenly;
+}
+app-inline-range-calendar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
+.resaForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  // margin-top: 20px;
+  mat-form-field {
+    padding: 5px;
+  }
+}
 .btnContainer {
   display: flex;
   justify-content: space-around;
@@ -73,12 +94,22 @@ img {
   font-size: 25px;
 }
 
+
 @media screen and (max-width: 800px) {
   h2 {
     font-size: 20px;
     span {
       font-size: 16px;
     }
+  }
+  .calendarAndResa {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .resaForm {
+    display: flex;
+    flex-direction: row;
   }
 }
 @media screen and (max-width: 400px) {

@@ -25,9 +25,31 @@
     <p>{{property.description}}</p>
     <p>Lieu : {{property.location}}</p>
   </div>
+  <hr>
+  <div *ngIf="!ownOrNotProperties && !loading" class="calendarAndResa">
+    <app-inline-range-calendar [propertyId]="property.id" (selectedDates)="getSelectedDates($event)"></app-inline-range-calendar>
+    <form [formGroup]="resaForm" class="resaForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Date de début</mat-label>
+        <input matInput formControlName="startDate" name="startDate" [value]="startDate | date">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Date de fin</mat-label>
+        <input matInput formControlName="endDate" name="endDate" [value]="endDate | date">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre de personnes</mat-label>
+        <mat-select formControlName="peoples" name="peoples">
+          <mat-option value={{people}} *ngFor="let people of peoples">{{people}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
   <div class="btnContainer" >
     <button mat-raised-button (click)="onBack()">Retour</button>
-    <button mat-raised-button color="primary" (click)="onReservation()" *ngIf="!ownOrNotProperties">Réserver</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="resaForm.invalid" (click)="onSubmitResaForm()" *ngIf="!ownOrNotProperties">Réserver</button>
     <a mat-raised-button color="primary" [routerLink]="['/my-properties/' + property.id + '/edit']" *ngIf="ownOrNotProperties">Modifier</a>
   </div>
+
+
 </section>
