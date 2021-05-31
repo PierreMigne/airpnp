@@ -91,10 +91,15 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
     const startDate = new Date(moment(this.startDate).format('YYYY-MM-DD'));
     const endDate = new Date(moment(this.endDate).format('YYYY-MM-DD'));
     const peoples = this.resaForm.get('peoples').value;
-    const nbDayInReservation = moment.duration(moment(endDate).diff(startDate)).asDays();
-    const price = this.property.price * nbDayInReservation;
+    const nbNightInReservation = moment.duration(moment(endDate).diff(startDate)).asDays();
+    const price = this.property.price * nbNightInReservation;
     this.booking = {startDate , endDate, price, peoples};
-    this.onCreateBooking(this.id);
+    if (nbNightInReservation === 0) {
+      this.snackbarService.alertSnackbar('Vous devez sélectionner au moins 2 jours.');
+      throw new Error('2 days min required.');
+    } else {
+      this.onCreateBooking(this.id);
+    }
   }
 
   onCreateBooking(propertyId: number): any {
@@ -107,7 +112,7 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
       (error) => {
         this.loading = false;
         if (error.error.code === '23505') {
-          this.snackbarService.alertSnackbar('Cet hébergement est déjà dans vos favoris.');
+          this.snackbarService.alertSnackbar('Cet hébergement est déjà dans vos favoris.'); // *******************************************************
         } else {
           console.log('Erreur ! : ' + JSON.stringify(error.error.message));
           this.snackbarService.alertSnackbar('Une erreur est survenue.');

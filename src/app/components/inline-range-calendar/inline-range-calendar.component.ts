@@ -51,6 +51,10 @@ export class InlineRangeCalendarComponent implements OnInit, OnDestroy {
   choosedDate(event: any): void {
     this.startDate = event.startDate._d;
     this.endDate = event.endDate._d;
+    if (moment(event.startDate).isSame(moment(event.endDate), 'day')) {
+      this.snackbarService.alertSnackbar('Vous devez sélectionner au moins 2 jours.');
+      throw new Error('2 days min required.');
+    }
     this.selected = event;
     this.selectedDates.emit(event);
   }

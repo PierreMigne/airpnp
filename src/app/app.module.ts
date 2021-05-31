@@ -34,6 +34,8 @@ import { BookingsComponent } from './views/bookings/bookings.component';
 import { MaterialModule } from './material.module';
 import { InlineRangeCalendarComponent } from './components/inline-range-calendar/inline-range-calendar.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { PaginationPersonnalise } from './classes/paginationPersonnalise';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -81,6 +83,7 @@ registerLocaleData(localeFr);
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'fr-FR'},
+    {provide: MatPaginatorIntl, useClass: PaginationPersonnalise},
     // {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
     // { provide: DateAdapter, useClass: CustomDateAdapter },
     UserService,

@@ -8,6 +8,7 @@ import { UserService } from '../../../services/user/user.service';
 import { User } from '../../../models/user.model';
 import { Favorite } from '../../../models/favorite.model';
 import { AuthService } from '../../../services/auth/auth.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-all-properties',
@@ -25,6 +26,7 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
   options: any;
 
   isAuth: boolean;
+  pageSlice: Array<Property>;
 
   propertyIdInFavorites = [];
 
@@ -49,6 +51,7 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
     this.propertiesSubscription = this.propertyService.getPropertiesFromServer().subscribe(
       (properties: Array<Property>) => {
         this.properties = properties;
+        this.pageSlice = this.properties.slice(0, 10);
         this.loading = false;
         if (this.isAuth) {
           this.userService.getUserFromServer().subscribe(
@@ -110,6 +113,15 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
         this.loading = false;
       }
     );
+  }
+
+  OnPageChange(event: PageEvent): void {
+    const startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    if (endIndex > this.properties.length) {
+      endIndex = this.properties.length;
+    }
+    this.pageSlice = this.properties.slice(startIndex, endIndex);
   }
 
   ngOnDestroy(): void {

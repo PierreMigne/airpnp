@@ -33,7 +33,7 @@
     <p>Désolé, nous n'avons pas pu trouver d'hébergements avec ces critères.</p>
     <p>Voulez-vous faire <a routerLink="/home">une autre recherche</a> ?</p>
   </div>
-  <mat-card class="propertyCard" *ngFor="let property of properties">
+  <mat-card class="propertyCard" *ngFor="let property of pageSlice">
     <mat-card-header>
       <mat-card-title>{{property.title}}</mat-card-title>
       <mat-card-subtitle>{{property.category}} · {{property.location}}</mat-card-subtitle>
@@ -72,3 +72,8 @@
   </mat-card>
 
 </div>
+<mat-paginator *ngIf="properties" (page)="OnPageChange($event)"
+  [length]="properties.length"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>

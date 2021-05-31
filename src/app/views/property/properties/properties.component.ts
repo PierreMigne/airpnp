@@ -37,8 +37,9 @@ export class PropertiesComponent implements OnInit, OnDestroy {
   }
 
   onDeleteProperty(propertyId: number): void {
-    this.loading = true;
-    this.propertiesSubscription = this.propertyService.deleteProperty(propertyId).subscribe(
+    if (confirm('Êtes-vous sûr de vouloir supprimer cet hébergement ?')) {
+      this.loading = true;
+      this.propertiesSubscription = this.propertyService.deleteProperty(propertyId).subscribe(
       (properties: Array<Property>) => {
         this.properties = properties;
         this.snackbarService.successSnackbar('Hébergement supprimé avec succès.');
@@ -48,8 +49,8 @@ export class PropertiesComponent implements OnInit, OnDestroy {
         console.log('Erreur ! : ' + JSON.stringify(error.error.message));
         this.snackbarService.alertSnackbar('Une erreur est survenue.');
         this.loading = false;
-      }
-    );
+      });
+    }
   }
 
   ngOnDestroy(): void {

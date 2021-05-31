@@ -7,7 +7,7 @@
   <div *ngIf="!favorites.length">
     <p>Vous n'avez pas encore d'hébergements dans vos favoris.</p>
   </div>
-  <mat-card class="propertyCard" *ngFor="let favorite of favorites">
+  <mat-card class="propertyCard" *ngFor="let favorite of pageSlice">
     <a [routerLink]="['/properties/' + favorite.property.id]" class="link">
       <mat-card-header>
         <mat-card-title>{{favorite.property.title}}</mat-card-title>
@@ -45,3 +45,8 @@
   </mat-card>
 
 </div>
+<mat-paginator *ngIf="favorites" (page)="OnPageChange($event)"
+  [length]="favorites.length"
+  [pageSize]="5"
+  [pageSizeOptions]="[2, 5, 10, 25]">
+</mat-paginator>
