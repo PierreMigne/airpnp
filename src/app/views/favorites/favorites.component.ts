@@ -1,9 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Favorite } from 'src/app/models/favorite.model';
-import { Property } from 'src/app/models/property.model';
 import { PropertyService } from 'src/app/services/property/property.service';
 import { environment } from 'src/environments/environment';
 import { SnackbarService } from '../../services/snackbar/snackbar.service';

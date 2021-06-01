@@ -107,16 +107,12 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
     this.propertyService.createBooking(propertyId, this.booking).subscribe(
       () => {
         this.loading = false;
-        this.snackbarService.successSnackbar('Test réussi');
+        this.snackbarService.successSnackbar('Réservation effectuée avec succès.');
       },
       (error) => {
         this.loading = false;
-        if (error.error.code === '23505') {
-          this.snackbarService.alertSnackbar('Cet hébergement est déjà dans vos favoris.'); // *******************************************************
-        } else {
-          console.log('Erreur ! : ' + JSON.stringify(error.error.message));
-          this.snackbarService.alertSnackbar('Une erreur est survenue.');
-        }
+        console.log('Erreur ! : ' + JSON.stringify(error.error.message));
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
       }
     );
   }
