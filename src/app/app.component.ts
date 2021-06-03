@@ -1,6 +1,5 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +9,13 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
 
 
-  constructor(private router: Router, private location: Location) {
+  constructor(private location: Location) {
   }
 
   ngOnInit() {
   }
 
-  getPath() {
+  getPath(): boolean {
     const path = this.location.prepareExternalUrl(this.location.path()).slice(1);
     if (path === 'signup' || path === 'signin') {
       return true;

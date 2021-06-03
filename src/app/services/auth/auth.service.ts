@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  urlServer = environment.urlServer + 'auth';
+
   constructor(private httpClient: HttpClient, private router: Router) {
   }
 
   async signIn(email: string, password: string): Promise<any> {
     return await this.httpClient
-      .post<{accessToken: string}>('http://localhost:3000/auth/signin', {email, password})
+      .post<{accessToken: string}>(this.urlServer + '/signin', {email, password})
       .toPromise()
       .then((res) => {
         if (res.accessToken) {
@@ -32,7 +36,7 @@ export class AuthService {
 
   async signUp(email: string, password: string, firstname: string, lastname: string, birthDate: Date): Promise<any> {
     return await this.httpClient
-      .post<{accessToken: string}>('http://localhost:3000/auth/signup', {email, password, firstname, lastname, birthDate})
+      .post<{accessToken: string}>(this.urlServer + '/signup', {email, password, firstname, lastname, birthDate})
       .toPromise()
       .then(() => {
         this.signIn(email, password);
@@ -43,6 +47,10 @@ export class AuthService {
         return(err.error.message);
       })
     ;
+  }
+
+  forgotPassword(email: string): Observable<{accessToken: string}> {
+    return this.httpClient.post<{accessToken: string}>(this.urlServer + '/forgot', {email});
   }
 
   getIsAuth(): boolean {

@@ -1,6 +1,5 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -12,7 +11,7 @@ export class AuthComponent implements OnInit {
   title: string;
   type: string;
 
-  constructor(private authService: AuthService, private location: Location) { }
+  constructor(private location: Location) { }
 
   ngOnInit(): void {
     this.getPath();
@@ -26,11 +25,13 @@ export class AuthComponent implements OnInit {
     } else if (path === 'signin') {
       this.title = 'CONNEXION';
       this.type = 'signin';
+    } else if (path === 'forgot') {
+      this.title = 'Oubli de mot de passe';
+      this.type = 'forgot';
+    } else if (path.includes('reset') ) {
+      this.title = 'Réinitialisation du mot de passe';
+      this.type = 'reset';
     }
   }
-
-  // onLogout() {
-  //   this.authService.logout();
-  // }
 
 }

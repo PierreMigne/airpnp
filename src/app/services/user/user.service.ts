@@ -24,4 +24,8 @@ export class UserService {
   editPassword(oldPassword: string, password: string): Observable<User> {
     return this.httpClient.put<User>(this.urlServer + '/profile/edit/password', {oldPassword, password});
   }
+
+  resetPassword(accessToken: string, password: string): Observable<User> {
+    return this.httpClient.put<User>(this.urlServer + '/profile/reset/password', {accessToken, password});
+  }
 }

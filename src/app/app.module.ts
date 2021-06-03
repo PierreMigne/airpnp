@@ -36,6 +36,8 @@ import { InlineRangeCalendarComponent } from './components/inline-range-calendar
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { PaginationPersonnalise } from './classes/paginationPersonnalise';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -60,6 +62,8 @@ registerLocaleData(localeFr);
     FavoritesComponent,
     BookingsComponent,
     InlineRangeCalendarComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

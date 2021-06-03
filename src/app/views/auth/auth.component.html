@@ -2,4 +2,6 @@
   <h2>{{title}}</h2>
   <app-signin-form *ngIf="type === 'signin'" [title]='title'></app-signin-form>
   <app-signup-form *ngIf="type === 'signup'" [title]='title'></app-signup-form>
+  <app-forgot-password *ngIf="type === 'forgot'" [title]='title'></app-forgot-password>
+  <app-reset-password *ngIf="type === 'reset'" [title]='title'></app-reset-password>
 </div>

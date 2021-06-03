@@ -14,11 +14,14 @@ import { EditPasswordComponent } from './views/profile/edit-password/edit-passwo
 import { UploadComponent } from './views/upload/upload.component';
 import { FavoritesComponent } from './views/favorites/favorites.component';
 import { BookingsComponent } from './views/bookings/bookings.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'signin', component: AuthComponent},
   { path: 'signup', component: AuthComponent},
+  { path: 'forgot', component: AuthComponent},
+  { path: 'reset/:accessToken', component: AuthComponent},
   { path: 'properties', component: AllPropertiesComponent},
   { path: 'properties/:id', component: SinglePropertyComponent},
   { path: 'my-properties', canActivate: [AuthGuardService], component: PropertiesComponent},
