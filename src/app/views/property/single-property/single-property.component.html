@@ -2,7 +2,26 @@
 <section class="container" *ngIf="!loading">
   <h2>{{property.title | uppercase}} <span class="propertyPrice">{{property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</span></h2>
   <span class="subTitle">{{property.category}} · {{property.location}}</span>
-  <img *ngFor="let image of property.images" [src]="urlServer + property.id + '/' + image.file">
+  <swiper
+    [slidesPerView]="1"
+    [spaceBetween]="30"
+    [loop]="true"
+    [pagination]="{
+      clickable: true
+    }"
+    [autoplay]="{
+      delay: 5000,
+      pauseOnMouseEnter: true,
+      disableOnInteraction: false
+    }"
+    [navigation]="true"
+    class="mySwiper"
+    autoHeight= "true"
+  >
+    <ng-template swiperSlide *ngFor="let image of property.images">
+      <img [src]="urlServer + property.id + '/' + image.file" (click)="growImages($event)">
+    </ng-template>
+  </swiper>
   <div class="iconContainer">
     <div>
       <mat-icon aria-hidden="false" aria-label="home icon">home</mat-icon>

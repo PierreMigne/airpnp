@@ -38,6 +38,8 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { PaginationPersonnalise } from './classes/paginationPersonnalise';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { GrowImgDialogComponent } from './components/dialog/grow-img-dialog/grow-img-dialog.component';
+import { SwiperModule } from 'swiper/angular';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -64,6 +66,7 @@ registerLocaleData(localeFr);
     InlineRangeCalendarComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    GrowImgDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +74,7 @@ registerLocaleData(localeFr);
     BrowserAnimationsModule,
     LayoutModule,
     MaterialModule,
+    SwiperModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

@@ -11,7 +11,10 @@ import { environment } from 'src/environments/environment';
 import { SnackbarService } from '../../../services/snackbar/snackbar.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Booking } from '../../../models/booking.model';
-
+import { MatDialog } from '@angular/material/dialog';
+import { GrowImgDialogComponent } from '../../../components/dialog/grow-img-dialog/grow-img-dialog.component';
+import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper/core';
+SwiperCore.use([Pagination, Navigation, Autoplay ]);
 
 @Component({
   selector: 'app-single-property',
@@ -42,6 +45,7 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
     private router: Router,
     private snackbarService: SnackbarService,
     private formBuilder: FormBuilder,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +61,8 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
         this.property = property;
         this.peoples = Array.from({length: property.peoples}, (_, i) => i + 1);
         this.loading = false;
+        // console.log(this.property.image);
+
       },
       (error) => {
         console.log('Erreur ! : ' + JSON.stringify(error.error.message));
@@ -115,6 +121,15 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
         this.snackbarService.alertSnackbar('Une erreur est survenue.');
       }
     );
+  }
+
+  growImages(event: any): void {
+    const src = event.path[0].src;
+    this.dialog.open(GrowImgDialogComponent, {
+      data: {
+        img: src
+      }
+    });
   }
 
 

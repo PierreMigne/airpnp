@@ -12,6 +12,9 @@
 }
 .propertyCard img{
   margin-bottom: 0;
+  // max-height: 300px;
+  height: 325px;
+  object-fit: cover;
 }
 mat-card-header {
   justify-content: space-between;

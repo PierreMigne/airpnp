@@ -5,7 +5,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
-// import { MatDatepickerModule } from '@angular/material/datepicker'; // usefull ?
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -32,12 +32,12 @@ import { MatTableModule } from '@angular/material/table';
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    // MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
     MatMenuModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
   ],
 })
 export class MaterialModule  { }

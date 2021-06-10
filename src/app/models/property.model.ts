@@ -7,7 +7,7 @@ export class Property {
   private _peoples: number;
   private _beds: number;
   private _description: string;
-  private _options: Array<string>;
+  private _options: string;
   private _price: number;
   private _createdAt: Date;
   private _isVisible: boolean;
@@ -21,7 +21,7 @@ export class Property {
     peoples: number,
     beds: number,
     description: string,
-    options: Array<string>,
+    options: string,
     price: number,
     isLiked: boolean,
   ) {
@@ -105,9 +105,9 @@ export class Property {
 
   /**
    * Getter options
-   * @return {Array<string>}
+   * @return {string}
    */
-  public get options(): Array<string> {
+  public get options(): string {
     return this._options;
   }
 
@@ -209,9 +209,9 @@ export class Property {
 
   /**
    * Setter options
-   * @param {Array<string>} value
+   * @param {string} value
    */
-  public set options(value: Array<string>) {
+  public set options(value: string) {
     this._options = value;
   }
 
