@@ -1,0 +1,38 @@
+.bookingsContainer {
+  max-width: 1200px;
+  margin: auto;
+}
+
+table {
+  width: 100%;
+}
+.table-responsive {
+  .mat-cell:not(:first-child),
+  .mat-header-cell:not(:first-child) {
+      padding: 0px 5px;
+  }
+}
+.mat-paginator {
+  background-color: #fafafa;
+}
+
+// @media screen and (max-width:'400px') {
+//   .dates {
+//     span {
+//       display: block;
+//     }
+//     .displayOff {
+//       display: none;
+//     }
+//   }
+//   .table-responsive {
+//     .mat-cell,
+//     .mat-header-cell {
+//         padding: 0px 5px;
+//     }
+//     .mat-cell:first-child,
+//     .mat-header-cell:first-child {
+//       padding: 0px 5px 0 10px;
+//   }
+//   }
+// }

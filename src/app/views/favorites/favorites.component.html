@@ -35,7 +35,7 @@
           </div>
         </div>
         <ul class="propertyOptions">
-          <li *ngFor="let option of favorite.property.options">{{ option | uppercase }}</li>
+          <li *ngFor="let option of favorite.property.options">{{ option.options | uppercase }}</li>
         </ul>
       </mat-card-content>
     </a>

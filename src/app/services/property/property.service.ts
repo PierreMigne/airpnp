@@ -28,7 +28,41 @@ export class PropertyService {
     this.property = new Subject<Property>();
   }
 
-  getPropertiesFromServer(): Observable<Property[]> {
+  // getPropertiesFromServer(): Observable<Property[]> {
+  //   const categoryList = this.category ? this.category.map((category: string, index: number) => {
+  //     return 'category[' + index + ']=' + category; // category[0]=MAISON&category[1]=VILLA...
+  //   }).join('&') : null;
+
+  //   const optionsList = this.options ? this.options.map((options: any, index: number) => {
+  //     return 'options[' + index + ']=' + options; // options[0]=wifi&options[1]=pisicne...
+  //   }).join('&') : null;
+
+  //   let url = this.urlServer;
+
+  //   if (!this.router.url.includes('my-properties')) {
+  //     url += '/all';
+  //   }
+
+  //   if (this.category || this.location || this.peoples  || this.options) {
+  //     url += '?';
+  //   }
+  //   if (this.category) {
+  //     url += categoryList;
+  //   }
+  //   if (this.location) {
+  //     url += `&location=${this.location}`;
+  //   }
+  //   if (this.peoples) {
+  //     url += `&peoples=${this.peoples}`;
+  //   }
+  //   if (this.options) {
+  //     url += `&${optionsList}`;
+  //   }
+
+  //   return this.httpClient.get<Property[]>(url);
+  // }
+
+  private getUrlOfProperties(isWaitingValidation: boolean): string {
     const categoryList = this.category ? this.category.map((category: string, index: number) => {
       return 'category[' + index + ']=' + category; // category[0]=MAISON&category[1]=VILLA...
     }).join('&') : null;
@@ -41,6 +75,10 @@ export class PropertyService {
 
     if (!this.router.url.includes('my-properties')) {
       url += '/all';
+    }
+
+    if (isWaitingValidation) {
+      url += '/not-visibles';
     }
 
     if (this.category || this.location || this.peoples  || this.options) {
@@ -58,15 +96,35 @@ export class PropertyService {
     if (this.options) {
       url += `&${optionsList}`;
     }
+    return url;
+  }
 
+  getPropertiesFromServer(): Observable<Property[]> {
+    const isWaitingValidation = false;
+    const url = this.getUrlOfProperties(isWaitingValidation);
     return this.httpClient.get<Property[]>(url);
   }
 
+  getWaitingValidationPropertiesFromServers(): Observable<Property[]> {
+    const isWaitingValidation = true;
+    const url = this.getUrlOfProperties(isWaitingValidation);
+    return this.httpClient.get<Property[]>(url);
+  }
+
+  countWaitingValidationPropertiesFromServers(): Observable<number> {
+    const url = this.urlServer + '/all/not-visibles/count';
+    return this.httpClient.get<number>(url);
+  }
+
   getPropertyFromServer(id: number): Observable<Property> {
-    if (this.router.url.split('/').includes('my-properties')) {
-      return this.httpClient.get<Property>(this.urlServer + '/' + id);
+    if (this.router.url.split('/').includes('not-visible')) {
+      return this.httpClient.get<Property>(this.urlServer + '/all/' + id + '/not-visible');
     } else {
-      return this.httpClient.get<Property>(this.urlServer + '/all/' + id);
+      if (this.router.url.split('/').includes('my-properties')) {
+        return this.httpClient.get<Property>(this.urlServer + '/' + id);
+      } else {
+        return this.httpClient.get<Property>(this.urlServer + '/all/' + id);
+      }
     }
   }
 
@@ -85,6 +143,13 @@ export class PropertyService {
   // getFavoriteByPropertyIdAndUser(propertyId: number): Observable<Favorite> {
   //   return this.httpClient.get<Favorite>(this.urlServer + '/' +  propertyId + '/favorite');
   // }
+
+  editPropertyVisible(
+    id: number,
+    isVisible: boolean,
+    ): Observable<Property> {
+    return this.httpClient.put<Property>(this.urlServer + '/' + id + '/visible', {isVisible});
+  }
 
   editProperty(
     id: number,

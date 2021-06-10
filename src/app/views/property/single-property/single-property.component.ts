@@ -14,6 +14,7 @@ import { Booking } from '../../../models/booking.model';
 import { MatDialog } from '@angular/material/dialog';
 import { GrowImgDialogComponent } from '../../../components/dialog/grow-img-dialog/grow-img-dialog.component';
 import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper/core';
+import { AuthService } from '../../../services/auth/auth.service';
 SwiperCore.use([Pagination, Navigation, Autoplay ]);
 
 @Component({
@@ -28,8 +29,10 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
   property: Property;
   propertySubscription: Subscription;
   loading: boolean;
-  ownOrNotProperties: boolean;
+  ownProperties: boolean;
   booking: any;
+  isAdmin: boolean;
+  isConnected: boolean;
 
   resaForm: FormGroup;
   peoples: Array<number>;
@@ -40,6 +43,7 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
 
   constructor(
     private propertyService: PropertyService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private location: Location,
     private router: Router,
@@ -51,9 +55,13 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loading = true;
     this.id = this.route.snapshot.params.id;
+    this.isConnected = this.authService.getIsAuth();
+    if (this.router.url.split('/').includes('my-properties') || !this.isConnected) {
+      this.ownProperties = true;
+    }
 
-    if (this.router.url.split('/').includes('my-properties')) {
-      this.ownOrNotProperties = true;
+    if (this.router.url.split('/').includes('not-visible')) {
+      this.isAdmin = true;
     }
 
     this.propertySubscription = this.propertyService.getPropertyFromServer(this.id).subscribe(
@@ -61,8 +69,6 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
         this.property = property;
         this.peoples = Array.from({length: property.peoples}, (_, i) => i + 1);
         this.loading = false;
-        // console.log(this.property.image);
-
       },
       (error) => {
         console.log('Erreur ! : ' + JSON.stringify(error.error.message));
@@ -80,8 +86,6 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
       endDate: new FormControl({value: this.endDate, disabled: true}, Validators.required),
     });
   }
-
-
 
   getSelectedDates(selectedDates): void {
     this.startDate = selectedDates.startDate;
@@ -130,6 +134,34 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
         img: src
       }
     });
+  }
+
+  onValidateProperty(): void {
+    const isVisible = true;
+    this.propertyService.editPropertyVisible(this.id, isVisible).subscribe(
+      () => {
+        this.snackbarService.successSnackbar('Hébergement validé avec succès.');
+        this.router.navigate(['admin', 'validation']);
+      },
+      (error) => {
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
+        console.log('Erreur ! : ' + JSON.stringify(error.error));
+      }
+    );
+  }
+
+  onRejectProperty(): void {
+    const isVisible = false;
+    this.propertyService.editPropertyVisible(this.id, isVisible).subscribe(
+      () => {
+        this.snackbarService.successSnackbar('Hébergement refusé avec succès.');
+        this.router.navigate(['admin', 'validation']);
+      },
+      (error) => {
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
+        console.log('Erreur ! : ' + JSON.stringify(error.error));
+      }
+    );
   }
 
 

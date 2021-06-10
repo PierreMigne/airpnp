@@ -40,6 +40,9 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { GrowImgDialogComponent } from './components/dialog/grow-img-dialog/grow-img-dialog.component';
 import { SwiperModule } from 'swiper/angular';
+import { AdminComponent } from './views/admin/admin/admin.component';
+import { PropertyWaitingValidationComponent } from './views/admin/property-waiting-validation/property-waiting-validation.component';
+import { GiveAdminAccessComponent } from './views/admin/give-admin-access/give-admin-access.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -67,6 +70,9 @@ registerLocaleData(localeFr);
     ForgotPasswordComponent,
     ResetPasswordComponent,
     GrowImgDialogComponent,
+    AdminComponent,
+    PropertyWaitingValidationComponent,
+    GiveAdminAccessComponent,
   ],
   imports: [
     BrowserModule,

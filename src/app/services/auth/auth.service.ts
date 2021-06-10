@@ -61,7 +61,7 @@ export class AuthService {
     }
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('accessToken');
     this.router.navigateByUrl('/home');
   }

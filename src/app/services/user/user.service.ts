@@ -28,4 +28,8 @@ export class UserService {
   resetPassword(accessToken: string, password: string): Observable<User> {
     return this.httpClient.put<User>(this.urlServer + '/profile/reset/password', {accessToken, password});
   }
+
+  isUserAdmin(): Observable<boolean> {
+    return this.httpClient.get<boolean>(this.urlServer + '/admin');
+  }
 }

@@ -38,14 +38,14 @@
     </div>
   </div>
   <ul class="propertyOptions">
-    <li *ngFor="let option of property.options">{{ option | uppercase }}</li>
+    <li *ngFor="let option of property.options">{{ option.options | uppercase }}</li>
   </ul>
   <div class="propertyDescpritionLocation">
     <p>{{property.description}}</p>
     <p>Lieu : {{property.location}}</p>
   </div>
   <hr>
-  <div *ngIf="!ownOrNotProperties && !loading" class="calendarAndResa">
+  <div *ngIf="!ownProperties && !loading && !isAdmin" class="calendarAndResa">
     <app-inline-range-calendar [propertyId]="property.id" (selectedDates)="getSelectedDates($event)"></app-inline-range-calendar>
     <form [formGroup]="resaForm" class="resaForm">
       <mat-form-field appearance="fill">
@@ -64,10 +64,16 @@
       </mat-form-field>
     </form>
   </div>
-  <div class="btnContainer" >
+  <div class="btnContainer" *ngIf="!isAdmin">
     <button mat-raised-button (click)="onBack()">Retour</button>
-    <button mat-raised-button color="primary" type="submit" [disabled]="resaForm.invalid" (click)="onSubmitResaForm()" *ngIf="!ownOrNotProperties">Réserver</button>
-    <a mat-raised-button color="primary" [routerLink]="['/my-properties/' + property.id + '/edit']" *ngIf="ownOrNotProperties">Modifier</a>
+    <button mat-raised-button color="primary" type="submit" [disabled]="resaForm.invalid" (click)="onSubmitResaForm()" *ngIf="!ownProperties && isConnected">Réserver</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="resaForm.invalid" (click)="onSubmitResaForm()" *ngIf="!isConnected">Réserver</button>
+    <a mat-raised-button color="primary" [routerLink]="['/my-properties/' + property.id + '/edit']" *ngIf="ownProperties && isConnected">Modifier</a>
+  </div>
+
+  <div class="btnContainer" *ngIf="isAdmin">
+    <a mat-raised-button color="warn" (click)="onRejectProperty()">Refuser</a>
+    <button mat-raised-button color="primary" (click)="onValidateProperty()">Valider</button>
   </div>
 
 

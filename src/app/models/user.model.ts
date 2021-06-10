@@ -6,6 +6,7 @@ export class User {
   private _email: string;
   private _password: string;
   private _image: string;
+  private _isAdmin: boolean;
   private _favorites: any
 
   constructor(
@@ -15,6 +16,7 @@ export class User {
     email: string,
     password: string,
     image: string,
+    isAdmin: boolean,
     favorites: any
   ) {
     this._firstname = firstname;
@@ -23,6 +25,7 @@ export class User {
     this._email = email;
     this._password = password;
     this._image = image;
+    this._isAdmin = isAdmin;
     this._favorites = favorites;
   }
 
@@ -80,6 +83,14 @@ export class User {
    */
   public get image(): string {
     return this._image;
+  }
+
+  /**
+   * Getter isAdmin
+   * @return {boolean}
+   */
+  public get isAdmin(): boolean {
+    return this._isAdmin;
   }
 
   /**
@@ -144,6 +155,14 @@ export class User {
    */
   public set image(value: string) {
     this._image = value;
+  }
+
+  /**
+   * Setter isAdmin
+   * @param {boolean} value
+   */
+  public set isAdmin(value: boolean) {
+    this._isAdmin = value;
   }
 
   /**

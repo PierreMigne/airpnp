@@ -15,6 +15,10 @@ import { UploadComponent } from './views/upload/upload.component';
 import { FavoritesComponent } from './views/favorites/favorites.component';
 import { BookingsComponent } from './views/bookings/bookings.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { AdminComponent } from './views/admin/admin/admin.component';
+import { AdminGuardService } from './services/guards/admin/admin-guard.service';
+import { GiveAdminAccessComponent } from './views/admin/give-admin-access/give-admin-access.component';
+import { PropertyWaitingValidationComponent } from './views/admin/property-waiting-validation/property-waiting-validation.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -24,6 +28,7 @@ const routes: Routes = [
   { path: 'reset/:accessToken', component: AuthComponent},
   { path: 'properties', component: AllPropertiesComponent},
   { path: 'properties/:id', component: SinglePropertyComponent},
+  { path: 'properties/:id/not-visible', canActivate: [AdminGuardService], component: SinglePropertyComponent},
   { path: 'my-properties', canActivate: [AuthGuardService], component: PropertiesComponent},
   { path: 'my-properties/add', canActivate: [AuthGuardService], component: NewPropertyComponent},
   { path: 'my-properties/:id', canActivate: [AuthGuardService], component: SinglePropertyComponent},
@@ -35,6 +40,9 @@ const routes: Routes = [
   { path: 'profile/edit', canActivate: [AuthGuardService], component: EditProfilComponent},
   { path: 'profile/edit/password', canActivate: [AuthGuardService], component: EditPasswordComponent},
   { path: 'profile/:id/upload', canActivate: [AuthGuardService], component: UploadComponent},
+  { path: 'admin', canActivate: [AdminGuardService], component: AdminComponent},
+  { path: 'admin/new', canActivate: [AdminGuardService], component: GiveAdminAccessComponent},
+  { path: 'admin/validation', canActivate: [AdminGuardService], component: PropertyWaitingValidationComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
     return this.authService.getIsAuth();
   }
 
-  onLogout() {
+  onLogout(): void {
     this.authService.logout();
   }
 
