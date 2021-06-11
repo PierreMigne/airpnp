@@ -29,7 +29,6 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
   property: Property;
   propertySubscription: Subscription;
   loading: boolean;
-  ownProperties: boolean;
   booking: any;
   isAdmin: boolean;
   isConnected: boolean;
@@ -56,9 +55,6 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.id = this.route.snapshot.params.id;
     this.isConnected = this.authService.getIsAuth();
-    if (this.router.url.split('/').includes('my-properties') || !this.isConnected) {
-      this.ownProperties = true;
-    }
 
     if (this.router.url.split('/').includes('not-visible')) {
       this.isAdmin = true;
@@ -137,8 +133,8 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
   }
 
   onValidateProperty(): void {
-    const isVisible = true;
-    this.propertyService.editPropertyVisible(this.id, isVisible).subscribe(
+    const status = 'VALIDE';
+    this.propertyService.editPropertyStatus(this.id, status).subscribe(
       () => {
         this.snackbarService.successSnackbar('Hébergement validé avec succès.');
         this.router.navigate(['admin', 'validation']);
@@ -151,8 +147,8 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
   }
 
   onRejectProperty(): void {
-    const isVisible = false;
-    this.propertyService.editPropertyVisible(this.id, isVisible).subscribe(
+    const status = 'INVALIDE';
+    this.propertyService.editPropertyStatus(this.id, status).subscribe(
       () => {
         this.snackbarService.successSnackbar('Hébergement refusé avec succès.');
         this.router.navigate(['admin', 'validation']);

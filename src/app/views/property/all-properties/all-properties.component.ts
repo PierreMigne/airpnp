@@ -23,7 +23,7 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
   location: string;
   category: any;
   peoples: number;
-  options: any;
+  searchedOptions: any;
 
   isAuth: boolean;
   pageSlice: Array<Property>;
@@ -46,7 +46,9 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
     this.location = this.propertyService.location;
     this.category = this.propertyService.category;
     this.peoples = this.propertyService.peoples;
-    this.options = this.propertyService.options;
+    this.searchedOptions = this.propertyService.options;
+
+
 
     this.propertiesSubscription = this.propertyService.getPropertiesFromServer().subscribe(
       (properties: Array<Property>) => {
@@ -110,6 +112,7 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
       },
       (error) => {
         console.log('Erreur ! : ' + JSON.stringify(error.error));
+        this.snackbarService.alertSnackbar('Une erreur est survenue.');
         this.loading = false;
       }
     );

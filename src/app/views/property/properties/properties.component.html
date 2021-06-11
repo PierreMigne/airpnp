@@ -16,8 +16,16 @@
         <p class="propertyPrice">{{property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</p>
       </mat-card-header>
       <div class="propertyCardImgContainer">
+        <div class="status"
+          [ngClass]="{
+            valide: property.status === 'VALIDE',
+            invalide: property.status === 'INVALIDE',
+            attente: property.status === 'ATTENTE'
+          }">
+          {{property.status}}
+        </div>
         <img *ngIf="property.images[0]" mat-card-image [src]="urlServer + property.id + '/' + property.images[0].file" [alt]="property.title">
-        <!-- <img *ngIf="!property.images[0]" mat-card-image [src]="" [alt]="property.title"> src = placholder ?-->
+        <img *ngIf="!property.images[0]" mat-card-image src="/assets/img/400x325.png" [alt]="property.title">
       </div>
       <mat-card-content>
         <div class="iconContainer">

@@ -112,7 +112,7 @@ export class PropertyService {
   }
 
   countWaitingValidationPropertiesFromServers(): Observable<number> {
-    const url = this.urlServer + '/all/not-visibles/count';
+    const url = this.urlServer + '/all/waiting/count';
     return this.httpClient.get<number>(url);
   }
 
@@ -144,11 +144,11 @@ export class PropertyService {
   //   return this.httpClient.get<Favorite>(this.urlServer + '/' +  propertyId + '/favorite');
   // }
 
-  editPropertyVisible(
+  editPropertyStatus(
     id: number,
-    isVisible: boolean,
+    status: string,
     ): Observable<Property> {
-    return this.httpClient.put<Property>(this.urlServer + '/' + id + '/visible', {isVisible});
+    return this.httpClient.put<Property>(this.urlServer + '/' + id + '/status', {status});
   }
 
   editProperty(

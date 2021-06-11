@@ -16,7 +16,7 @@
       </mat-card-header>
       <div class="propertyCardImgContainer">
         <img *ngIf="favorite.property.images[0]" mat-card-image [src]="urlServer + favorite.property.id + '/' + favorite.property.images[0].file" [alt]="favorite.property.title">
-        <!-- <img *ngIf="!property.images[0]" mat-card-image [src]="" [alt]="property.title"> src = placholder ?-->
+        <img *ngIf="!favorite.property.images[0]" mat-card-image src="/assets/img/400x325.png" [alt]="favorite.property.title">
       </div>
       <mat-card-content>
         <div class="iconContainer">

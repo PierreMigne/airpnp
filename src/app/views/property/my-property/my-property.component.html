@@ -46,35 +46,15 @@
     <p>Lieu : {{property.location}}</p>
   </div>
   <hr>
-  <div *ngIf="!loading && !isAdmin && isConnected" class="calendarAndResa">
-    <app-inline-range-calendar [propertyId]="property.id" (selectedDates)="getSelectedDates($event)"></app-inline-range-calendar>
-    <form [formGroup]="resaForm" class="resaForm">
-      <mat-form-field appearance="fill">
-        <mat-label>Date de début</mat-label>
-        <input matInput formControlName="startDate" name="startDate" [value]="startDate | date">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Date de fin</mat-label>
-        <input matInput formControlName="endDate" name="endDate" [value]="endDate | date">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Nombre de personnes</mat-label>
-        <mat-select formControlName="peoples" name="peoples">
-          <mat-option value={{people}} *ngFor="let people of peoples">{{people}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </form>
-  </div>
-  <div class="btnContainer" *ngIf="!isAdmin">
+  <div class="btnContainer">
     <button mat-raised-button (click)="onBack()">Retour</button>
-    <button mat-raised-button color="primary" type="submit" [disabled]="resaForm.invalid" (click)="onSubmitResaForm()" *ngIf="isConnected">Réserver</button>
-    <a mat-raised-button color="primary" [routerLink]="['/signin']" *ngIf="!isConnected">Se connecter</a>
+    <a mat-raised-button color="primary" [routerLink]="['/my-properties/' + property.id + '/edit']">Modifier</a>
   </div>
 
-  <div class="btnContainer" *ngIf="isAdmin">
+  <!-- <div class="btnContainer" *ngIf="isAdmin">
     <a mat-raised-button color="warn" (click)="onRejectProperty()">Refuser</a>
     <button mat-raised-button color="primary" (click)="onValidateProperty()">Valider</button>
-  </div>
+  </div> -->
 
 
 </section>

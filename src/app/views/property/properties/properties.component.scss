@@ -25,12 +25,30 @@
 }
 .propertyCardImgContainer {
   width: 100%;
+  position: relative;
 }
 .propertyCard img{
   margin-bottom: 0;
-  // max-height: 300px;
   height: 325px;
   object-fit: cover;
+}
+.status {
+  position: absolute;
+  right: 0;
+  width: 100px;
+  height: 20px;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+}
+.valide {
+  background-color: green;
+}
+.invalide {
+  background-color: red;
+}
+.attente {
+  background-color: goldenrod;
 }
 .iconContainer {
   display: flex;

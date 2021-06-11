@@ -55,7 +55,14 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
         this.loading = false;
         const index = this.categories.indexOf(this.property.category);
 
-        this.editPropertyForm.patchValue({
+        const propertyOptions = this.property.options as unknown as [];
+        let optionsString = '';
+        propertyOptions.forEach((option: any) => {
+          optionsString = optionsString + option.options + ', ';
+        });
+        const opt = optionsString.slice(0, -2);
+
+        this.editPropertyForm.setValue({
           title: this.property.title,
           category: this.categories[index],
           location: this.property.location,
@@ -63,7 +70,7 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
           peoples: this.property.peoples,
           beds: this.property.beds,
           description: this.property.description,
-          options: this.property.options,
+          options: opt,
           price: this.property.price,
         });
       },

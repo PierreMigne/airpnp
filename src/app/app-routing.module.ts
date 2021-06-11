@@ -19,6 +19,7 @@ import { AdminComponent } from './views/admin/admin/admin.component';
 import { AdminGuardService } from './services/guards/admin/admin-guard.service';
 import { GiveAdminAccessComponent } from './views/admin/give-admin-access/give-admin-access.component';
 import { PropertyWaitingValidationComponent } from './views/admin/property-waiting-validation/property-waiting-validation.component';
+import { MyPropertyComponent } from './views/property/my-property/my-property.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -31,7 +32,7 @@ const routes: Routes = [
   { path: 'properties/:id/not-visible', canActivate: [AdminGuardService], component: SinglePropertyComponent},
   { path: 'my-properties', canActivate: [AuthGuardService], component: PropertiesComponent},
   { path: 'my-properties/add', canActivate: [AuthGuardService], component: NewPropertyComponent},
-  { path: 'my-properties/:id', canActivate: [AuthGuardService], component: SinglePropertyComponent},
+  { path: 'my-properties/:id', canActivate: [AuthGuardService], component: MyPropertyComponent},
   { path: 'my-properties/:id/edit', canActivate: [AuthGuardService], component: EditPropertyComponent},
   { path: 'my-properties/:id/upload', canActivate: [AuthGuardService], component: UploadComponent},
   { path: 'favorites', canActivate: [AuthGuardService], component: FavoritesComponent},

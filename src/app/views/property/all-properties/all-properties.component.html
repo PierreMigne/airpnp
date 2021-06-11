@@ -19,10 +19,10 @@
       <mat-chip>{{peoples}}</mat-chip>
     </div>
 
-    <div *ngIf="options">
-      <span *ngIf="options.length > 1">Options: </span>
-      <span *ngIf="options.length <= 1">Option: </span>
-      <mat-chip *ngFor="let option of options">{{option}}</mat-chip>
+    <div *ngIf="searchedOptions">
+      <span *ngIf="searchedOptions.length > 1">Options: </span>
+      <span *ngIf="searchedOptions.length <= 1">Option: </span>
+      <mat-chip *ngFor="let searchedOption of searchedOptions">{{searchedOption}}</mat-chip>
     </div>
   </mat-chip-list>
 </div>
@@ -40,7 +40,8 @@
       <p class="propertyPrice">{{property.price | currency:"EUR": 'symbol' : '1.0-0'}} / nuit</p>
     </mat-card-header>
     <div class="propertyCardImgContainer">
-      <img mat-card-image [src]="urlServer + property.id + '/' + property.images[0].file" [alt]="property.title">
+      <img *ngIf="property.images[0]" mat-card-image [src]="urlServer + property.id + '/' + property.images[0].file" [alt]="property.title">
+      <img *ngIf="!property.images[0]" mat-card-image src="/assets/img/400x325.png" [alt]="property.title">
     </div>
     <mat-card-content>
       <div class="iconContainer">
@@ -59,7 +60,7 @@
         </div>
       </div>
       <ul class="propertyOptions">
-        <li *ngFor="let option of property.options">{{ option | uppercase }}</li>
+        <li *ngFor="let optionsr of property.options">{{ optionsr.options | uppercase }}</li>
       </ul>
     </mat-card-content>
     <mat-card-actions>
