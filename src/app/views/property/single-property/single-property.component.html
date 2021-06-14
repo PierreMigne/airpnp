@@ -71,9 +71,20 @@
     <a mat-raised-button color="primary" [routerLink]="['/signin']" *ngIf="!isConnected">Se connecter</a>
   </div>
 
-  <div class="btnContainer" *ngIf="isAdmin">
-    <a mat-raised-button color="warn" (click)="onRejectProperty()">Refuser</a>
+  <div class="btnContainer" *ngIf="isAdmin && !isReject">
+    <button mat-raised-button color="warn" (click)="onRejectProperty()">Refuser</button>
     <button mat-raised-button color="primary" (click)="onValidateProperty()">Valider</button>
+  </div>
+  <div *ngIf="isReject">
+    <form [formGroup]="rejectPropertyForm" class="rejectForm" (ngSubmit)="onSubmitRejectPropertyForm()">
+      <mat-form-field appearance="fill">
+        <mat-label>Motif(s) de refus</mat-label>
+        <mat-select formControlName="reason" name="reason" multiple>
+          <mat-option value={{reason}} *ngFor="let reason of reasons">{{reason}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="rejectPropertyForm.invalid" >Refuser</button>
+    </form>
   </div>
 
 

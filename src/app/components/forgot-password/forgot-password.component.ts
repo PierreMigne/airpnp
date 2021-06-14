@@ -16,6 +16,7 @@ export class ForgotPasswordComponent implements OnInit {
   errorMsg: string;
   email: string;
   forgotPasswordSubscription: Subscription;
+  loading: boolean;
 
   @Input() title: string;
   constructor(
@@ -39,16 +40,19 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   onSubmitForgotPasswordForm(): void {
+    this.loading = true;
     this.errorMsg = null;
     this.email = this.forgotPasswordForm.get('email').value;
     this.forgotPasswordSubscription = this.authService.forgotPassword(this.email).subscribe(
       () => {
         this.snackbarService.successSnackbar('Mail envoyé avec succès.');
         this.router.navigate(['profile']);
+        this.loading = false;
       },
       (error) => {
         this.snackbarService.alertSnackbar('Une erreur est survenue.');
         console.log('Erreur ! : ' + JSON.stringify(error.error.message));
+        this.loading = false;
       }
     );
   }

@@ -147,8 +147,9 @@ export class PropertyService {
   editPropertyStatus(
     id: number,
     status: string,
+    reasons?: string[]
     ): Observable<Property> {
-    return this.httpClient.put<Property>(this.urlServer + '/' + id + '/status', {status});
+    return this.httpClient.put<Property>(this.urlServer + '/' + id + '/status', {status, reasons});
   }
 
   editProperty(

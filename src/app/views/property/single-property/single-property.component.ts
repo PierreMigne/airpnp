@@ -32,7 +32,10 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
   booking: any;
   isAdmin: boolean;
   isConnected: boolean;
+  isReject: boolean;
 
+  rejectPropertyForm: FormGroup;
+  reasons: string[];
   resaForm: FormGroup;
   peoples: Array<number>;
 
@@ -55,6 +58,7 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.id = this.route.snapshot.params.id;
     this.isConnected = this.authService.getIsAuth();
+    this.isReject = false;
 
     if (this.router.url.split('/').includes('not-visible')) {
       this.isAdmin = true;
@@ -133,29 +137,45 @@ export class SinglePropertyComponent implements OnInit, OnDestroy {
   }
 
   onValidateProperty(): void {
+    this.loading = true;
     const status = 'VALIDE';
     this.propertyService.editPropertyStatus(this.id, status).subscribe(
       () => {
         this.snackbarService.successSnackbar('Hébergement validé avec succès.');
         this.router.navigate(['admin', 'validation']);
+        this.loading = false;
       },
       (error) => {
         this.snackbarService.alertSnackbar('Une erreur est survenue.');
         console.log('Erreur ! : ' + JSON.stringify(error.error));
+        this.loading = false;
       }
     );
   }
 
   onRejectProperty(): void {
+    this.isReject = true;
+    this.reasons = ['Image inappropriée', 'Titre incorrect', 'Description incorrecte', 'Options incorrectes', 'Lieu inconnu', 'Tarif incorrect', 'Capacité d\'hébergement incorrect', 'Erreur sur l\'annonce'];
+    this.rejectPropertyForm = this.formBuilder.group({
+      reason: ['', [Validators.required]]
+    });
+
+  }
+
+  onSubmitRejectPropertyForm(): void {
+    this.loading = true;
     const status = 'INVALIDE';
-    this.propertyService.editPropertyStatus(this.id, status).subscribe(
+    const reasons = this.rejectPropertyForm.get('reason').value;
+    this.propertyService.editPropertyStatus(this.id, status, reasons).subscribe(
       () => {
         this.snackbarService.successSnackbar('Hébergement refusé avec succès.');
         this.router.navigate(['admin', 'validation']);
+        this.loading = false;
       },
       (error) => {
         this.snackbarService.alertSnackbar('Une erreur est survenue.');
         console.log('Erreur ! : ' + JSON.stringify(error.error));
+        this.loading = false;
       }
     );
   }

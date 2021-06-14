@@ -94,6 +94,15 @@ app-inline-range-calendar {
   font-size: 25px;
 }
 
+.rejectForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 15px;
+  padding-bottom: 20px;
+}
+
 // .swiper-container {
 //   width: 100%;
 //   height: 100%;

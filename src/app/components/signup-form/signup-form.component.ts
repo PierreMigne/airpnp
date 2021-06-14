@@ -19,6 +19,7 @@ export class SignupFormComponent implements OnInit {
   lastname: string;
   birthDate: Date;
   hide = true;
+  loading: boolean;
 
   @Input() title: string;
   constructor(
@@ -51,14 +52,16 @@ export class SignupFormComponent implements OnInit {
     this.firstname = this.signUpForm.get('firstname').value;
     this.lastname = this.signUpForm.get('lastname').value;
     this.birthDate = this.signUpForm.get('birthDate').value;
-
+    this.loading = true;
     await this.authService
       .signUp(this.email, this.password, this.firstname, this.lastname, this.birthDate)
       .then((data) => {
         this.errorMsg = data;
+        this.loading = false;
       },
       (error) => {
         this.errorMsg = error;
+        this.loading = false;
       }
       )
       .catch((errMsg: string) => (this.errorMsg = errMsg))
