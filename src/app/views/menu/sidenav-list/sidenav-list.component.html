@@ -10,28 +10,45 @@
 
 <!-- Sidenav utilisateur connecté -->
 <mat-nav-list *ngIf="onGetIsAuth()">
-  <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
+  <div *ngIf="!item">
+    <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
+      <mat-icon>home</mat-icon>
+      <span class="nav-caption">Accueil</span>
+    </a>
+    <a mat-list-item routerLink="/profile" (click)="onSidenavClose()">
+      <mat-icon>account_circle</mat-icon>
+      <span class="nav-caption">Mon compte</span>
+    </a>
+    <a mat-list-item routerLink="/my-properties" (click)="onSidenavClose()">
+      <mat-icon>house</mat-icon>
+      <span class="nav-caption">Mes hébergements</span>
+    </a>
+    <a mat-list-item routerLink="/favorites" (click)="onSidenavClose()">
+      <mat-icon>favorite_border</mat-icon>
+      <span class="nav-caption">Mes favoris</span>
+    </a>
+    <a mat-list-item routerLink="/bookings" (click)="onSidenavClose()">
+      <mat-icon>book_online</mat-icon>
+      <span class="nav-caption">Mes réservations</span>
+    </a>
+    <a mat-list-item routerLink="/home" (click)="onSidenavClose()" (click)="onLogout()">
+      <mat-icon>logout</mat-icon>
+      <span class="nav-caption">Déconnexion</span>
+    </a>
+  </div>
+  <!-- Sidenav utilisateur Admin -->
+  <div *ngIf="item">
+    <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
     <mat-icon>home</mat-icon>
     <span class="nav-caption">Accueil</span>
   </a>
-  <a mat-list-item routerLink="/profile" (click)="onSidenavClose()">
-    <mat-icon>account_circle</mat-icon>
-    <span class="nav-caption">Mon compte</span>
-  </a>
-  <a mat-list-item routerLink="/my-properties" (click)="onSidenavClose()">
-    <mat-icon>house</mat-icon>
-    <span class="nav-caption">Mes hébergements</span>
-  </a>
-  <a mat-list-item routerLink="/favorites" (click)="onSidenavClose()">
-    <mat-icon>favorite_border</mat-icon>
-    <span class="nav-caption">Mes favoris</span>
-  </a>
-  <a mat-list-item routerLink="/bookings" (click)="onSidenavClose()">
-    <mat-icon>book_online</mat-icon>
-    <span class="nav-caption">Mes réservations</span>
+  <a mat-list-item routerLink="/admin" (click)="onSidenavClose()">
+    <mat-icon>admin_panel_settings</mat-icon>
+    <span class="nav-caption">Admin</span>
   </a>
   <a mat-list-item routerLink="/home" (click)="onSidenavClose()" (click)="onLogout()">
     <mat-icon>logout</mat-icon>
     <span class="nav-caption">Déconnexion</span>
   </a>
+  </div>
 </mat-nav-list>

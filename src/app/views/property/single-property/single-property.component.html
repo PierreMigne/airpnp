@@ -45,6 +45,10 @@
     <p>{{property.description}}</p>
     <p>Lieu : {{property.location}}</p>
   </div>
+  <div class="ownerRef">
+    <img *ngIf="property.user.image" [src]="urlServerProfile + property.user.id + '/' + property.user.image.file" alt="">
+    <p>Hébergement proposé par {{property.user.firstname}} {{property.user.lastname}}</p>
+  </div>
   <hr>
   <div *ngIf="!loading && !isAdmin && isConnected" class="calendarAndResa">
     <app-inline-range-calendar [propertyId]="property.id" (selectedDates)="getSelectedDates($event)"></app-inline-range-calendar>

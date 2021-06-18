@@ -3,10 +3,11 @@
   <hr>
   <div *ngIf="properties && !properties.length">
     <p>Il n'y a pas d'hébergement en attente de validation.</p>
+    <a mat-button class="returnBtn" [routerLink]="['/admin']">Retour</a>
   </div>
 </div>
 <mat-spinner *ngIf="loading"></mat-spinner>
-<div *ngIf="!loading && properties.length" class="bookingsContainer">
+<div *ngIf="!loading && properties.length" class="propertyContainer">
   <div class="mat-elevation-z8 table-responsive">
     <table mat-table [dataSource]="dataSource">
 
@@ -46,4 +47,5 @@
       [pageSizeOptions]="[2, 5, 10, 25]">
     </mat-paginator>
   </div>
+  <a mat-button class="returnBtn" [routerLink]="['/admin']">Retour</a>
 </div>

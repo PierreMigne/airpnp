@@ -6,7 +6,7 @@ export class User {
   private _email: string;
   private _password: string;
   private _image: string;
-  private _isAdmin: boolean;
+  private _role: string;
   private _favorites: any
 
   constructor(
@@ -16,7 +16,7 @@ export class User {
     email: string,
     password: string,
     image: string,
-    isAdmin: boolean,
+    role: string,
     favorites: any
   ) {
     this._firstname = firstname;
@@ -25,7 +25,7 @@ export class User {
     this._email = email;
     this._password = password;
     this._image = image;
-    this._isAdmin = isAdmin;
+    this._role = role;
     this._favorites = favorites;
   }
 
@@ -86,11 +86,11 @@ export class User {
   }
 
   /**
-   * Getter isAdmin
-   * @return {boolean}
+   * Getter role
+   * @return {string}
    */
-  public get isAdmin(): boolean {
-    return this._isAdmin;
+  public get role(): string {
+    return this._role;
   }
 
   /**
@@ -158,11 +158,11 @@ export class User {
   }
 
   /**
-   * Setter isAdmin
-   * @param {boolean} value
+   * Setter role
+   * @param {string} value
    */
-  public set isAdmin(value: boolean) {
-    this._isAdmin = value;
+  public set role(value: string) {
+    this._role = value;
   }
 
   /**

@@ -12,9 +12,6 @@
       <li>
         <a routerLink="/properties">Hébergements</a>
       </li>
-      <li>
-        <a>{{onGetIsAuth()}}</a>
-      </li>
       <li *ngIf="!onGetIsAuth()">
         <a routerLink="/signin">Connexion</a>
       </li>
@@ -22,28 +19,42 @@
         <a routerLink="/signup">Inscription</a>
       </li>
       <li *ngIf="onGetIsAuth()">
-        <button mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
+        <button mat-button [matMenuTriggerFor]="menu" (click)='isUserAdmin()'>
+          <mat-icon>account_circle</mat-icon>
+        </button>
         <mat-menu #menu="matMenu" class="mat-menu">
-          <a routerLink="/profile" mat-menu-item>
-            <mat-icon>account_circle</mat-icon>
-            Mon compte
-          </a>
-          <a routerLink="/my-properties" mat-menu-item>
-            <mat-icon>house</mat-icon>
-            Mes hébergements
-          </a>
-          <a routerLink="/favorites" mat-menu-item>
-            <mat-icon>favorite_border</mat-icon>
-            Mes favoris
-          </a>
-          <a routerLink="/bookings" mat-menu-item>
-            <mat-icon>book_online</mat-icon>
-            Mes réservations
-          </a>
-          <a routerLink="/home" mat-menu-item (click)="onLogout()">
-            <mat-icon>logout</mat-icon>
-            Déconnexion
-          </a>
+          <div *ngIf="!isAdmin">
+            <a routerLink="/profile" mat-menu-item>
+              <mat-icon>account_circle</mat-icon>
+              Mon compte
+            </a>
+            <a routerLink="/my-properties" mat-menu-item>
+              <mat-icon>house</mat-icon>
+              Mes hébergements
+            </a>
+            <a routerLink="/favorites" mat-menu-item>
+              <mat-icon>favorite_border</mat-icon>
+              Mes favoris
+            </a>
+            <a routerLink="/bookings" mat-menu-item>
+              <mat-icon>book_online</mat-icon>
+              Mes réservations
+            </a>
+            <a routerLink="/home" mat-menu-item (click)="onLogout()">
+              <mat-icon>logout</mat-icon>
+              Déconnexion
+            </a>
+          </div>
+          <div *ngIf="isAdmin">
+            <a routerLink="/admin" mat-menu-item>
+              <mat-icon>admin_panel_settings</mat-icon>
+              Admin
+            </a>
+            <a routerLink="/home" mat-menu-item (click)="onLogout()">
+              <mat-icon>logout</mat-icon>
+              Déconnexion
+            </a>
+          </div>
         </mat-menu>
       </li>
     </ul>

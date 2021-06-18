@@ -18,6 +18,14 @@ export class SnackbarService {
     });
   }
 
+  successSnackbarValidation(msg: string): void {
+    this.matSnackBar.open(msg, 'X' , {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['successSnackbar'],
+    });
+  }
+
   alertSnackbar(msg: string): void {
     this.matSnackBar.open(msg, 'X' , {
       horizontalPosition: 'center',

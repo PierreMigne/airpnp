@@ -25,6 +25,7 @@ SwiperCore.use([Pagination, Navigation, Autoplay ]);
 export class SinglePropertyComponent implements OnInit, OnDestroy {
 
   urlServer = environment.urlServer + 'properties/uploads/';
+  urlServerProfile = environment.urlServer + 'properties/uploads/profile/';
   id: number;
   property: Property;
   propertySubscription: Subscription;

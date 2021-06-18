@@ -20,6 +20,7 @@ import { AdminGuardService } from './services/guards/admin/admin-guard.service';
 import { GiveAdminAccessComponent } from './views/admin/give-admin-access/give-admin-access.component';
 import { PropertyWaitingValidationComponent } from './views/admin/property-waiting-validation/property-waiting-validation.component';
 import { MyPropertyComponent } from './views/property/my-property/my-property.component';
+import { SuperAdminGuardService } from './services/guards/superAdmin/superAdmin-guard.service';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -42,7 +43,7 @@ const routes: Routes = [
   { path: 'profile/edit/password', canActivate: [AuthGuardService], component: EditPasswordComponent},
   { path: 'profile/:id/upload', canActivate: [AuthGuardService], component: UploadComponent},
   { path: 'admin', canActivate: [AdminGuardService], component: AdminComponent},
-  { path: 'admin/new', canActivate: [AdminGuardService], component: GiveAdminAccessComponent},
+  { path: 'admin/new', canActivate: [SuperAdminGuardService], component: GiveAdminAccessComponent},
   { path: 'admin/validation', canActivate: [AdminGuardService], component: PropertyWaitingValidationComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

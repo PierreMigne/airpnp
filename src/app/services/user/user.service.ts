@@ -17,8 +17,16 @@ export class UserService {
     return this.httpClient.get<User>(this.urlServer + '/profile');
   }
 
+  getAllUsersFromServer(): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.urlServer + '/all');
+  }
+
   editUser(firstname: string, lastname: string, birthDate: Date): Observable<User> {
     return this.httpClient.put<User>(this.urlServer + '/profile/edit', {firstname, lastname, birthDate});
+  }
+
+  editUserRole(userId: number, role: string): Observable<User> {
+    return this.httpClient.put<User>(this.urlServer + '/all/' + userId + '/role', {role});
   }
 
   editPassword(oldPassword: string, password: string): Observable<User> {
@@ -32,4 +40,13 @@ export class UserService {
   isUserAdmin(): Observable<boolean> {
     return this.httpClient.get<boolean>(this.urlServer + '/admin');
   }
+
+  isUserSuperAdmin(): Observable<boolean> {
+    return this.httpClient.get<boolean>(this.urlServer + '/superAdmin');
+  }
+
+  countAdminsFromServers(): Observable<number> {
+    return this.httpClient.get<number>(this.urlServer + '/admin/count');
+  }
+
 }

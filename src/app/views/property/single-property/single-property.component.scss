@@ -64,6 +64,27 @@ img {
 .propertyDescpritionLocation {
   text-align: center;
 }
+.ownerRef {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  p {
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+  img {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 10px;
+  }
+}
+
 .calendarAndResa {
   display: flex;
   justify-content: space-evenly;

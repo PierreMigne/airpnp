@@ -6,7 +6,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 })
 export class PaginationPersonnalise extends MatPaginatorIntl {
 
-  itemsPerPageLabel = 'Hébergements par page';
+  itemsPerPageLabel = 'Items par page';
   nextPageLabel = 'Page suivante';
   previousPageLabel = 'Page précédente';
   firstPageLabel = 'Première page';

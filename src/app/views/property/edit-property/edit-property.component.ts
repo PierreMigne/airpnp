@@ -103,7 +103,7 @@ export class EditPropertyComponent implements OnInit, OnDestroy {
       .editProperty(this.id, (this.editPropertyForm.value as Property)).subscribe(
       (property: Property) => {
         this.editProperty = property;
-        this.snackbarService.successSnackbar('Hébergement modifié avec succès.');
+        this.snackbarService.successSnackbarValidation('Votre hébergement sera de nouveau disponible lorsqu\'un Administrateur aura validé votre annonce.');
         this.router.navigate(['my-properties']);
       },
       (error) => {

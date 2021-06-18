@@ -65,7 +65,7 @@ export class NewPropertyComponent implements OnInit, OnDestroy {
       .createProperty((this.createPropertyForm.value as Property)).subscribe(
       (property: Property) => {
         this.createProperty = property;
-        this.snackbarService.successSnackbar('Hébergement créé avec succès.');
+        this.snackbarService.successSnackbarValidation('Votre hébergement sera disponible lorsqu\'un Administrateur aura validé votre annonce.');
         this.router.navigate(['my-properties', property.id, 'upload']);
       },
       (error) => {

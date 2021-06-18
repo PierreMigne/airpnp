@@ -1,0 +1,17 @@
+.adminsContainer {
+  max-width: 900px;
+  margin: auto;
+}
+
+table {
+  width: 100%;
+}
+.table-responsive {
+  .mat-cell:not(:first-child),
+  .mat-header-cell:not(:first-child) {
+      padding: 0px 5px;
+  }
+}
+.returnBtn {
+  margin-top: 15px;
+}

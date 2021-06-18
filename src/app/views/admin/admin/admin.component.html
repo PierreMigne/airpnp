@@ -4,34 +4,30 @@
 </section>
 <div class="cardsContainer">
   <mat-card class="card">
-    <mat-card-header>
-      <mat-card-title>Hébergements en attente</mat-card-title>
-    </mat-card-header>
-    <img mat-card-image src="/assets/img/propertyBuying.jpg" alt="Photo of a property">
-    <mat-card-content>
-      <h2 *ngIf="nbProperty">
-        {{nbProperty}} en attente
-      </h2>
-      <h2 *ngIf="!nbProperty">
-        0 en attente
-      </h2>
-    </mat-card-content>
-    <mat-card-actions *ngIf="nbProperty">
-      <a mat-button [routerLink]="['/admin/validation']">Voir</a>
-    </mat-card-actions>
+    <a mat-button [routerLink]="['/admin/validation']">
+      <mat-card-header>
+        <mat-card-title>Hébergements en attente</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="/assets/img/propertyBuying.jpg" alt="Photo of a property">
+      <mat-card-content>
+        <h2 *ngIf="nbProperty">
+          {{nbProperty}} en attente
+        </h2>
+        <h2 *ngIf="!nbProperty">
+          0 en attente
+        </h2>
+      </mat-card-content>
+    </a>
   </mat-card>
-  <mat-card class="card">
-    <mat-card-header>
-      <mat-card-title>Autoriser nouvel Admin</mat-card-title>
-    </mat-card-header>
-    <img mat-card-image src="/assets/img/admin.jpg" alt="Photo of an admin">
-    <mat-card-content>
-      <h2>
-        12
-      </h2>
-    </mat-card-content>
-    <mat-card-actions>
-      <a mat-button [routerLink]="['/admin/new']">Voir</a>
-    </mat-card-actions>
+  <mat-card class="card" *ngIf="isUserSuperAdmin">
+    <a mat-button [routerLink]="['/admin/new']">
+      <mat-card-header>
+        <mat-card-title>Ajouter un nouvel Admin</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="/assets/img/admin.jpg" alt="Photo of an admin">
+      <mat-card-content>
+        <h2>Nombre d'Admin : {{nbAdmin}}</h2>
+      </mat-card-content>
+    </a>
   </mat-card>
 </div>
