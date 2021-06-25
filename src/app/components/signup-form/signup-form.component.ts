@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { ConfirmedValidator } from './confirmed.validator';
 
@@ -12,7 +11,7 @@ import { ConfirmedValidator } from './confirmed.validator';
 export class SignupFormComponent implements OnInit {
 
   signUpForm: FormGroup;
-  errorMsg: string;
+  msg: string;
   email: string;
   password: string;
   firstname: string;
@@ -25,14 +24,13 @@ export class SignupFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.initForm();
   }
 
-  initForm() {
+  initForm(): void {
     this.signUpForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)]],
@@ -45,8 +43,8 @@ export class SignupFormComponent implements OnInit {
     });
   }
 
-  async onSubmitSignUpForm() {
-    this.errorMsg = null;
+  async onSubmitSignUpForm(): Promise<void> {
+    this.msg = null;
     this.email = this.signUpForm.get('email').value;
     this.password = this.signUpForm.get('password').value;
     this.firstname = this.signUpForm.get('firstname').value;
@@ -56,15 +54,15 @@ export class SignupFormComponent implements OnInit {
     await this.authService
       .signUp(this.email, this.password, this.firstname, this.lastname, this.birthDate)
       .then((data) => {
-        this.errorMsg = data;
+        this.msg = data;
         this.loading = false;
       },
       (error) => {
-        this.errorMsg = error;
+        this.msg = error;
         this.loading = false;
       }
       )
-      .catch((errMsg: string) => (this.errorMsg = errMsg))
+      .catch((errMsg: string) => (this.msg = errMsg))
     ;
   }
 

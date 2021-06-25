@@ -35,7 +35,7 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  uploadFile(file: any) {
+  uploadFile(file: any): void {
     const formData = new FormData();
     formData.append('file', file.data);
     file.inProgress = true;
@@ -64,13 +64,29 @@ export class UploadComponent implements OnInit {
   private uploadFiles(): void {
     this.fileUpload.nativeElement.value = '';
     this.files.forEach(file => {
-      this.uploadFile(file);
+      const name = file.data.name;
+      const ext = (name.substring(name.lastIndexOf('.') + 1)).toLowerCase();
+
+      // Verify if the file is an img and max 5mo.
+      if (ext === 'png' || ext === 'jpeg' || ext === 'jpg') {
+        if (file.data.size > 5000000) {
+          this.snackbarService.alertSnackbar('Merci de choisir un image faisant au maximum 5mo !');
+          throw new Error ('Le poids de l\'image est trop lourd !');
+        } else {
+          this.uploadFile(file);
+        }
+      } else {
+        this.snackbarService.alertSnackbar('Merci de choisir un format .png ou .jpg ou .jpeg !');
+        throw new Error ('Le format n\'est pas bon !');
+      }
+
     });
   }
 
   onUploadFiles(): void {
     this.files = [];
     const fileUpload = this.fileUpload.nativeElement;
+
     fileUpload.onchange = () => {
       for (const file of fileUpload.files) {
         this.files.push({ data: file, inProgress: false, progress: 0});

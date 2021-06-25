@@ -36,7 +36,14 @@ export class InlineRangeCalendarComponent implements OnInit, OnDestroy {
         this.loading = false;
         this.reservation = [{startDate : null, endDate: null }];
         this.bookings.forEach(booking => {
-          this.reservation.push({startDate : moment(booking.startDate), endDate: moment(booking.endDate)});
+
+          // old reservation not needed
+          if (moment(booking.startDate).isBefore(moment()) && moment(booking.endDate).isBefore(moment())) {
+            return;
+          } else {
+            this.reservation.push({startDate : moment(booking.startDate), endDate: moment(booking.endDate)});
+          }
+
         });
       },
       (error) => {
@@ -60,14 +67,14 @@ export class InlineRangeCalendarComponent implements OnInit, OnDestroy {
   }
 
   isInvalidDate = (m: moment.Moment) => {
-    let isValid = false;
+    let isNotValid = false;
     this.reservation.forEach(resa => {
-      // Si la date tombe sur une des reservation alors elle est invalidée
+      // if the date is between start date and an end date of a reservation, she's not valid.
       if (m.isBetween(resa.startDate, resa.endDate, 'D', '[)')) {
-        isValid = true;
+        isNotValid = true;
       }
     });
-    return isValid;
+    return isNotValid;
   }
 
   ngOnDestroy(): void {

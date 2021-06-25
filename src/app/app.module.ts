@@ -100,8 +100,6 @@ registerLocaleData(localeFr);
   providers: [
     {provide: LOCALE_ID, useValue: 'fr-FR'},
     {provide: MatPaginatorIntl, useClass: PaginationPersonnalise},
-    // {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
-    // { provide: DateAdapter, useClass: CustomDateAdapter },
     UserService,
     PropertyService,
     {provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptorService, multi: true}

@@ -1,6 +1,6 @@
 <mat-spinner *ngIf="loading"></mat-spinner>
 <form [formGroup]="signUpForm" (ngSubmit)="onSubmitSignUpForm()" *ngIf="!loading">
-  <mat-error *ngIf="errorMsg">{{errorMsg}}</mat-error>
+  <mat-error *ngIf="msg">{{msg}}</mat-error>
   <div class="authForm">
     <mat-form-field appearance="fill">
       <mat-label>Entrez votre prénom</mat-label>

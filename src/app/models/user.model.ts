@@ -1,5 +1,9 @@
+  // tslint:disable: variable-name
+  // tslint:disable: no-redundant-jsdoc
+  // tslint:disable: adjacent-overload-signatures
+
 export class User {
-  private _id: number
+  private _id: number;
   private _firstname: string;
   private _lastname: string;
   private _birthDate: string;
@@ -7,7 +11,7 @@ export class User {
   private _password: string;
   private _image: string;
   private _role: string;
-  private _favorites: any
+  private _favorites: any;
 
   constructor(
     firstname: string,

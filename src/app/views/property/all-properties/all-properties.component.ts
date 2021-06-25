@@ -42,13 +42,10 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loading = true;
     this.isAuth = this.authService.getIsAuth();
-
     this.location = this.propertyService.location;
     this.category = this.propertyService.category;
     this.peoples = this.propertyService.peoples;
     this.searchedOptions = this.propertyService.options;
-
-
 
     this.propertiesSubscription = this.propertyService.getPropertiesFromServer().subscribe(
       (properties: Array<Property>) => {
@@ -59,9 +56,6 @@ export class AllPropertiesComponent implements OnInit, OnDestroy {
           this.userService.getUserFromServer().subscribe(
             (user: User) => {
               this.propertyIdInFavorites = user.favorites.map(fav => fav.propertyId);
-              // user.favorites.forEach(propertyOfUser => {
-              //   this.propertyIdInFavorites.push(propertyOfUser.propertyId);
-              // });
               this.properties.forEach(property => {
                 if (this.propertyIdInFavorites.includes(property.id)) {
                   property.isLiked = true;

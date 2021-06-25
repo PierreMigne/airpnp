@@ -17,7 +17,7 @@ export class AuthComponent implements OnInit {
     this.getPath();
   }
 
-  getPath() {
+  getPath(): any {
     const path = this.location.prepareExternalUrl(this.location.path()).slice(1);
     if (path === 'signup') {
       this.title = 'INSCRIPTION';
