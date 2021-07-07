@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -7,6 +7,7 @@ import { User } from '../../../models/user.model';
 import { UserService } from '../../../services/user/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { findIndex } from 'rxjs/operators';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-give-admin-access',
@@ -23,39 +24,28 @@ export class GiveAdminAccessComponent implements OnInit, OnDestroy {
   editedUser: User;
   editUserRoleSubscription: Subscription;
 
-  editUserRoleForm: FormGroup;
-
   pageSlice: Array<User>;
   loading: boolean;
   // urlServer = environment.urlServer + 'properties/uploads/';
-  displayedColumns: string[] = ['id', 'email', 'roles', 'rolesDefine'];
+  displayedColumns: string[] = ['id', 'email', 'role'];
   dataSource: MatTableDataSource<User>;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private userService: UserService, private snackbarService: SnackbarService, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.roles = ['USER', 'ADMIN', 'SUPERADMIN'];
-    this.initForm();
+    this.roles = ['USER', 'ADMIN'];
     this.initSubscription();
   }
 
-  initForm(): void {
-    this.editUserRoleForm = this.formBuilder.group({
-      role: ['', [Validators.required]],
-    });
-  }
   initSubscription(): void {
     this.loading = true;
-    this.usersSubscription = this.userService.getAllUsersFromServer().subscribe(
+    this.usersSubscription = this.userService.getAllUsersAndAdminsFromServer().subscribe(
       (users: Array<User>) => {
         this.users = users;
         // const index = this.roles.indexOf(this.users.role);
         this.pageSlice = this.users.slice(0, 5);
         this.dataSource = new MatTableDataSource<User>(this.pageSlice);
-
-        this.editUserRoleForm.setValue({
-          role: this.roles[0],
-        });
 
         this.loading = false;
       },
@@ -66,8 +56,14 @@ export class GiveAdminAccessComponent implements OnInit, OnDestroy {
     );
   }
 
-  onSubmitEditUserRoleForm(id: number): void {
-    this.editUserRoleSubscription = this.userService.editUserRole(id, this.editUserRoleForm.value.role).subscribe(
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  onSubmitEditUserRoleForm(id: number, role: string): void {
+    if (!role) { return; }
+    this.editUserRoleSubscription = this.userService.editUserRole(id, role).subscribe(
       (user: User) => {
         this.editedUser = user;
         this.snackbarService.successSnackbar('Rôle modifié avec succès.');
@@ -80,7 +76,7 @@ export class GiveAdminAccessComponent implements OnInit, OnDestroy {
     );
   }
 
-  OnPageChange(event: PageEvent): void {
+  onPageChange(event: PageEvent): void {
     const startIndex = event.pageIndex * event.pageSize;
     let endIndex = startIndex + event.pageSize;
     if (endIndex > this.users.length) {
@@ -88,6 +84,10 @@ export class GiveAdminAccessComponent implements OnInit, OnDestroy {
     }
     this.pageSlice = this.users.slice(startIndex, endIndex);
     this.dataSource = new MatTableDataSource<User>(this.pageSlice);
+  }
+
+  onSortingPage(): void {
+    this.dataSource.sort = this.sort;
   }
 
   ngOnDestroy(): void {

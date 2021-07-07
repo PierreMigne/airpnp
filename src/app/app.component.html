@@ -1,11 +1,11 @@
 <mat-sidenav-container>
   <!-- Sidenav Content -->
   <mat-sidenav #sidenav role="navigation">
-    <app-sidenav-list (sidenavClose)="sidenav.close()" [item]="isAdmin" ></app-sidenav-list>
+    <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <!-- Navbar Content -->
-    <app-header (sidenavToggle)="sidenav.toggle() && isUserAdmin()"></app-header>
+    <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
     <main [ngClass]="getPath() ? 'authBackground' : ''">
       <!-- Content -->
       <router-outlet ></router-outlet>

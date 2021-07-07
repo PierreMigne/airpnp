@@ -44,6 +44,7 @@ import { AdminComponent } from './views/admin/admin/admin.component';
 import { PropertyWaitingValidationComponent } from './views/admin/property-waiting-validation/property-waiting-validation.component';
 import { GiveAdminAccessComponent } from './views/admin/give-admin-access/give-admin-access.component';
 import { MyPropertyComponent } from './views/property/my-property/my-property.component';
+import { AuthService } from './services/auth/auth.service';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -101,6 +102,7 @@ registerLocaleData(localeFr);
     {provide: LOCALE_ID, useValue: 'fr-FR'},
     {provide: MatPaginatorIntl, useClass: PaginationPersonnalise},
     UserService,
+    AuthService,
     PropertyService,
     {provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptorService, multi: true}
   ],

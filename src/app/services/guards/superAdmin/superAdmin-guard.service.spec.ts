@@ -10,7 +10,4 @@ describe('AdminService', () => {
     service = TestBed.inject(SuperAdminGuardService);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
 });

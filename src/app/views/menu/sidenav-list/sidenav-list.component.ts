@@ -1,7 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user/user.service';
-import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sidenav-list',
@@ -10,20 +9,15 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class SidenavListComponent implements OnInit {
 
-  @Input() item: boolean ;
   @Output() sidenavClose = new EventEmitter();
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, public userService: UserService) { }
 
   ngOnInit(): void {
   }
 
   public onSidenavClose = () => {
     this.sidenavClose.emit();
-  }
-
-  onGetIsAuth(): boolean {
-    return this.authService.getIsAuth();
   }
 
   onLogout(): void {

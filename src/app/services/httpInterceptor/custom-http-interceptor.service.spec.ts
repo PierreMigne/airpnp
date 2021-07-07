@@ -10,7 +10,4 @@ describe('CustomHttpInterceptorService', () => {
     service = TestBed.inject(CustomHttpInterceptorService);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
 });

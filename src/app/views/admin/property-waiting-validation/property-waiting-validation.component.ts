@@ -4,7 +4,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Property } from '../../../models/property.model';
 import { PropertyService } from '../../../services/property/property.service';
-import { SnackbarService } from '../../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-property-waiting-validation',
@@ -19,10 +18,10 @@ export class PropertyWaitingValidationComponent implements OnInit, OnDestroy {
   pageSlice: Array<Property>;
   loading: boolean;
   // urlServer = environment.urlServer + 'properties/uploads/';
-  displayedColumns: string[] = ['id', 'cat', 'isVisible', 'propertyId'];
+  displayedColumns: string[] = ['id', 'cat', 'user', 'propertyId'];
   dataSource: MatTableDataSource<Property>;
 
-  constructor(private propertyService: PropertyService, private snackbarService: SnackbarService) {}
+  constructor(private propertyService: PropertyService) {}
 
   ngOnInit(): void {
     this.loading = true;

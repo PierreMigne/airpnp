@@ -1,5 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserService } from '../../../services/user/user.service';
 
@@ -8,14 +7,11 @@ import { UserService } from '../../../services/user/user.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-
-  isAdmin = false;
-  isAdminSubscription: Subscription;
+export class HeaderComponent implements OnInit {
 
   @Output() public sidenavToggle = new EventEmitter();
 
-  constructor(private authService: AuthService, private userService: UserService) { }
+  constructor(private authService: AuthService, public userService: UserService) { }
 
   ngOnInit(): void {
   }
@@ -24,23 +20,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.sidenavToggle.emit();
   }
 
-  onGetIsAuth(): boolean {
-    return this.authService.getIsAuth();
-  }
-
-  isUserAdmin(): void {
-    this.userService.isUserAdmin().subscribe(
-     (isAdmin: boolean) => {
-      this.isAdmin = isAdmin;
-    });
-  }
-
   onLogout(): void {
     this.authService.logout();
   }
 
-  ngOnDestroy(): void {
-    this.isAdminSubscription.unsubscribe();
-  }
 
 }

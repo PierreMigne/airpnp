@@ -9,21 +9,18 @@
   </div>
   <div class="flexNav">
     <ul class="navigation-items">
-      <li>
-        <a routerLink="/properties">Hébergements</a>
-      </li>
-      <li *ngIf="!onGetIsAuth()">
+      <li *ngIf="!userService?.user?.role">
         <a routerLink="/signin">Connexion</a>
       </li>
-      <li *ngIf="!onGetIsAuth()">
+      <li *ngIf="!userService?.user?.role">
         <a routerLink="/signup">Inscription</a>
       </li>
-      <li *ngIf="onGetIsAuth()">
-        <button mat-button [matMenuTriggerFor]="menu" (click)='isUserAdmin()'>
+      <li>
+        <button mat-button [matMenuTriggerFor]="menu" *ngIf="userService?.user">
           <mat-icon>account_circle</mat-icon>
         </button>
         <mat-menu #menu="matMenu" class="mat-menu">
-          <div *ngIf="!isAdmin">
+          <div *ngIf="userService?.user?.role === 'USER'">
             <a routerLink="/profile" mat-menu-item>
               <mat-icon>account_circle</mat-icon>
               Mon compte
@@ -45,7 +42,7 @@
               Déconnexion
             </a>
           </div>
-          <div *ngIf="isAdmin">
+          <div *ngIf="userService?.user?.role === 'ADMIN' || userService?.user?.role === 'SUPERADMIN'">
             <a routerLink="/admin" mat-menu-item>
               <mat-icon>admin_panel_settings</mat-icon>
               Admin

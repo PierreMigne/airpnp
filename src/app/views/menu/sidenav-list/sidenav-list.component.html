@@ -1,5 +1,5 @@
 <!-- Sidenav utilisateur non connecté -->
-<mat-nav-list *ngIf="!onGetIsAuth()">
+<mat-nav-list *ngIf="!userService?.user?.role">
   <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
     <mat-icon>home</mat-icon>
     <span class="nav-caption">Accueil</span>
@@ -9,8 +9,8 @@
 </mat-nav-list>
 
 <!-- Sidenav utilisateur connecté -->
-<mat-nav-list *ngIf="onGetIsAuth()">
-  <div *ngIf="!item">
+<mat-nav-list>
+  <div *ngIf="userService?.user?.role === 'USER'">
     <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
       <mat-icon>home</mat-icon>
       <span class="nav-caption">Accueil</span>
@@ -37,7 +37,7 @@
     </a>
   </div>
   <!-- Sidenav utilisateur Admin -->
-  <div *ngIf="item">
+  <div *ngIf="userService?.user?.role === 'ADMIN' || userService?.user?.role === 'SUPERADMIN'">
     <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
     <mat-icon>home</mat-icon>
     <span class="nav-caption">Accueil</span>

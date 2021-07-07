@@ -34,21 +34,23 @@
 }
 .status {
   position: absolute;
-  right: 0;
-  width: 100px;
-  height: 20px;
+  right: -16px;
+  width: 140px;
+  height: 25px;
+  border-bottom-left-radius: 9999px;
   text-align: center;
+  line-height: 27px;
   font-size: 18px;
   color: white;
 }
 .valide {
-  background-color: green;
+  background-color: #399732;
 }
 .invalide {
-  background-color: red;
+  background-color: #FA1212;
 }
 .attente {
-  background-color: goldenrod;
+  background-color: #D5A00D;
 }
 .iconContainer {
   display: flex;

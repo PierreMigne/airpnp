@@ -23,9 +23,9 @@
         <td mat-cell *matCellDef="let property"> {{property.category}} </td>
       </ng-container>
 
-      <!-- IsVisible Column -->
-      <ng-container matColumnDef="isVisible">
-        <th mat-header-cell *matHeaderCellDef> Visible </th>
+      <!-- User Column -->
+      <ng-container matColumnDef="user">
+        <th mat-header-cell *matHeaderCellDef> Utilisateur </th>
         <td mat-cell *matCellDef="let property"> {{property.user.firstname}} {{property.user.lastname}}
 
         </td>

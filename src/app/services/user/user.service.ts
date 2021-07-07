@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 import { User } from '../../models/user.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -8,9 +8,11 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserService {
+  user: User;
 
   urlServer = environment.urlServer + 'auth';
   constructor(private httpClient: HttpClient) {
+    this.getUserFromLocal()
   }
 
   getUserFromServer(): Observable<User> {
@@ -19,6 +21,10 @@ export class UserService {
 
   getAllUsersFromServer(): Observable<User[]> {
     return this.httpClient.get<User[]>(this.urlServer + '/all');
+  }
+
+  getAllUsersAndAdminsFromServer(): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.urlServer + '/allUsersAndAdmins');
   }
 
   editUser(firstname: string, lastname: string, birthDate: Date): Observable<User> {
@@ -47,6 +53,15 @@ export class UserService {
 
   countAdminsFromServers(): Observable<number> {
     return this.httpClient.get<number>(this.urlServer + '/admin/count');
+  }
+
+  getUserFromLocal(): any {
+    if (localStorage.getItem('user') !==  null) {
+      this.user = JSON.parse(localStorage.getItem('user'))
+      // console.log(this.user);
+
+      return this.user;
+    }
   }
 
 }
