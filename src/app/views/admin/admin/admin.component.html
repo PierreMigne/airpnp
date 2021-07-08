@@ -19,7 +19,7 @@
       </mat-card-content>
     </a>
   </mat-card>
-  <mat-card class="card" *ngIf="isUserSuperAdmin">
+  <mat-card class="card" *ngIf="userService?.user?.role === 'SUPERADMIN'">
     <a mat-button [routerLink]="['/admin/new']">
       <mat-card-header>
         <mat-card-title>Ajouter un nouvel Admin</mat-card-title>

@@ -16,10 +16,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   nbAdmin: number;
   nbAdminSubscription: Subscription;
 
-  isUserSuperAdmin: boolean;
-  isUserSuperAdminSubscription: Subscription;
-
-  constructor(private propertyService: PropertyService, private userService: UserService) { }
+  constructor(private propertyService: PropertyService, public userService: UserService) { }
 
   ngOnInit(): void {
     this.nbPropertiesSubscription = this.propertyService.countWaitingValidationPropertiesFromServers().subscribe(
@@ -38,20 +35,11 @@ export class AdminComponent implements OnInit, OnDestroy {
         console.log('Erreur ! : ' + JSON.stringify(error.error));
       }
     );
-    this.isUserSuperAdminSubscription = this.userService.isUserSuperAdmin().subscribe(
-      (isUserSuperAdmin: boolean) => {
-        this.isUserSuperAdmin = isUserSuperAdmin;
-      },
-      (error) => {
-        console.log('Erreur ! : ' + JSON.stringify(error.error));
-      }
-    );
   }
 
   ngOnDestroy(): void {
     this.nbPropertiesSubscription.unsubscribe();
     this.nbAdminSubscription.unsubscribe();
-    this.isUserSuperAdminSubscription.unsubscribe();
   }
 
 }
