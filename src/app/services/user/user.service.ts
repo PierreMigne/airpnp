@@ -57,9 +57,7 @@ export class UserService {
 
   getUserFromLocal(): any {
     if (localStorage.getItem('user') !==  null) {
-      this.user = JSON.parse(localStorage.getItem('user'))
-      // console.log(this.user);
-
+      this.user = JSON.parse(localStorage.getItem('user'));
       return this.user;
     }
   }
